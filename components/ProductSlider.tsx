@@ -1,5 +1,7 @@
 import React from 'react';
 import Slider from 'react-slick';
+import Image from 'next/image';
+
 
 interface ProductSliderProps {
   images: string[];
@@ -41,9 +43,11 @@ const ProductSlider: React.FC<ProductSliderProps> = ({ images }) => {
       <Slider {...settings}>
         {images.map((src, index) => (
           <div key={index}>
-            <img
+           <Image
               src={src}
               alt={`صورة ${index + 1}`}
+              width={800} // أو القيمة المناسبة حسب التصميم
+              height={600} // اضبط الحجم حسب النسبة المطلوبة
               style={{
                 width: '100%',
                 height: 'auto',

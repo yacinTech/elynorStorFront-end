@@ -1,6 +1,8 @@
 // components/Footer.tsx
 import Link from 'next/link';
 import { FaFacebookF, FaInstagram, FaWhatsapp } from 'react-icons/fa';
+import Image from 'next/image';
+
 
 export default function Footer() {
   return (
@@ -21,19 +23,20 @@ export default function Footer() {
         
         {/* شعار واسم المتجر */}
         <div style={{ marginBottom: '20px' }}>
-          <img 
-  src="/logo.png" 
-  alt="شعار المتجر" 
-  style={{ 
-    width: '66px', // زيادة بنسبة 10% عن 60px
-    height: '66px',
-    borderRadius: '50%', // يجعل الصورة دائرية
-    objectFit: 'cover',
-    marginBottom: '10px',
-    boxShadow: '0 2px 6px rgba(0,0,0,0.2)', // اختياري: ظل خفيف
-    transition: 'transform 0.3s ease',
-  }} 
-/>
+         <Image
+            src="/logo.png"
+            alt="شعار المتجر"
+            width={66}
+            height={66}
+            style={{
+              borderRadius: '50%',
+              objectFit: 'cover',
+              marginBottom: '10px',
+              boxShadow: '0 2px 6px rgba(0,0,0,0.2)',
+              transition: 'transform 0.3s ease',
+            }}
+          />
+
 
           <h2 style={{ fontSize: '1.6rem', margin: 0 }}>الينور</h2>
           <p style={{ color: '#777' }}>منتجات أنيقة بأسعار مناسبة</p>

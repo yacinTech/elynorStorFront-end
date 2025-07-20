@@ -5,6 +5,7 @@ import { GetStaticPaths, GetStaticProps } from 'next';
 import { getProductsByCategory } from '../../lib/api';
 import WhatsAppButton from '../../components/WhatsAppButton';
 import NewsletterForm from '../../components/NewsletterForm';
+import Image from 'next/image';
 
 interface Product {
   _id: string;
@@ -79,17 +80,23 @@ export default function CategoryPage({ category, products }: CategoryPageProps) 
                     (e.currentTarget as HTMLDivElement).style.boxShadow = '0 4px 12px rgba(0, 0, 0, 0.06)';
                   }}
                 >
-                  <img
-                    src={product.images[0]}
-                    alt={product.name}
+                  <div
                     style={{
+                      position: 'relative',
                       width: '100%',
                       height: '220px',
-                      objectFit: 'cover',
                       borderRadius: '12px',
-                      marginBottom: '12px'
+                      marginBottom: '12px',
+                      overflow: 'hidden',  // لمنع خروج الصورة عن الحدود
                     }}
-                  />
+                  >
+                    <Image
+                      src={product.images[0]}
+                      alt={product.name}
+                      layout="fill"
+                      objectFit="cover"
+                    />
+                  </div>
                   <h3 style={{
                     margin: '0 0 8px',
                     fontSize: '1.2rem',
@@ -137,7 +144,7 @@ export const getStaticProps: GetStaticProps<CategoryPageProps> = async (context)
   }
 
   // جلب المنتجات حسب التصنيف
-const products = await getProductsByCategory(category) || [];
+  const products = await getProductsByCategory(category);
 
   return {
     props: {

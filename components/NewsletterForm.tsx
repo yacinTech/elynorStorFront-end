@@ -16,11 +16,14 @@ export default function NewsletterForm() {
       await subscribeToNewsletter(email);
       setSuccess('🎉 تم الاشتراك بنجاح! شكرًا لك.');
       setEmail('');
-    } catch (err: any) {
-      setError(err.message || 'حدث خطأ، حاول مرة أخرى.');
-    } finally {
-      setLoading(false);
-    }
+    } catch (err: unknown) {
+  if (err instanceof Error) {
+    setError(err.message);
+  } else {
+    setError('حدث خطأ، حاول مرة أخرى.');
+  }
+}
+
   };
 
   return (

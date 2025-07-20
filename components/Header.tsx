@@ -1,6 +1,8 @@
 import Link from 'next/link';
 import { useState } from 'react';
 import MobileMenu from './MobileMenu';
+import Image from 'next/image';
+
 
 export default function Header() {
   const [categories] = useState<string[]>([
@@ -8,7 +10,7 @@ export default function Header() {
     'المنزل والمطبخ',
     'الملابس والأزياء',
     'عناية شخصية',
-    ''
+    
   ]);
 
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -27,7 +29,23 @@ export default function Header() {
         <div className="logo-container">
           <Link href="/" legacyBehavior>
             <a className="logo-link">
-              <img src="/logo.png" alt="Logo" className="logo-image" />
+              <Image
+                  src="/logo.png"
+                  alt="Logo"
+                  width={60}
+                  height={60}
+                  unoptimized // فقط إذا أردت إلغاء تحسينات Next.js مؤقتًا
+                  style={{
+                    borderRadius: '50%',
+                    border: '2px solid #ddd',
+                    boxShadow: '0 2px 5px rgba(0, 0, 0, 0.1)',
+                    objectFit: 'cover',
+                    marginRight: '12px',
+                  }}
+                />
+
+
+
               <span className="store-name">ELYNOR</span>
             </a>
           </Link>

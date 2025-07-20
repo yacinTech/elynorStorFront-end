@@ -1,5 +1,6 @@
 // components/ProductCard.tsx
 import Link from 'next/link';
+import Image from 'next/image';
 
 interface Product {
   _id: string;
@@ -23,11 +24,19 @@ export default function ProductCard({ product }: { product: Product }) {
     >
      <Link href={`/product/${product._id}`} style={{ color: 'inherit', textDecoration: 'none' }}>
   {product.images?.length ? (
-    <img
-      src={product.images[0]}
-      alt={product.name}
-      style={{ maxWidth: '100%', height: '180px', objectFit: 'cover', borderRadius: '6px' }}
-    />
+    
+<Image
+  src={product.images[0]}
+  alt={product.name}
+  width={300} // أو الحجم المناسب
+  height={180}
+  style={{
+    objectFit: 'cover',
+    borderRadius: '6px',
+    maxWidth: '100%',
+    height: 'auto', // الحفاظ على النسبة
+  }}
+/>
   ) : (
     <div
       style={{

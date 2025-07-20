@@ -24,22 +24,23 @@ export default function OrderForm({ productId }: OrderFormProps) {
     }));
   };
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setLoading(true);
-    try {
-      await submitOrder({
-        ...form, productId,
-        name: '',
-        city: ''
-      });
-      setSuccess(true);
-    } catch (error) {
-      alert('حدث خطأ أثناء إرسال الطلب');
-    } finally {
-      setLoading(false);
-    }
-  };
+const handleSubmit = async (e: React.FormEvent) => {
+  e.preventDefault();
+  setLoading(true);
+  try {
+    await submitOrder({
+      ...form, productId,
+      name: '',
+      city: ''
+    });
+    setSuccess(true);
+  } catch {
+    alert('حدث خطأ أثناء إرسال الطلب');
+  } finally {
+    setLoading(false);
+  }
+};
+
 
   if (success) {
     return (
