@@ -44,7 +44,7 @@ export async function submitOrder(orderData: {
 }
 
 
-export const subscribeToNewsletter = async (email: string): Promise<any> => {
+export const subscribeToNewsletter = async (email: string): Promise<unknown> => {
   const res = await fetch('https://mynewstore-back-end.onrender.com/api/newsletter/subscribe', {
     method: 'POST',
     headers: {

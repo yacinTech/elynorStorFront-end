@@ -14,7 +14,8 @@ interface Product {
   price: number;
   images: string[];
   createdAt?: string;
-  [key: string]: any; // لتفادي خطأ في الحقول غير المعروفة
+  // يُفضل تجنب any واستخدام Record<string, unknown> بدلاً منها
+  [key: string]: unknown;
 }
 
 export default function Home() {
