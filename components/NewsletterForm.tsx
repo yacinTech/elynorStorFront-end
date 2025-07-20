@@ -17,13 +17,13 @@ export default function NewsletterForm() {
       setSuccess('🎉 تم الاشتراك بنجاح! شكرًا لك.');
       setEmail('');
     } catch (err: unknown) {
-  if (err instanceof Error) {
-    setError(err.message);
-  } else {
-    setError('حدث خطأ، حاول مرة أخرى.');
-  }
-}
-
+      if (err instanceof Error) {
+        setError(err.message);
+      } else {
+        setError('حدث خطأ، حاول مرة أخرى.');
+      }
+    }
+    setLoading(false);
   };
 
   return (
@@ -83,16 +83,19 @@ export default function NewsletterForm() {
 
         input[type='email'] {
           flex: 1 1 240px;
-          padding: 14px 18px;
+          padding: 10px 14px; /* تقليل البادينغ ليصبح أقل طولًا */
           border: none;
           border-radius: 8px;
-          font-size: 1rem;
+          font-size: 0.95rem;
           outline: none;
-          transition: box-shadow 0.3s ease;
+          transition: box-shadow 0.3s ease, background 0.3s ease;
+          background: #f1f1fa;
+          color: #333;
+         
         }
 
         input[type='email']:focus {
-          box-shadow: 0 0 8px 3px rgba(255, 255, 255, 0.7);
+          box-shadow: 0 0 8px 2px rgba(255, 255, 255, 0.5);
           background-color: #5a54a4;
           color: #fff;
         }
@@ -101,7 +104,7 @@ export default function NewsletterForm() {
           background-color: #f9a825;
           border: none;
           color: #2e2e2e;
-          padding: 14px 24px;
+          padding: 12px 24px;
           font-size: 1rem;
           font-weight: 600;
           border-radius: 8px;
@@ -110,6 +113,7 @@ export default function NewsletterForm() {
           transition: background-color 0.3s ease, transform 0.2s ease;
           flex-shrink: 0;
           min-width: 130px;
+          height: 38px; /* توحيد الارتفاع مع الحقل */
         }
 
         button:hover:not(:disabled) {
@@ -151,20 +155,37 @@ export default function NewsletterForm() {
         }
 
         /* Responsive */
-        @media (max-width: 480px) {
-          .newsletter-wrapper {
-            max-width: 90vw;
-            padding: 25px 15px;
-          }
+       @media (max-width: 480px) {
+  .newsletter-wrapper {
+    max-width: 92vw;
+    padding: 20px 12px;
+    max-height: auto;
+  }
 
-          .newsletter-form {
-            flex-direction: column;
-          }
+  .newsletter-form {
+    flex-direction: column;
+    gap: 10px;
+    height: auto;
+  }
 
-          button {
-            min-width: 100%;
-            padding: 14px 0;
-          }
+  input[type='email'] {
+    width: 100%;
+    max-width: 100%;
+    font-size: 0.9rem;
+    padding: 8px 10px;     /* تصغير الحشوة لتقليل الارتفاع */
+    height: 30px;          /* تقليص الارتفاع */
+    box-sizing: border-box;
+    border-radius: 6px;
+  }
+
+  button {
+    width: 100%;
+    padding: 8px 0;
+    height: 36px;
+    font-size: 0.9rem;
+  }
+}
+
         }
       `}</style>
     </>

@@ -30,7 +30,7 @@ export default function ProductCard({ product }: { product: Product }) {
           <div className="image-placeholder">لا توجد صورة</div>
         )}
         <h3>{product.name}</h3>
-        <p>{product.price} درهم</p>
+        <div className="price-badge">{product.price} درهم</div>
       </Link>
 
       <style jsx>{`
@@ -43,7 +43,8 @@ export default function ProductCard({ product }: { product: Product }) {
           transition: box-shadow 0.3s;
           width: 100%;
           max-width: 400px;
-          margin: 8px auto; /* center with horizontal margins */
+          margin: 8px auto;
+          background-color: #fff;
         }
 
         .product-card:hover {
@@ -64,11 +65,19 @@ export default function ProductCard({ product }: { product: Product }) {
         h3 {
           margin-top: 10px;
           font-size: 1.1rem;
+          color: #333;
         }
 
-        p {
-          color: #444;
+        .price-badge {
+          display: inline-block;
+          margin-top: 8px;
+          background-color: #f9f3e9;
+          color: #c97b00;
           font-weight: bold;
+          padding: 6px 12px;
+          border-radius: 20px;
+          font-size: 0.95rem;
+          border: 1px solid #f0e0c0;
         }
 
         @media (max-width: 640px) {
