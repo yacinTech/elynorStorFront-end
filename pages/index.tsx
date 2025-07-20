@@ -58,6 +58,17 @@ export default function Home() {
         <meta property="og:description" content={description} />
         <meta property="og:type" content="website" />
         <meta property="og:image" content="/introu.jpg" />
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-J90YN8P50R"></script>
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              window.dataLayer = window.dataLayer || [];
+              function gtag(){dataLayer.push(arguments);}
+              gtag('js', new Date());
+              gtag('config', 'G-J90YN8P50R');
+            `,
+          }}
+        />
       </Head>
 
       <div style={{ maxWidth: '1100px', margin: 'auto', padding: '20px' }}>
