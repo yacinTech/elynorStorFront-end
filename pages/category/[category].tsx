@@ -44,10 +44,31 @@ export default function CategoryPage({ category, products }: CategoryPageProps) 
         <link rel="canonical" href={`https://yourdomain.com/category/${encodeURIComponent(category)}`} />
       </Head>
 
-      <div style={{ padding: '30px' }}>
-        <h1 style={{ marginBottom: '30px', fontSize: '1.8rem', color: '#333' }}>
-          المنتجات في تصنيف: {category}
-        </h1>
+      <div
+  style={{
+    padding: '40px 20px',
+    backgroundColor: '#f9f9f9',
+    borderRadius: '12px',
+    boxShadow: '0 4px 12px rgba(0, 0, 0, 0.08)',
+    textAlign: 'center',
+  }}
+>
+  <h1
+    style={{
+      marginBottom: '25px',
+      fontSize: '2rem',
+      color: '#222',
+      fontWeight: '700',
+      letterSpacing: '0.5px',
+      borderBottom: '2px solid #8e44ad',
+      display: 'inline-block',
+      paddingBottom: '8px',
+    }}
+  >
+    المنتجات في تصنيف: {category}
+  </h1>
+
+
 
         {products.length === 0 ? (
           <p>لا توجد منتجات في هذا التصنيف.</p>

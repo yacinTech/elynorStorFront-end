@@ -84,10 +84,33 @@ export default function Home() {
             height={400}
             style={{ width: '100%', height: 'auto', borderRadius: '12px', marginBottom: '20px' }}
           />
-          <h2 style={{ fontSize: '1.8rem', color: '#333' }}>مرحباً بكم في متجرنا!</h2>
-          <p style={{ fontSize: '1.1rem', color: '#666' }}>
-            اكتشفوا أفضل المنتجات المختارة بعناية وجودة عالية وأسعار تنافسية.
-          </p>
+          <h2
+  style={{
+    fontSize: '2.2rem',
+    color: '#b980f0',
+    fontWeight: 'bold',
+    marginBottom: '16px',
+    textShadow: '1px 1px 2px rgba(0,0,0,0.1)',
+  }}
+>
+  مرحباً بكم في متجر Elynor
+</h2>
+
+<p
+  style={{
+    fontSize: '1.2rem',
+    color: '#444',
+    lineHeight: '1.9',
+    background: '#fdf7ff',
+    padding: '20px',
+    borderRadius: '12px',
+    boxShadow: '0 4px 10px rgba(0, 0, 0, 0.05)',
+    textAlign: 'justify',
+  }}
+>
+  يسعدنا أن نرحب بكم في متجر Elynor، وجهتكم المثالية لعالم من الأناقة والجودة الرفيعة. نحن نهتم بكل تفصيلة، ونحرص على تقديم منتجات مختارة بعناية لتلائم ذوقكم الراقي. هدفنا هو توفير تجربة تسوق ممتعة، سهلة وآمنة، مع ضمان رضاكم الكامل في كل مرة. شكراً لاختياركم لنا، ونتمنى أن تجدوا ما يلهمكم ويعبّر عن ذوقكم.
+</p>
+
         </div>
 
         <h1 style={{ marginBottom: '20px', textAlign: 'center' }}>جميع المنتجات</h1>
