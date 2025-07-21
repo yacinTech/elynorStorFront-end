@@ -1,12 +1,13 @@
-import { useRouter } from 'next/router';
-import { useEffect, useState } from 'react';
+// pages/product/[id].tsx
+
+import { GetServerSideProps } from 'next';
 import Head from 'next/head';
-import { getProductById, getProductsByCategory } from '../../lib/api';
 import ProductCard from '../../components/ProductCard';
-import OrderForm from '../../pages/order';
+import OrderForm from '../order';
 import WhatsAppButton from '../../components/WhatsAppButton';
 import NewsletterForm from '../../components/NewsletterForm';
 import ProductSlider from '../../components/ProductSlider';
+import { getProductById, getProductsByCategory } from '../../lib/api';
 
 type Product = {
   _id: string;
@@ -17,50 +18,17 @@ type Product = {
   images: string[];
 };
 
-export default function ProductDetails() {
-  const router = useRouter();
-  const { id } = router.query;
-  const [product, setProduct] = useState<Product | null>(null);
-  const [related, setRelated] = useState<Product[]>([]);
-  const [loading, setLoading] = useState(true);
+type Props = {
+  product: Product | null;
+  related: Product[];
+};
 
-  useEffect(() => {
-    if (typeof id !== 'string') return;
-
-    let cancelled = false;
-    setLoading(true);
-
-    (async () => {
-      try {
-        const data = await getProductById(id);
-        if (!data) throw new Error('المنتج غير موجود');
-        if (!cancelled) setProduct(data);
-
-        const others = await getProductsByCategory(data.category);
-        if (!cancelled) {
-          setRelated(others.filter((p: Product) => p._id !== data._id));
-          setLoading(false);
-        }
-      } catch (error) {
-        if (!cancelled) {
-          setProduct(null);
-          setLoading(false);
-          console.error(error);
-        }
-      }
-    })();
-
-    return () => {
-      cancelled = true;
-    };
-  }, [id]);
-
-  if (loading) return <p>جاري تحميل تفاصيل المنتج...</p>;
+export default function ProductDetails({ product, related }: Props) {
   if (!product) return <p>المنتج غير موجود.</p>;
 
   const fullImageUrl =
-    product.images?.[0]?.startsWith('http') 
-      ? product.images[0] 
+    product.images?.[0]?.startsWith('http')
+      ? product.images[0]
       : `https://elynor-store.vercel.app${product.images?.[0] || '/logo.png'}`;
 
   return (
@@ -69,14 +37,6 @@ export default function ProductDetails() {
         <title>{product.name} - ELYNOR</title>
         <link rel="icon" href="/logo.png" />
         <meta name="description" content={product.description || 'تفاصيل المنتج'} />
-        <meta
-          name="keywords"
-          content={`${product.name}, ${product.description
-            .split(' ')
-            .slice(0, 10)
-            .join(', ')}, ${product.category}, منتجات, متجر, شراء`}
-        />
-
         <meta property="og:title" content={product.name} />
         <meta property="og:description" content={product.description || 'تفاصيل المنتج'} />
         <meta property="og:type" content="product" />
@@ -87,7 +47,6 @@ export default function ProductDetails() {
 
       <div style={{ maxWidth: '900px', margin: 'auto', padding: '20px' }}>
         <ProductSlider images={product.images || []} />
-
         <div
           style={{
             backgroundColor: '#f9f9f9',
@@ -99,26 +58,15 @@ export default function ProductDetails() {
             fontFamily: 'Segoe UI, sans-serif',
           }}
         >
-          <h2
-            style={{
-              fontSize: '1.4rem',
-              fontWeight: 'bold',
-              marginBottom: '12px',
-              color: '#333',
-              textAlign: 'center',
-            }}
-          >
+          <h2 style={{ fontSize: '1.4rem', fontWeight: 'bold', marginBottom: '12px', color: '#333', textAlign: 'center' }}>
             {product.name}
           </h2>
-
           <p style={{ fontSize: '1rem', color: '#444', lineHeight: '1.5', marginBottom: '20px', textAlign: 'center' }}>
             {product.description}
           </p>
-
           <p style={{ fontSize: '1.1rem', fontWeight: 'bold', color: '#e60023', textAlign: 'center' }}>
             السعر: {product.price} درهم
           </p>
-
           <p style={{ fontSize: '1rem', color: '#007BFF', textAlign: 'center' }}>التصنيف: {product.category}</p>
         </div>
 
@@ -148,3 +96,25 @@ export default function ProductDetails() {
     </>
   );
 }
+
+export const getServerSideProps: GetServerSideProps = async (context) => {
+  const { id } = context.params as { id: string };
+
+  try {
+    const product = await getProductById(id);
+    if (!product) return { props: { product: null, related: [] } };
+
+    const others = await getProductsByCategory(product.category);
+    const related = others.filter((p: Product) => p._id !== product._id);
+
+    return {
+      props: {
+        product,
+        related,
+      },
+    };
+  } catch (error) {
+    console.error(error);
+    return { props: { product: null, related: [] } };
+  }
+};
