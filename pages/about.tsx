@@ -3,6 +3,7 @@ import WhatsAppButton from '../components/WhatsAppButton';
 import NewsletterForm from '../components/NewsletterForm';
 import Head from 'next/head';
 import SEO from '../components/SEO';
+import Testimonials from '../components/Testimonials';
 
 export default function AboutPage() {
   return (
@@ -51,7 +52,7 @@ export default function AboutPage() {
         فريقنا يعمل بشغف لتوفير أجمل التصاميم وتقديم خدمة ممتازة بكل احترافية.
         نحن نؤمن أن الأناقة تبدأ بالتفاصيل، وكل منتج نعرضه يعكس هذا التوجه.
       </p>
-
+      <Testimonials />
       <WhatsAppButton />
       <NewsletterForm />
     </div>

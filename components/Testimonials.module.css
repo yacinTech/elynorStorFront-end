@@ -1,0 +1,71 @@
+/* styles/Testimonials.module.css */
+.wrapper {
+  padding: 4rem 1rem;
+  background: #fff;
+  text-align: center;
+}
+
+.heading {
+  font-size: 2rem;
+  font-weight: bold;
+  color: #1e1e1e;
+  margin-bottom: 3rem;
+}
+
+.cards {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 2rem;
+}
+
+.card {
+  background: #f8f8f8;
+  border-radius: 16px;
+  padding: 2rem;
+  width: 300px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.05);
+  transition: transform 0.3s ease;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+}
+
+.avatarWrapper {
+  width: 70px;
+  height: 70px;
+  margin: 0 auto 1rem;
+  border-radius: 50%;
+  overflow: hidden;
+}
+
+.avatar {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.comment {
+  font-size: 1rem;
+  color: #333;
+  margin-bottom: 1.2rem;
+  font-style: italic;
+}
+
+.footer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.name {
+  font-weight: bold;
+  color: #111;
+}
+
+.stars {
+  color: #ffb400;
+  font-size: 1.1rem;
+}
