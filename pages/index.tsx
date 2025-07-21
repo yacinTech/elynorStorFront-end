@@ -14,7 +14,6 @@ interface Product {
   price: number;
   images: string[];
   createdAt?: string;
-  // يُفضل تجنب any واستخدام Record<string, unknown> بدلاً منها
   [key: string]: unknown;
 }
 
@@ -43,35 +42,26 @@ export default function Home() {
       : 'منتجات, متجر, شراء, تسوق';
 
   const description =
-    'مرحباً بكم في متجرنا الإلكتروني حيث تجد أفضل المنتجات المختارة بعناية وجودة عالية وأسعار تنافسية. اكتشف تشكيلتنا الواسعة اليوم.';
+    'مرحباً بكم في متجر Elynor حيث تجدون منتجات مختارة بعناية، بأناقة وجودة عالية. استمتعوا بتجربة تسوق مميزة وآمنة.';
+
+  const ogImage = 'https://elynor-store.vercel.app/og-image.jpg';
 
   if (loading) return <p>جاري تحميل المنتجات...</p>;
 
   return (
     <>
       <Head>
-        <title>متجر ELYNOR - أفضل المنتجات المختارة</title>
+        <title>متجر ELYNOR | تسوق بأناقة وجودة</title>
         <link rel="icon" href="/logo.png" />
-        <meta name="description" content="اكتشف تشكيلة مميزة من المنتجات في متجر Elynor - ملابس، إلكترونيات، أدوات منزلية وأكثر!" />
+        <meta name="description" content={description} />
         <meta name="keywords" content={keywords} />
         <meta property="og:url" content="https://elynor-store.vercel.app/" />
-        <meta property="og:title" content="متجر ELYNOR - أفضل المنتجات المختارة" />
-        <meta property="og:description" content="اكتشف تشكيلة مميزة من المنتجات في متجر Elynor - ملابس، إلكترونيات، أدوات منزلية وأكثر!" />
+        <meta property="og:title" content="متجر ELYNOR | تسوق بأناقة وجودة" />
+        <meta property="og:description" content={description} />
         <meta property="og:type" content="website" />
-        <meta property="og:image" content="https://elynor-store.vercel.app/og-image.jpg" />
+        <meta property="og:image" content={ogImage} />
         <meta property="og:image:width" content="1200" />
         <meta property="og:image:height" content="630" />
-        <script async src="https://www.googletagmanager.com/gtag/js?id=G-J90YN8P50R"></script>
-        <script
-          dangerouslySetInnerHTML={{
-            __html: `
-              window.dataLayer = window.dataLayer || [];
-              function gtag(){dataLayer.push(arguments);}
-              gtag('js', new Date());
-              gtag('config', 'G-J90YN8P50R');
-            `,
-          }}
-        />
       </Head>
 
       <div style={{ maxWidth: '1100px', margin: 'auto', padding: '20px' }}>
@@ -79,44 +69,58 @@ export default function Home() {
         <div style={{ textAlign: 'center', marginBottom: '40px' }}>
           <Image
             src="/introu.jpg"
-            alt="ترحيب"
+            alt="متجر Elynor"
             width={800}
             height={400}
-            style={{ width: '100%', height: 'auto', borderRadius: '12px', marginBottom: '20px' }}
+            style={{
+              width: '100%',
+              height: 'auto',
+              borderRadius: '12px',
+              marginBottom: '20px',
+              objectFit: 'cover',
+            }}
           />
           <h2
-  style={{
-    fontSize: '2.2rem',
-    color: '#b980f0',
-    fontWeight: 'bold',
-    marginBottom: '16px',
-    textShadow: '1px 1px 2px rgba(0,0,0,0.1)',
-  }}
->
-  مرحباً بكم في متجر Elynor
-</h2>
-
-<p
-  style={{
-    fontSize: '1.2rem',
-    color: '#444',
-    lineHeight: '1.9',
-    background: '#fdf7ff',
-    padding: '20px',
-    borderRadius: '12px',
-    boxShadow: '0 4px 10px rgba(0, 0, 0, 0.05)',
-    textAlign: 'justify',
-  }}
->
-  يسعدنا أن نرحب بكم في متجر Elynor، وجهتكم المثالية لعالم من الأناقة والجودة الرفيعة. نحن نهتم بكل تفصيلة، ونحرص على تقديم منتجات مختارة بعناية لتلائم ذوقكم الراقي. هدفنا هو توفير تجربة تسوق ممتعة، سهلة وآمنة، مع ضمان رضاكم الكامل في كل مرة. شكراً لاختياركم لنا، ونتمنى أن تجدوا ما يلهمكم ويعبّر عن ذوقكم.
-</p>
-
+            style={{
+              fontSize: '2.4rem',
+              color: '#6d28d9',
+              fontWeight: 'bold',
+              marginBottom: '16px',
+              textShadow: '1px 1px 2px rgba(0,0,0,0.1)',
+            }}
+          >
+            مرحباً بكم في متجر Elynor
+          </h2>
+          <p
+            style={{
+              fontSize: '1.2rem',
+              color: '#333',
+              lineHeight: '1.9',
+              background: '#f4f0ff',
+              padding: '20px',
+              borderRadius: '12px',
+              boxShadow: '0 4px 10px rgba(0, 0, 0, 0.05)',
+              textAlign: 'justify',
+            }}
+          >
+            يسعدنا أن نرحب بكم في متجر Elynor، حيث نعرض لكم منتجات أنيقة، عالية الجودة ومختارة بعناية لتلائم ذوقكم.
+            نحن نهتم بتوفير تجربة تسوق مريحة وآمنة وسريعة التوصيل. شكراً لاختياركم لنا.
+          </p>
         </div>
 
-        <h1 style={{ marginBottom: '20px', textAlign: 'center' }}>جميع المنتجات</h1>
+        <h1
+          style={{
+            marginBottom: '30px',
+            textAlign: 'center',
+            fontSize: '1.8rem',
+            color: '#111',
+          }}
+        >
+          جميع المنتجات
+        </h1>
 
         {products.length === 0 ? (
-          <p>لا توجد منتجات لعرضها.</p>
+          <p style={{ textAlign: 'center' }}>لا توجد منتجات حالياً.</p>
         ) : (
           <div className="product-grid">
             {products.map((product) => (
@@ -130,7 +134,9 @@ export default function Home() {
             display: grid;
             gap: 20px;
             grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            padding-bottom: 40px;
           }
+
           @media (max-width: 600px) {
             .product-grid {
               grid-template-columns: 1fr;
