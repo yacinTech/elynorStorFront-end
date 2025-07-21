@@ -1,6 +1,6 @@
 // lib/api.ts
 
-const API_BASE = 'https://mynewstore-back-end.onrender.com/api/products'; // عدّل هذا حسب API الخاص بك
+export const API_BASE = 'https://mynewstore-back-end.onrender.com/api/products'; // عدّل هذا حسب API الخاص بك
 
 export async function getAllProducts() {
   const res = await fetch(`${API_BASE}`);
