@@ -28,6 +28,7 @@ export default function Home({ products }: HomeProps) {
 
   const description =
     'مرحباً بكم في متجر Elynor حيث تجدون منتجات مختارة بعناية، بأناقة وجودة عالية. استمتعوا بتجربة تسوق مميزة وآمنة.';
+
   const ogImage = 'https://elynor-store.vercel.app/og-image.jpg';
 
   return (
@@ -133,16 +134,18 @@ export default function Home({ products }: HomeProps) {
   );
 }
 
-// ✅ هذا هو الجزء المهم لجلب المنتجات على السيرفر
+// جلب البيانات من السيرفر عند كل طلب
 export async function getServerSideProps() {
   try {
     const products = await getAllProducts();
-    const sorted = products.sort((a: { createdAt: string | number | Date; _id: any; }, b: { createdAt: string | number | Date; _id: string; }) => {
+
+    const sorted = products.sort((a: Product, b: Product) => {
       if (a.createdAt && b.createdAt) {
         return new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime();
       }
       return b._id.localeCompare(a._id);
     });
+
     return { props: { products: sorted } };
   } catch {
     return { props: { products: [] } };
