@@ -1,12 +1,13 @@
-// pages/server-sitemap.xml.ts
-
 import { GetServerSideProps } from 'next';
-// Update the import path to the correct relative path
 import { API_BASE } from '../lib/api';
 
 const BASE_URL = 'https://elynor-store.vercel.app';
 
-function generateSiteMap(products: any[]) {
+type Product = {
+  _id: string;
+};
+
+function generateSiteMap(products: Product[]) {
   return `<?xml version="1.0" encoding="UTF-8"?>
   <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
     ${products
@@ -25,7 +26,7 @@ function generateSiteMap(products: any[]) {
 export const getServerSideProps: GetServerSideProps = async ({ res }) => {
   try {
     const response = await fetch(`${API_BASE}/products`);
-    const products = await response.json();
+    const products: Product[] = await response.json();
 
     const sitemap = generateSiteMap(products);
 

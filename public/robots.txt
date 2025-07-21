@@ -1,9 +1,4 @@
-# *
 User-agent: *
 Allow: /
+Sitemap: https://elynor-store.vercel.app/server-sitemap.xml
 
-# Host
-Host: https://elynor-store.vercel.app/
-
-# Sitemaps
-Sitemap: https://elynor-store.vercel.app/sitemap.xml
