@@ -7,7 +7,7 @@ export default function SEO() {
   return (
      <Head>
         <title>متجر ELYNOR - أفضل المنتجات المختارة</title>
-        <link rel="icon" href="/logo.png" />
+        <link rel="icon" href="/og-image.jpg" />
         <meta name="description" content="اكتشف تشكيلة مميزة من المنتجات في متجر Elynor - ملابس، إلكترونيات، أدوات منزلية وأكثر!" />
         <meta name="keywords" content={keywords} />
         <meta property="og:url" content="https://elynor-store.vercel.app/" />

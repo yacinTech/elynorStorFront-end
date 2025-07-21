@@ -35,7 +35,7 @@ export default function ProductDetails({ product, related }: Props) {
     <>
       <Head>
         <title>{product.name} - ELYNOR</title>
-        <link rel="icon" href="/logo.png" />
+        <link rel="icon" href="/og-image.jpg" />
         <meta name="description" content={product.description || 'تفاصيل المنتج'} />
         <meta property="og:title" content={product.name} />
         <meta property="og:description" content={product.description || 'تفاصيل المنتج'} />
