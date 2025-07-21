@@ -14,7 +14,7 @@ function generateSiteMap(products: Product[]) {
       .map((product) => {
         return `
           <url>
-            <loc>${BASE_URL}/product/${product._id}</loc>
+            <loc>${BASE_URL}/${product._id}</loc>
             <lastmod>${new Date().toISOString()}</lastmod>
           </url>
         `;
@@ -25,7 +25,8 @@ function generateSiteMap(products: Product[]) {
 
 export const getServerSideProps: GetServerSideProps = async ({ res }) => {
   try {
-    const response = await fetch(`${API_BASE}/products`);
+    // تأكد أن API_BASE يشير لنقطة نهاية المنتجات، مثلاً 'https://api.example.com/products'
+    const response = await fetch(`${API_BASE}`);
     const products: Product[] = await response.json();
 
     const sitemap = generateSiteMap(products);
