@@ -47,28 +47,72 @@ export default function ProductDetails({ product, related }: Props) {
 
       <div style={{ maxWidth: '900px', margin: 'auto', padding: '20px' }}>
         <ProductSlider images={product.images || []} />
-        <div
-          style={{
-            backgroundColor: '#f9f9f9',
-            padding: '16px',
-            borderRadius: '12px',
-            boxShadow: '0 4px 12px rgba(0, 0, 0, 0.08)',
-            maxWidth: '600px',
-            margin: '0 auto 30px',
-            fontFamily: 'Segoe UI, sans-serif',
-          }}
-        >
-          <h2 style={{ fontSize: '1.4rem', fontWeight: 'bold', marginBottom: '12px', color: '#333', textAlign: 'center' }}>
-            {product.name}
-          </h2>
-          <p style={{ fontSize: '1rem', color: '#444', lineHeight: '1.5', marginBottom: '20px', textAlign: 'center' }}>
-            {product.description}
-          </p>
-          <p style={{ fontSize: '1.1rem', fontWeight: 'bold', color: '#e60023', textAlign: 'center' }}>
-            السعر: {product.price} درهم
-          </p>
-          <p style={{ fontSize: '1rem', color: '#007BFF', textAlign: 'center' }}>التصنيف: {product.category}</p>
-        </div>
+       <div
+  style={{
+    backgroundColor: '#f9f9f9',
+    padding: '16px',
+    borderRadius: '12px',
+    boxShadow: '0 4px 12px rgba(0, 0, 0, 0.08)',
+    maxWidth: '600px',
+    margin: '0 auto 30px',
+    fontFamily: 'Segoe UI, sans-serif',
+  }}
+>
+  <h2
+    style={{
+      fontSize: '1.4rem',
+      fontWeight: 'bold',
+      marginBottom: '12px',
+      color: '#333',
+      textAlign: 'center',
+      whiteSpace: 'normal',
+      overflowWrap: 'break-word',
+      wordBreak: 'break-word',
+    }}
+  >
+    {product.name}
+  </h2>
+  <p
+    style={{
+      fontSize: '1rem',
+      color: '#444',
+      lineHeight: '1.5',
+      marginBottom: '20px',
+      textAlign: 'center',
+      whiteSpace: 'normal',
+      overflowWrap: 'break-word',
+      wordBreak: 'break-word',
+    }}
+  >
+    {product.description}
+  </p>
+  <p
+    style={{
+      fontSize: '1.1rem',
+      fontWeight: 'bold',
+      color: '#e60023',
+      textAlign: 'center',
+      whiteSpace: 'normal',
+      overflowWrap: 'break-word',
+      wordBreak: 'break-word',
+    }}
+  >
+    السعر: {product.price} درهم
+  </p>
+  <p
+    style={{
+      fontSize: '1rem',
+      color: '#007BFF',
+      textAlign: 'center',
+      whiteSpace: 'normal',
+      overflowWrap: 'break-word',
+      wordBreak: 'break-word',
+    }}
+  >
+    التصنيف: {product.category}
+  </p>
+</div>
+
 
         <OrderForm productId={product._id} />
 
