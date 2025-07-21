@@ -1,5 +1,4 @@
 // pages/index.tsx
-import { useEffect, useState } from 'react';
 import Head from 'next/head';
 import Image from 'next/image';
 import { getAllProducts } from '../lib/api';
@@ -17,25 +16,11 @@ interface Product {
   [key: string]: unknown;
 }
 
-export default function Home() {
-  const [products, setProducts] = useState<Product[]>([]);
-  const [loading, setLoading] = useState(true);
+interface HomeProps {
+  products: Product[];
+}
 
-  useEffect(() => {
-    getAllProducts()
-      .then((data: Product[]) => {
-        const sorted = data.sort((a, b) => {
-          if (a.createdAt && b.createdAt) {
-            return new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime();
-          }
-          return b._id.localeCompare(a._id);
-        });
-        setProducts(sorted);
-      })
-      .catch(() => setProducts([]))
-      .finally(() => setLoading(false));
-  }, []);
-
+export default function Home({ products }: HomeProps) {
   const keywords =
     products.length > 0
       ? Array.from(new Set(products.flatMap((p) => [p.name, p.category]).filter(Boolean))).join(', ')
@@ -43,10 +28,7 @@ export default function Home() {
 
   const description =
     'مرحباً بكم في متجر Elynor حيث تجدون منتجات مختارة بعناية، بأناقة وجودة عالية. استمتعوا بتجربة تسوق مميزة وآمنة.';
-
   const ogImage = 'https://elynor-store.vercel.app/og-image.jpg';
-
-  if (loading) return <p>جاري تحميل المنتجات...</p>;
 
   return (
     <>
@@ -149,4 +131,20 @@ export default function Home() {
       <NewsletterForm />
     </>
   );
+}
+
+// ✅ هذا هو الجزء المهم لجلب المنتجات على السيرفر
+export async function getServerSideProps() {
+  try {
+    const products = await getAllProducts();
+    const sorted = products.sort((a: { createdAt: string | number | Date; _id: any; }, b: { createdAt: string | number | Date; _id: string; }) => {
+      if (a.createdAt && b.createdAt) {
+        return new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime();
+      }
+      return b._id.localeCompare(a._id);
+    });
+    return { props: { products: sorted } };
+  } catch {
+    return { props: { products: [] } };
+  }
 }
