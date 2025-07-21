@@ -24,7 +24,7 @@ export default function Footer() {
         {/* شعار واسم المتجر */}
         <div style={{ marginBottom: '20px' }}>
          <Image
-            src="/logo.png"
+            src="/og-image.jpg"
             alt="شعار المتجر"
             width={66}
             height={66}

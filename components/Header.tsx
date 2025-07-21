@@ -34,7 +34,7 @@ export default function Header() {
             onMouseLeave={() => setHovered(false)}
           >
             <Image
-              src="/logo.png"
+              src="/og-image.jpg"
               alt="Logo"
               width={60}
               height={60}
