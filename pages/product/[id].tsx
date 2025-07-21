@@ -17,7 +17,6 @@ type Product = {
   images: string[];
 };
 
-
 export default function ProductDetails() {
   const router = useRouter();
   const { id } = router.query;
@@ -59,6 +58,11 @@ export default function ProductDetails() {
   if (loading) return <p>جاري تحميل تفاصيل المنتج...</p>;
   if (!product) return <p>المنتج غير موجود.</p>;
 
+  const fullImageUrl =
+    product.images?.[0]?.startsWith('http') 
+      ? product.images[0] 
+      : `https://elynor-store.vercel.app${product.images?.[0] || '/logo.png'}`;
+
   return (
     <>
       <Head>
@@ -76,16 +80,14 @@ export default function ProductDetails() {
         <meta property="og:title" content={product.name} />
         <meta property="og:description" content={product.description || 'تفاصيل المنتج'} />
         <meta property="og:type" content="product" />
-        <meta property="og:image" content={product.images?.[0] || '/logo.png'} />
-        <meta property="og:url" content={`https://yourdomain.com/product/${product._id}`} />
-        <link rel="canonical" href={`https://yourdomain.com/product/${product._id}`} />
+        <meta property="og:image" content={fullImageUrl} />
+        <meta property="og:url" content={`https://elynor-store.vercel.app/product/${product._id}`} />
+        <link rel="canonical" href={`https://elynor-store.vercel.app/product/${product._id}`} />
       </Head>
 
       <div style={{ maxWidth: '900px', margin: 'auto', padding: '20px' }}>
-        {/* سلايدر الصور */}
-       <ProductSlider images={product.images || []} />
+        <ProductSlider images={product.images || []} />
 
-        {/* معلومات المنتج */}
         <div
           style={{
             backgroundColor: '#f9f9f9',

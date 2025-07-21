@@ -53,13 +53,14 @@ export default function Home() {
         <title>متجر ELYNOR - أفضل المنتجات المختارة</title>
         <link rel="icon" href="/logo.png" />
         <meta name="description" content="اكتشف تشكيلة مميزة من المنتجات في متجر Elynor - ملابس، إلكترونيات، أدوات منزلية وأكثر!" />
-        <meta name="description" content={description} />
         <meta name="keywords" content={keywords} />
         <meta property="og:url" content="https://elynor-store.vercel.app/" />
         <meta property="og:title" content="متجر ELYNOR - أفضل المنتجات المختارة" />
         <meta property="og:description" content={description} />
         <meta property="og:type" content="website" />
         <meta property="og:image" content="https://elynor-store.vercel.app/introu.jpg" />
+        <meta property="og:image:width" content="1200" />
+        <meta property="og:image:height" content="630" />
         <script async src="https://www.googletagmanager.com/gtag/js?id=G-J90YN8P50R"></script>
         <script
           dangerouslySetInnerHTML={{
