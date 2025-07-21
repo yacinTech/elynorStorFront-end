@@ -1,14 +1,24 @@
 import Image from 'next/image';
 import WhatsAppButton from '../components/WhatsAppButton';
 import NewsletterForm from '../components/NewsletterForm';
+import Head from 'next/head';
+import SEO from '../components/SEO';
 
 export default function AboutPage() {
   return (
-    <div
-      style={{
-        maxWidth: '800px',
-        margin: '40px auto',
-        padding: '20px',
+    <div>
+      <Head>
+        <title>من نحن - متجر ELYNOR</title>
+        <SEO />
+        <meta name="description" content="تعرف على متجر ELYNOR، حيث نقدم أفضل المنتجات المختارة بعناية وجودة عالية." />
+        <meta name="keywords" content="من نحن, متجر ELYNOR, منتجات مختارة, جودة عالية" />
+        <link rel="canonical" href="https://elynor-store.vercel.app/about" />
+      </Head>
+      <div
+        style={{
+          maxWidth: '800px',
+          margin: '40px auto',
+          padding: '20px',
         lineHeight: '1.8',
         color: '#333',
         textAlign: 'center',
@@ -44,6 +54,7 @@ export default function AboutPage() {
 
       <WhatsAppButton />
       <NewsletterForm />
+    </div>
     </div>
   );
 }

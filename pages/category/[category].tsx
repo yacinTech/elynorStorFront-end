@@ -6,6 +6,7 @@ import { getProductsByCategory } from '../../lib/api';
 import WhatsAppButton from '../../components/WhatsAppButton';
 import NewsletterForm from '../../components/NewsletterForm';
 import Image from 'next/image';
+import SEO from '../../components/SEO';
 
 interface Product {
   _id: string;
@@ -36,6 +37,7 @@ export default function CategoryPage({ category, products }: CategoryPageProps) 
     <>
       <Head>
         <title>منتجات {category} - متجرنا</title>
+        <SEO />
         <meta name="description" content={description} />
         <meta name="keywords" content={keywords} />
         <meta property="og:title" content={`منتجات ${category} - متجرنا`} />
