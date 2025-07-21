@@ -42,16 +42,41 @@ export default function AboutPage() {
         />
       </div>
 
-      <h1 style={{ fontSize: '2rem', marginBottom: '20px' }}>من نحن</h1>
+      <div style={{
+  maxWidth: '700px',
+  margin: '40px auto',
+  padding: '30px 25px',
+  backgroundColor: '#fafafa',
+  borderRadius: '16px',
+  boxShadow: '0 8px 24px rgba(0,0,0,0.1)',
+  fontFamily: "'Segoe UI', Tahoma, Geneva, Verdana, sans-serif",
+  color: '#2c2c2c',
+  lineHeight: '1.7',
+  textAlign: 'right',
+}}>
+  <h1 style={{
+    fontSize: '2.4rem',
+    fontWeight: '800',
+    marginBottom: '24px',
+    color: '#4a148c',
+    borderBottom: '3px solid #4a148c',
+    paddingBottom: '8px',
+  }}>
+    من نحن
+  </h1>
 
-      <p>
-        الينور هو متجر إلكتروني يسعى لتقديم منتجات راقية وجودة عالية تناسب كل الأذواق.
-        نحرص على تجربة تسوق سلسة وموثوقة، مع دعم متواصل واهتمام كبير برضا العملاء.
-      </p>
-      <p>
-        فريقنا يعمل بشغف لتوفير أجمل التصاميم وتقديم خدمة ممتازة بكل احترافية.
-        نحن نؤمن أن الأناقة تبدأ بالتفاصيل، وكل منتج نعرضه يعكس هذا التوجه.
-      </p>
+  <p style={{ marginBottom: '20px', fontSize: '1.15rem' }}>
+    متجر <strong>الينور</strong> الإلكتروني يهدف لتقديم منتجات راقية بجودة ممتازة تناسب كافة الأذواق.
+    نسعى لتوفير تجربة تسوق سهلة وموثوقة، مع دعم متواصل واهتمام كامل برضا عملائنا.
+  </p>
+
+  <p style={{ fontSize: '1.15rem' }}>
+    فريقنا يعمل بشغف لتوفير أجمل التصاميم وخدمة عملاء متميزة بكل احترافية.
+    نؤمن أن الأناقة تبدأ من التفاصيل، وكل منتج نقدمه يعكس هذه الرؤية.
+  </p>
+</div>
+
+
       <Testimonials />
       <WhatsAppButton />
       <NewsletterForm />
