@@ -31,88 +31,118 @@ export default function ProductDetails({ product, related }: Props) {
       ? product.images[0]
       : `https://elynor-store.vercel.app${product.images?.[0] || '/logo.png'}`;
 
+  const productUrl = `https://elynor-store.vercel.app/product/${product._id}`;
+
   return (
     <>
       <Head>
         <title>{product.name} - ELYNOR</title>
+        <meta name="description" content={product.description?.slice(0, 160) || 'تفاصيل المنتج من متجر Elynor'} />
+        <meta name="robots" content="index, follow" />
         <link rel="icon" href="/og-image.jpg" />
-        <meta name="description" content={product.description || 'تفاصيل المنتج'} />
+
+        {/* Open Graph / Facebook */}
+        <meta property="og:type" content="product" />
         <meta property="og:title" content={product.name} />
         <meta property="og:description" content={product.description || 'تفاصيل المنتج'} />
-        <meta property="og:type" content="product" />
         <meta property="og:image" content={fullImageUrl} />
-        <meta property="og:url" content={`https://elynor-store.vercel.app/product/${product._id}`} />
-        <link rel="canonical" href={`https://elynor-store.vercel.app/product/${product._id}`} />
+        <meta property="og:url" content={productUrl} />
+
+        {/* Twitter */}
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content={product.name} />
+        <meta name="twitter:description" content={product.description} />
+        <meta name="twitter:image" content={fullImageUrl} />
+
+        {/* Canonical */}
+        <link rel="canonical" href={productUrl} />
+
+        {/* Structured Data */}
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org/",
+              "@type": "Product",
+              name: product.name,
+              image: product.images,
+              description: product.description,
+              sku: product._id,
+              category: product.category,
+              offers: {
+                "@type": "Offer",
+                priceCurrency: "MAD",
+                price: product.price,
+                availability: "https://schema.org/InStock",
+                url: productUrl,
+              },
+            }),
+          }}
+        />
       </Head>
 
       <div style={{ maxWidth: '900px', margin: 'auto', padding: '20px' }}>
         <ProductSlider images={product.images || []} />
-       <div
-  style={{
-    backgroundColor: '#f9f9f9',
-    padding: '16px',
-    borderRadius: '12px',
-    boxShadow: '0 4px 12px rgba(0, 0, 0, 0.08)',
-    maxWidth: '600px',
-    margin: '0 auto 30px',
-    fontFamily: 'Segoe UI, sans-serif',
-  }}
->
-  <h2
-    style={{
-      fontSize: '1.4rem',
-      fontWeight: 'bold',
-      marginBottom: '12px',
-      color: '#333',
-      textAlign: 'center',
-      whiteSpace: 'normal',
-      overflowWrap: 'break-word',
-      wordBreak: 'break-word',
-    }}
-  >
-    {product.name}
-  </h2>
-  <p
-    style={{
-      fontSize: '1rem',
-      color: '#444',
-      lineHeight: '1.5',
-      marginBottom: '20px',
-      textAlign: 'center',
-      whiteSpace: 'normal',
-      overflowWrap: 'break-word',
-      wordBreak: 'break-word',
-    }}
-  >
-    {product.description}
-  </p>
-  <p
-    style={{
-      fontSize: '1.1rem',
-      fontWeight: 'bold',
-      color: '#e60023',
-      textAlign: 'center',
-      whiteSpace: 'normal',
-      overflowWrap: 'break-word',
-      wordBreak: 'break-word',
-    }}
-  >
-    السعر: {product.price} درهم
-  </p>
-  <p
-    style={{
-      fontSize: '1rem',
-      color: '#007BFF',
-      textAlign: 'center',
-      whiteSpace: 'normal',
-      overflowWrap: 'break-word',
-      wordBreak: 'break-word',
-    }}
-  >
-    التصنيف: {product.category}
-  </p>
-</div>
 
+        <div
+          style={{
+            backgroundColor: '#f9f9f9',
+            padding: '16px',
+            borderRadius: '12px',
+            boxShadow: '0 4px 12px rgba(0, 0, 0, 0.08)',
+            maxWidth: '600px',
+            margin: '0 auto 30px',
+            fontFamily: 'Segoe UI, sans-serif',
+          }}
+        >
+          <h2
+            style={{
+              fontSize: '1.4rem',
+              fontWeight: 'bold',
+              marginBottom: '12px',
+              color: '#333',
+              textAlign: 'center',
+              whiteSpace: 'normal',
+              overflowWrap: 'break-word',
+              wordBreak: 'break-word',
+            }}
+          >
+            {product.name}
+          </h2>
+          <p
+            style={{
+              fontSize: '1rem',
+              color: '#444',
+              lineHeight: '1.5',
+              marginBottom: '20px',
+              textAlign: 'center',
+              whiteSpace: 'normal',
+              overflowWrap: 'break-word',
+              wordBreak: 'break-word',
+            }}
+          >
+            {product.description}
+          </p>
+          <p
+            style={{
+              fontSize: '1.1rem',
+              fontWeight: 'bold',
+              color: '#e60023',
+              textAlign: 'center',
+            }}
+          >
+            السعر: {product.price} درهم
+          </p>
+          <p
+            style={{
+              fontSize: '1rem',
+              color: '#007BFF',
+              textAlign: 'center',
+            }}
+          >
+            التصنيف: {product.category}
+          </p>
+        </div>
 
         <OrderForm productId={product._id} />
 
