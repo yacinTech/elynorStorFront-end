@@ -15,7 +15,7 @@ const ProductSlider: React.FC<ProductSliderProps> = ({ images }) => {
     slidesToShow: 1,
     slidesToScroll: 1,
     autoplay: true,
-    autoplaySpeed: 5000,
+    autoplaySpeed: 3333,
     arrows: true,
     rtl: true, // لدعم الاتجاه من اليمين إلى اليسار
   };
