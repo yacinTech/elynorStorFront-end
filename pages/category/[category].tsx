@@ -9,6 +9,7 @@ import Image from 'next/image';
 import SEO from '../../components/SEO';
 
 interface Product {
+  slug: string;
   _id: string;
   name: string;
   price: number;
@@ -82,11 +83,12 @@ export default function CategoryPage({ category, products }: CategoryPageProps) 
             gap: '24px'
           }}>
             {products.map(product => (
-              <Link
-                key={product._id}
-                href={`/product/${product._id}`}
-                style={{ textDecoration: 'none', color: 'inherit' }}
-              >
+                  <Link
+                    key={product._id}
+                    href={`/product/${product.slug}`}
+                    style={{ textDecoration: 'none', color: 'inherit' }}
+                  >
+
                 <div style={{
                   border: '1px solid #eee',
                   borderRadius: '16px',
