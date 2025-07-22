@@ -8,6 +8,7 @@ import NewsletterForm from '../components/NewsletterForm';
 
 interface Product {
   _id: string;
+  slug: string;
   name: string;
   category: string;
   price: number;

@@ -1,6 +1,6 @@
 // lib/api.ts
 
-export const API_BASE = 'https://mynewstore-back-end.onrender.com/api/products'; // عدّل هذا حسب API الخاص بك
+export const API_BASE = 'http://localhost:5000/api/products'; // عدّل هذا حسب API الخاص بك
 
 export async function getAllProducts() {
   const res = await fetch(`${API_BASE}`);
@@ -8,17 +8,20 @@ export async function getAllProducts() {
   return res.json();
 }
 
-export async function getProductById(id: string) {
-  const res = await fetch(`${API_BASE}/${id}`);
+// lib/api.ts
+
+export async function getProductBySlug(slug: string) {
+  const res = await fetch(`${API_BASE}/slug/${slug}`);
   if (!res.ok) return null;
-  return res.json();
+  return await res.json();
 }
 
 export async function getProductsByCategory(category: string) {
   const res = await fetch(`${API_BASE}/category/${encodeURIComponent(category)}`);
   if (!res.ok) return [];
-  return res.json();
+  return await res.json();
 }
+
 
 // lib/api.tsx
 // lib/api.tsx

@@ -5,6 +5,7 @@ const BASE_URL = 'https://elynor-store.vercel.app';
 
 type Product = {
   _id: string;
+  slug: string; 
 };
 
 function generateSiteMap(products: Product[]) {
@@ -29,11 +30,12 @@ function generateSiteMap(products: Product[]) {
 
   // بناء روابط صفحات المنتجات كما هو عندك
   const productsXml = products.map(product => `
-    <url>
-      <loc>${BASE_URL}/${product._id}</loc>
-      <lastmod>${new Date().toISOString()}</lastmod>
-    </url>
-  `).join('');
+  <url>
+    <loc>${BASE_URL}/${product.slug}</loc>
+    <lastmod>${new Date().toISOString()}</lastmod>
+  </url>
+`).join('');
+
 
   // جمع كل الروابط معاً في ملف السايت ماب
   return `<?xml version="1.0" encoding="UTF-8"?>

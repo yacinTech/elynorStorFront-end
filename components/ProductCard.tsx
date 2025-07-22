@@ -4,6 +4,7 @@ import Image from 'next/image';
 
 interface Product {
   _id: string;
+  slug: string;  // أضفت هذا الحقل
   name: string;
   price: number;
   images: string[];
@@ -12,7 +13,7 @@ interface Product {
 export default function ProductCard({ product }: { product: Product }) {
   return (
     <div className="product-card">
-      <Link href={`/product/${product._id}`} style={{ color: 'inherit', textDecoration: 'none' }}>
+      <Link href={`/product/${product.slug}`} style={{ color: 'inherit', textDecoration: 'none' }}>
         {product.images?.length ? (
           <Image
             src={product.images[0]}

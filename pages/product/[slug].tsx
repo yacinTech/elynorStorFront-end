@@ -1,5 +1,3 @@
-// pages/product/[id].tsx
-
 import { GetServerSideProps } from 'next';
 import Head from 'next/head';
 import ProductCard from '../../components/ProductCard';
@@ -7,10 +5,11 @@ import OrderForm from '../order';
 import WhatsAppButton from '../../components/WhatsAppButton';
 import NewsletterForm from '../../components/NewsletterForm';
 import ProductSlider from '../../components/ProductSlider';
-import { getProductById, getProductsByCategory } from '../../lib/api';
+import { getProductBySlug, getProductsByCategory } from '../../lib/api';
 
 type Product = {
   _id: string;
+  slug: string;
   name: string;
   description: string;
   price: number;
@@ -31,13 +30,16 @@ export default function ProductDetails({ product, related }: Props) {
       ? product.images[0]
       : `https://elynor-store.vercel.app${product.images?.[0] || '/logo.png'}`;
 
-  const productUrl = `https://elynor-store.vercel.app/product/${product._id}`;
+  const productUrl = `https://elynor-store.vercel.app/product/${product.slug}`;
 
   return (
     <>
       <Head>
         <title>{product.name} - ELYNOR</title>
-        <meta name="description" content={product.description?.slice(0, 160) || 'تفاصيل المنتج من متجر Elynor'} />
+        <meta
+          name="description"
+          content={product.description?.slice(0, 160) || 'تفاصيل المنتج من متجر Elynor'}
+        />
         <meta name="robots" content="index, follow" />
         <link rel="icon" href="/og-image.jpg" />
 
@@ -62,18 +64,18 @@ export default function ProductDetails({ product, related }: Props) {
           type="application/ld+json"
           dangerouslySetInnerHTML={{
             __html: JSON.stringify({
-              "@context": "https://schema.org/",
-              "@type": "Product",
+              '@context': 'https://schema.org/',
+              '@type': 'Product',
               name: product.name,
               image: product.images,
               description: product.description,
               sku: product._id,
               category: product.category,
               offers: {
-                "@type": "Offer",
-                priceCurrency: "MAD",
+                '@type': 'Offer',
+                priceCurrency: 'MAD',
                 price: product.price,
-                availability: "https://schema.org/InStock",
+                availability: 'https://schema.org/InStock',
                 url: productUrl,
               },
             }),
@@ -172,10 +174,10 @@ export default function ProductDetails({ product, related }: Props) {
 }
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
-  const { id } = context.params as { id: string };
+  const { slug } = context.params as { slug: string };
 
   try {
-    const product = await getProductById(id);
+    const product = await getProductBySlug(slug);
     if (!product) return { props: { product: null, related: [] } };
 
     const others = await getProductsByCategory(product.category);
