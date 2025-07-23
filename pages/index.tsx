@@ -8,6 +8,8 @@ import WhatsAppButton from '../components/WhatsAppButton';
 import NewsletterForm from '../components/NewsletterForm';
 import { useOnScreen } from '../hooks/useOnScreen';
 import TopBanner from '../components/TopBanner';
+import '@fortawesome/fontawesome-free/css/all.min.css';
+
 
 
 interface Product {
