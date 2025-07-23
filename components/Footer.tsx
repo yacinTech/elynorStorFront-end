@@ -65,7 +65,7 @@ export default function Footer() {
           <a href="https://www.facebook.com/share/18tUZLu7Rz/?mibextid=wwXIfr" target="_blank" rel="noopener noreferrer" style={iconStyle}>
             <FaFacebookF />
           </a>
-          <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" style={iconStyle}>
+          <a href="https://www.instagram.com/elynorofficiel?igsh=ejAwbnlkNHUxY2sy&utm_source=qr" target="_blank" rel="noopener noreferrer" style={iconStyle}>
             <FaInstagram />
           </a>
           <a href="http://wa.me/212646342598" target="_blank" rel="noopener noreferrer" style={iconStyle}>
