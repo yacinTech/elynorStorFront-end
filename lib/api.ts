@@ -1,6 +1,6 @@
 // lib/api.ts
 
-export const API_BASE = 'https://mynewstore-back-end.onrender.com/api/products'; // عدّل هذا حسب API الخاص بك
+export const API_BASE = 'https://elynor-store-020eb5c3d7a2.herokuapp.com/api/products'; // عدّل هذا حسب API الخاص بك
 
 export async function getAllProducts() {
   const res = await fetch(`${API_BASE}`);
@@ -32,7 +32,7 @@ export async function submitOrder(orderData: {
   phone: string;
   quantity: number;
 }) {
-  const res = await fetch('https://mynewstore-back-end.onrender.com/api/orders', {
+  const res = await fetch('https://elynor-store-020eb5c3d7a2.herokuapp.com/api/orders', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json; charset=utf-8', // تأكد من هذا السطر
@@ -48,7 +48,7 @@ export async function submitOrder(orderData: {
 
 
 export const subscribeToNewsletter = async (email: string): Promise<unknown> => {
-  const res = await fetch('https://mynewstore-back-end.onrender.com/api/newsletter/subscribe', {
+  const res = await fetch('https://elynor-store-020eb5c3d7a2.herokuapp.com/api/newsletter/subscribe', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
