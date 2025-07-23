@@ -127,13 +127,15 @@ export default function Home({ products }: HomeProps) {
             transition: 'transform 0.3s ease, text-shadow 0.3s ease',
             cursor: 'default',
           }}
-          onMouseEnter={e => {
-            (e.currentTarget.style as any).transform = 'scale(1.05)';
-            (e.currentTarget.style as any).textShadow = '2px 2px 8px rgba(105, 35, 221, 0.6)';
+         onMouseEnter={e => {
+            const target = e.currentTarget as HTMLElement;
+            target.style.transform = 'scale(1.05)';
+            target.style.textShadow = '2px 2px 8px rgba(105, 35, 221, 0.6)';
           }}
           onMouseLeave={e => {
-            (e.currentTarget.style as any).transform = 'scale(1)';
-            (e.currentTarget.style as any).textShadow = '1px 1px 3px rgba(75, 0, 130, 0.3)';
+            const target = e.currentTarget as HTMLElement;
+            target.style.transform = 'scale(1)';
+            target.style.textShadow = '1px 1px 3px rgba(75, 0, 130, 0.3)';
           }}
         >
           جميع المنتجات
@@ -166,11 +168,14 @@ export default function Home({ products }: HomeProps) {
                     transition: 'background-color 0.3s ease',
                   }}
                   onMouseEnter={e => {
-                    (e.currentTarget.style as any).backgroundColor = '#7c3aed';
+                    const target = e.currentTarget as HTMLElement;
+                    target.style.backgroundColor = '#7c3aed';
                   }}
                   onMouseLeave={e => {
-                    (e.currentTarget.style as any).backgroundColor = '#6d28d9';
+                    const target = e.currentTarget as HTMLElement;
+                    target.style.backgroundColor = '#6d28d9';
                   }}
+
                 >
                   عرض المزيد
                 </button>
