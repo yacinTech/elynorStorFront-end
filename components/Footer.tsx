@@ -62,13 +62,13 @@ export default function Footer() {
           gap: '15px',
           marginBottom: '20px',
         }}>
-          <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" style={iconStyle}>
+          <a href="https://www.facebook.com/share/18tUZLu7Rz/?mibextid=wwXIfr" target="_blank" rel="noopener noreferrer" style={iconStyle}>
             <FaFacebookF />
           </a>
           <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" style={iconStyle}>
             <FaInstagram />
           </a>
-          <a href="https://wa.me/212600000000" target="_blank" rel="noopener noreferrer" style={iconStyle}>
+          <a href="http://wa.me/212646342598" target="_blank" rel="noopener noreferrer" style={iconStyle}>
             <FaWhatsapp />
           </a>
         </div>
