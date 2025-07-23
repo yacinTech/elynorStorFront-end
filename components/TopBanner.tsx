@@ -1,21 +1,23 @@
 import React from 'react';
 
 const phrases = [
-  'التوصيل مجاني لجميع الطلبات',
-  'خدمة الزبائن متوفرة 24 ساعة',
-  'خصومات تصل إلى 50% على المنتجات المختارة',
-  'جودة عالية وأسعار منافسة',
-  'اشترك الآن واحصل على عروض حصرية',
+  { icon: 'fa-solid fa-truck', text: 'التوصيل مجاني لجميع الطلبات' },
+  { icon: 'fas fa-headset', text: 'خدمة الزبائن متوفرة 24 ساعة' },
+  { icon: 'fas fa-percent', text: 'خصومات تصل إلى 50% على المنتجات المختارة' },
+  { icon: 'fas fa-star', text: 'جودة عالية وأسعار منافسة' },
+  { icon: 'fas fa-gift', text: 'اشترك الآن واحصل على عروض حصرية' },
 ];
+
 
 export default function TopBanner() {
   return (
     <>
       <div className="top-banner">
         <div className="scrolling-text">
-          {phrases.map((phrase, index) => (
+          {phrases.map((item, index) => (
             <span key={index} className="phrase">
-              {phrase}
+              <i className={item.icon} style={{ marginLeft: '8px', color: '#A5D8FF' }} aria-hidden="true"></i>
+              {item.text}
               <span className="separator">•</span>
             </span>
           ))}
@@ -24,7 +26,7 @@ export default function TopBanner() {
 
       <style jsx>{`
         .top-banner {
-          position: relative;  /* مهم ليكون أسفل الهيدر وليس فوق */
+          position: relative;
           width: 100%;
           background-color: #6d28d9;
           color: white;
@@ -36,7 +38,7 @@ export default function TopBanner() {
           font-size: 1rem;
           direction: rtl;
           z-index: 1;
-          margin-bottom: 10px; /* تباعد بسيط بين الشريط والمحتوى */
+          margin-bottom: 10px;
         }
 
         .scrolling-text {
@@ -47,6 +49,12 @@ export default function TopBanner() {
 
         .phrase {
           margin: 0 1.5rem;
+          display: inline-flex;
+          align-items: center;
+        }
+
+        .phrase i {
+          font-size: 1.2rem;
         }
 
         .separator {
@@ -79,3 +87,4 @@ export default function TopBanner() {
     </>
   );
 }
+

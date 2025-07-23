@@ -43,16 +43,27 @@ export default function WhatsAppButton() {
           justify-content: center;
           transition: transform 0.3s ease, box-shadow 0.3s ease;
           z-index: 1000;
+          animation: glow 2.5s infinite ease-in-out;
         }
 
         .whatsapp-btn:hover {
           transform: scale(1.1) rotate(10deg);
           box-shadow: 0 6px 15px rgba(37, 211, 102, 0.8);
+          animation: none; /* تعطيل التوهج أثناء المرور */
         }
 
         .whatsapp-btn:focus {
           outline: none;
           box-shadow: 0 0 0 3px rgba(37, 211, 102, 0.8);
+        }
+
+        @keyframes glow {
+          0%, 100% {
+            box-shadow: 0 0 8px rgba(37, 211, 102, 0.6), 0 0 20px rgba(37, 211, 102, 0.4);
+          }
+          50% {
+            box-shadow: 0 0 20px rgba(37, 211, 102, 1), 0 0 40px rgba(37, 211, 102, 0.7);
+          }
         }
       `}</style>
     </>
