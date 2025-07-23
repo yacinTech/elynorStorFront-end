@@ -7,6 +7,8 @@ import ProductCard from '../components/ProductCard';
 import WhatsAppButton from '../components/WhatsAppButton';
 import NewsletterForm from '../components/NewsletterForm';
 import { useOnScreen } from '../hooks/useOnScreen';
+import TopBanner from '../components/TopBanner';
+
 
 interface Product {
   _id: string;
@@ -49,6 +51,7 @@ export default function Home({ products }: HomeProps) {
 
   return (
     <>
+    
       <Head>
         <title>متجر ELYNOR | تسوق بأناقة وجودة</title>
         <link rel="icon" href="/og-image.jpg" />
@@ -62,8 +65,11 @@ export default function Home({ products }: HomeProps) {
         <meta property="og:image:width" content="1200" />
         <meta property="og:image:height" content="630" />
       </Head>
+            <TopBanner />
+
 
       <div style={{ maxWidth: '1100px', margin: 'auto', padding: '20px' }}>
+         
         {/* قسم الترحيب مع تأثير الصعود التدريجي عند التمرير */}
         <div
           ref={ref}
