@@ -181,7 +181,20 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     if (!product) return { props: { product: null, related: [] } };
 
     const others = await getProductsByCategory(product.category);
-    const related = others.filter((p: Product) => p._id !== product._id);
+    // استبعد المنتج الحالي
+    const filtered = others.filter((p: Product) => p._id !== product._id);
+
+    // اختار 4 منتجات عشوائية من filtered
+    function getRandomItems<T>(arr: T[], n: number): T[] {
+      const shuffled = arr.slice(); // نسخة من المصفوفة
+      for (let i = shuffled.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+      }
+      return shuffled.slice(0, n);
+    }
+
+    const related = getRandomItems(filtered, 4);
 
     return {
       props: {

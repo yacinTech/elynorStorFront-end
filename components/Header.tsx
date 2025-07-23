@@ -181,7 +181,7 @@ export default function Header() {
           display: none;
           background: none;
           border: none;
-          font-size: 1.8rem;
+          font-size: 2rem;
           cursor: pointer;
           color: #333;
         }
