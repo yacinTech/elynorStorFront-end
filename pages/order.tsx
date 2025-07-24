@@ -3,7 +3,7 @@ import { submitOrder } from '../lib/api';
 
 declare global {
   interface Window {
-    fbq?: (...args: any[]) => void;
+    fbq?: (...args: unknown[]) => void;
   }
 }
 

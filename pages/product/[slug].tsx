@@ -3,8 +3,6 @@ import { GetServerSideProps } from 'next';
 import Head from 'next/head';
 import ProductCard from '../../components/ProductCard';
 import OrderForm from '../order';
-import WhatsAppButton from '../../components/WhatsAppButton';
-import NewsletterForm from '../../components/NewsletterForm';
 import ProductSlider from '../../components/ProductSlider';
 import { getProductBySlug, getProductsByCategory } from '../../lib/api';
 import TopBanner from '../../components/TopBanner';
@@ -29,12 +27,10 @@ export default function ProductDetails({ product, related }: Props) {
     if (
       product &&
       typeof window !== 'undefined' &&
-      // @ts-ignore
-      typeof window.fbq === 'function'
+      (window as any).fbq &&
+      typeof (window as any).fbq === 'function'
     ) {
-      // إرسال حدث ViewContent مع بيانات المنتج
-      // @ts-ignore
-      window.fbq('track', 'ViewContent', {
+      (window as any).fbq('track', 'ViewContent', {
         content_ids: [product._id],
         content_name: product.name,
         content_type: 'product',
@@ -64,23 +60,19 @@ export default function ProductDetails({ product, related }: Props) {
         <meta name="robots" content="index, follow" />
         <link rel="icon" href="/og-image.jpg" />
 
-        {/* Open Graph / Facebook */}
         <meta property="og:type" content="product" />
         <meta property="og:title" content={product.name} />
         <meta property="og:description" content={product.description || 'تفاصيل المنتج'} />
         <meta property="og:image" content={fullImageUrl} />
         <meta property="og:url" content={productUrl} />
 
-        {/* Twitter */}
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content={product.name} />
         <meta name="twitter:description" content={product.description} />
         <meta name="twitter:image" content={fullImageUrl} />
 
-        {/* Canonical */}
         <link rel="canonical" href={productUrl} />
 
-        {/* Structured Data */}
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
@@ -103,6 +95,7 @@ export default function ProductDetails({ product, related }: Props) {
           }}
         />
       </Head>
+
       <TopBanner />
 
       <div style={{ maxWidth: '900px', margin: 'auto', padding: '20px' }}>
@@ -200,12 +193,10 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     if (!product) return { props: { product: null, related: [] } };
 
     const others = await getProductsByCategory(product.category);
-    // استبعد المنتج الحالي
     const filtered = others.filter((p: Product) => p._id !== product._id);
 
-    // اختار 4 منتجات عشوائية من filtered
     function getRandomItems<T>(arr: T[], n: number): T[] {
-      const shuffled = arr.slice(); // نسخة من المصفوفة
+      const shuffled = arr.slice();
       for (let i = shuffled.length - 1; i > 0; i--) {
         const j = Math.floor(Math.random() * (i + 1));
         [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
