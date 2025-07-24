@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import { GetServerSideProps } from 'next';
+import { GetServerSideProps, GetServerSidePropsContext } from 'next';
 import Head from 'next/head';
 import ProductCard from '../../components/ProductCard';
 import OrderForm from '../order';
@@ -185,7 +185,9 @@ export default function ProductDetails({ product, related }: Props) {
   );
 }
 
-export const getServerSideProps: GetServerSideProps = async (context) => {
+export const getServerSideProps: GetServerSideProps<Props> = async (
+  context: GetServerSidePropsContext
+) => {
   const { slug } = context.params as { slug: string };
 
   try {
@@ -195,6 +197,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     const others = await getProductsByCategory(product.category);
     const filtered = others.filter((p: Product) => p._id !== product._id);
 
+    // Generic function with proper typing
     function getRandomItems<T>(arr: T[], n: number): T[] {
       const shuffled = arr.slice();
       for (let i = shuffled.length - 1; i > 0; i--) {
@@ -204,7 +207,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
       return shuffled.slice(0, n);
     }
 
-    const related = getRandomItems(filtered, 4);
+    const related = getRandomItems<Product>(filtered, 4);
 
     return {
       props: {
