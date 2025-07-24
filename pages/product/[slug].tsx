@@ -7,6 +7,15 @@ import ProductSlider from '../../components/ProductSlider';
 import { getProductBySlug, getProductsByCategory } from '../../lib/api';
 import TopBanner from '../../components/TopBanner';
 
+export {};
+
+declare global {
+  interface Window {
+    fbq?: (...args: unknown[]) => void;
+  }
+}
+
+
 type Product = {
   _id: string;
   slug: string;
@@ -27,10 +36,9 @@ export default function ProductDetails({ product, related }: Props) {
     if (
       product &&
       typeof window !== 'undefined' &&
-      (window as any).fbq &&
-      typeof (window as any).fbq === 'function'
+      typeof window.fbq === 'function'
     ) {
-      (window as any).fbq('track', 'ViewContent', {
+      window.fbq('track', 'ViewContent', {
         content_ids: [product._id],
         content_name: product.name,
         content_type: 'product',
@@ -39,6 +47,7 @@ export default function ProductDetails({ product, related }: Props) {
       });
     }
   }, [product]);
+
 
   if (!product) return <p>المنتج غير موجود.</p>;
 
