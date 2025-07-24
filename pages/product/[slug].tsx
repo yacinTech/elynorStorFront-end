@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import { GetServerSideProps } from 'next';
 import Head from 'next/head';
 import ProductCard from '../../components/ProductCard';
@@ -24,6 +25,25 @@ type Props = {
 };
 
 export default function ProductDetails({ product, related }: Props) {
+  useEffect(() => {
+    if (
+      product &&
+      typeof window !== 'undefined' &&
+      // @ts-ignore
+      typeof window.fbq === 'function'
+    ) {
+      // إرسال حدث ViewContent مع بيانات المنتج
+      // @ts-ignore
+      window.fbq('track', 'ViewContent', {
+        content_ids: [product._id],
+        content_name: product.name,
+        content_type: 'product',
+        value: product.price,
+        currency: 'MAD',
+      });
+    }
+  }, [product]);
+
   if (!product) return <p>المنتج غير موجود.</p>;
 
   const fullImageUrl =
@@ -168,8 +188,6 @@ export default function ProductDetails({ product, related }: Props) {
           </div>
         )}
       </div>
-
-    
     </>
   );
 }
