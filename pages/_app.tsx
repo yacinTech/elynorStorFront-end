@@ -27,7 +27,7 @@ export default function MyApp({ Component, pageProps }: AppProps) {
             height="1"
             width="1"
             style={{ display: 'none' }}
-            src="https://www.facebook.com/tr?id=1793174024744863&ev=PageView&noscript=1"
+            src="https://www.facebook.com/tr?id=2833863817001070&ev=PageView&noscript=1"
             alt="fb pixel"
           />
         </noscript>
@@ -46,7 +46,7 @@ export default function MyApp({ Component, pageProps }: AppProps) {
             t.src='https://connect.facebook.net/en_US/fbevents.js';
             s=b.getElementsByTagName(e)[0];
             s.parentNode.insertBefore(t,s)}(window, document,'script');
-            fbq('init', '1793174024744863');
+            fbq('init', '2833863817001070');
             fbq('track', 'PageView');
           `,
         }}
