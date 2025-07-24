@@ -9,6 +9,7 @@ import NewsletterForm from '../components/NewsletterForm';
 import { useOnScreen } from '../hooks/useOnScreen';
 import TopBanner from '../components/TopBanner';
 import '@fortawesome/fontawesome-free/css/all.min.css';
+import AboutPage from './about';
 
 
 
@@ -188,7 +189,10 @@ export default function Home({ products }: HomeProps) {
                 >
                   عرض المزيد
                 </button>
+                 <AboutPage />
               </div>
+             
+
             )}
           </>
         )}
@@ -221,8 +225,7 @@ export default function Home({ products }: HomeProps) {
         `}</style>
       </div>
 
-      <WhatsAppButton />
-      <NewsletterForm />
+      
     </>
   );
 }

@@ -2,7 +2,6 @@ import Link from 'next/link';
 import { useState } from 'react';
 import MobileMenu from './MobileMenu';
 import Image from 'next/image';
-import TopBanner from '../components/TopBanner';
 
 
 
@@ -12,7 +11,8 @@ export default function Header() {
     'المنزل والمطبخ',
     'الملابس والأزياء',
     'عناية شخصية',
-    'منتجات الأطفال'
+    'منتجات الأطفال',
+    'الرياضة والرحلات'
     
   ]);
 

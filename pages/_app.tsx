@@ -7,6 +7,8 @@ import '../styles/globals.css'; // استيراد CSS العالمي
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import '@fortawesome/fontawesome-free/css/all.min.css';
+import WhatsAppButton from '../components/WhatsAppButton';
+import NewsletterForm from '../components/NewsletterForm';
 
 
 export default function MyApp({ Component, pageProps }: AppProps) {
@@ -23,6 +25,8 @@ export default function MyApp({ Component, pageProps }: AppProps) {
       </Head>
       <Header />
       <Component {...pageProps} />
+      <WhatsAppButton />
+      <NewsletterForm />
       <Footer />
     </>
   );

@@ -7,6 +7,8 @@ import WhatsAppButton from '../../components/WhatsAppButton';
 import NewsletterForm from '../../components/NewsletterForm';
 import Image from 'next/image';
 import SEO from '../../components/SEO';
+import TopBanner from '../../components/TopBanner';
+
 
 interface Product {
   slug: string;
@@ -47,6 +49,7 @@ export default function CategoryPage({ category, products }: CategoryPageProps) 
         {/* يمكنك إضافة صورة عامة هنا إن أردت */}
         <link rel="canonical" href={`https://yourdomain.com/category/${encodeURIComponent(category)}`} />
       </Head>
+      <TopBanner />
 
       <div
   style={{
@@ -142,8 +145,7 @@ export default function CategoryPage({ category, products }: CategoryPageProps) 
           </div>
         )}
 
-        <WhatsAppButton />
-        <NewsletterForm />
+       
       </div>
     </>
   );

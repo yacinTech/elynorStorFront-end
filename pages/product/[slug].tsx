@@ -6,6 +6,7 @@ import WhatsAppButton from '../../components/WhatsAppButton';
 import NewsletterForm from '../../components/NewsletterForm';
 import ProductSlider from '../../components/ProductSlider';
 import { getProductBySlug, getProductsByCategory } from '../../lib/api';
+import TopBanner from '../../components/TopBanner';
 
 type Product = {
   _id: string;
@@ -82,6 +83,7 @@ export default function ProductDetails({ product, related }: Props) {
           }}
         />
       </Head>
+      <TopBanner />
 
       <div style={{ maxWidth: '900px', margin: 'auto', padding: '20px' }}>
         <ProductSlider images={product.images || []} />
@@ -167,8 +169,7 @@ export default function ProductDetails({ product, related }: Props) {
         )}
       </div>
 
-      <WhatsAppButton />
-      <NewsletterForm />
+    
     </>
   );
 }

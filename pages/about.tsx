@@ -1,6 +1,5 @@
 import Image from 'next/image';
-import WhatsAppButton from '../components/WhatsAppButton';
-import NewsletterForm from '../components/NewsletterForm';
+
 import Head from 'next/head';
 import SEO from '../components/SEO';
 import Testimonials from '../components/Testimonials';
@@ -78,8 +77,7 @@ export default function AboutPage() {
 
 
       <Testimonials />
-      <WhatsAppButton />
-      <NewsletterForm />
+
     </div>
     </div>
   );
