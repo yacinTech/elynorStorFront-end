@@ -1,4 +1,5 @@
 User-agent: *
 Allow: /
-Sitemap: https://elynor-store.vercel.app/server-sitemap.xml
+Sitemap: Sitemap: https://elynor-store.vercel.app/api/sitemap
+
 
