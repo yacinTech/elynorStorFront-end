@@ -2,7 +2,7 @@ import { useEffect } from 'react';
 import { GetServerSideProps, GetServerSidePropsContext } from 'next';
 import Head from 'next/head';
 import ProductCard from '../../components/ProductCard';
-import OrderForm from '../order';
+import OrderForm from '../../components/order';
 import ProductSlider from '../../components/ProductSlider';
 import { getProductBySlug, getProductsByCategory } from '../../lib/api';
 import TopBanner from '../../components/TopBanner';
