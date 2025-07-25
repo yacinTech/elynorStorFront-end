@@ -23,13 +23,16 @@ export default function MobileMenu({ categories, extraLinks, onClose }: MobileMe
     setIsVisible(false);
     setTimeout(() => {
       onClose();
-    }, 300);
+    }, 400); // زدت 100ms للتوافق مع مدة الانتقال الجديدة
   };
 
   return (
-    <div className="mobile-menu-overlay" onClick={handleClose}>
+    <div
+      className={`mobile-menu-overlay ${isVisible ? 'visible' : ''}`}
+      onClick={handleClose}
+    >
       <nav
-        className={`mobile-menu ${isVisible ? 'slide-in' : 'slide-out'}`}
+        className={`mobile-menu ${isVisible ? 'visible' : ''}`}
         onClick={e => e.stopPropagation()}
       >
         <button className="close-btn" onClick={handleClose} aria-label="إغلاق القائمة">
@@ -69,12 +72,18 @@ export default function MobileMenu({ categories, extraLinks, onClose }: MobileMe
         .mobile-menu-overlay {
           position: fixed;
           inset: 0;
-          background: rgba(0,0,0,0.4);
+          background: rgba(0, 0, 0, 0);
           z-index: 1500;
           display: flex;
-          justify-content: flex-end;
+          justify-content: flex-start;
+          backdrop-filter: blur(0);
+          transition: background 0.4s ease;
+          pointer-events: none;
+        }
+        .mobile-menu-overlay.visible {
+          background: rgba(0, 0, 0, 0.4);
           backdrop-filter: blur(4px);
-          transition: background 0.3s ease;
+          pointer-events: auto;
         }
 
         .mobile-menu {
@@ -82,85 +91,81 @@ export default function MobileMenu({ categories, extraLinks, onClose }: MobileMe
           width: 80%;
           max-width: 320px;
           height: 100vh;
-          padding: 16px 16px; /* تصغير الحشو */
-          box-shadow: -4px 0 12px rgba(0,0,0,0.15);
+          padding: 16px 16px;
+          box-shadow: 4px 0 12px rgba(0, 0, 0, 0);
           display: flex;
           flex-direction: column;
-          transform: translateX(100%);
-          transition: transform 0.3s ease;
+          transform: translateX(-100%);
+          transition:
+            transform 0.4s cubic-bezier(0.4, 0, 0.2, 1),
+            box-shadow 0.4s cubic-bezier(0.4, 0, 0.2, 1);
           overflow-y: hidden;
-          -webkit-overflow-scrolling: touch; /* سلاسة التمرير في iOS */
-            overscroll-behavior: contain; /* يمنع التأثير على الصفحة الرئيسية */
-  touch-action: pan-y; /* يسمح بالسحب العمودي */
-  position: fixed; /* تأكد من ثباتها */
+          -webkit-overflow-scrolling: touch;
+          overscroll-behavior: contain;
+          touch-action: pan-y;
+          position: fixed;
+          left: 0;
         }
-
-        .slide-in {
+        .mobile-menu.visible {
           transform: translateX(0);
-        }
-
-        .slide-out {
-          transform: translateX(100%);
+          box-shadow: 4px 0 20px rgba(0, 0, 0, 0.15);
         }
 
         .close-btn {
-          font-size: 2rem; /* تصغير حجم الزر */
+          font-size: 2rem;
           background: none;
           border: none;
           align-self: flex-end;
           cursor: pointer;
-          margin-bottom: 20px; /* تقليل المسافة */
+          margin-bottom: 20px;
           color: #444;
           transition: color 0.2s ease;
         }
-
         .close-btn:hover {
           color: #f06595;
         }
 
-ul {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-  flex-grow: 1;
-  display: flex;
-  flex-direction: column;
-  gap: 10px; /* تم تقليله */
-  max-height: calc(100vh - 60px);
-  overflow-y: auto;
-  -webkit-overflow-scrolling: touch;
-}
-
-ul li {
-  font-size: 0.95rem; /* بدل 1rem */
-  padding: 8px 12px;  /* بدل 12px أو أكثر */
-  font-weight: 500;   /* أو 400 حسب الشكل */
-}
+        ul {
+          list-style: none;
+          padding: 0;
+          margin: 0;
+          flex-grow: 1;
+          display: flex;
+          flex-direction: column;
+          gap: 10px;
+          max-height: calc(100vh - 60px);
+          overflow-y: auto;
+          -webkit-overflow-scrolling: touch;
+        }
+        ul li {
+          font-size: 0.95rem;
+          padding: 8px 12px;
+          font-weight: 500;
+        }
 
         .section-title {
           font-weight: 700;
-          font-size: 1rem; /* تصغير الخط */
+          font-size: 1rem;
           color: #8e44ad;
           border-bottom: 2px solid #f06595;
-          padding-bottom: 4px; /* تقليل الحشو */
-          margin-bottom: 6px; /* تقليل المسافة */
+          padding-bottom: 4px;
+          margin-bottom: 6px;
           user-select: none;
         }
 
         li a {
           color: #333;
           font-weight: 600;
-          font-size: 0.95rem; /* تصغير الخط */
+          font-size: 0.95rem;
           text-decoration: none;
-          padding: 6px 6px; /* تقليل الحشو */
+          padding: 6px 6px;
           display: block;
           border-radius: 6px;
           transition: background-color 0.2s ease, color 0.2s ease;
-          white-space: nowrap; /* اجعل النص في سطر واحد لمنع كسر النص */
+          white-space: nowrap;
           overflow: hidden;
           text-overflow: ellipsis;
         }
-
         li a:hover {
           background-color: #fce4ec;
           color: #f06595;
@@ -168,7 +173,7 @@ ul li {
 
         /* Scrollbar for nice UX */
         .mobile-menu::-webkit-scrollbar {
-          width: 6px; /* تصغير عرض scrollbar */
+          width: 6px;
         }
         .mobile-menu::-webkit-scrollbar-track {
           background: #f1f1f1;
