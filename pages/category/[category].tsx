@@ -187,6 +187,8 @@ export const getStaticPaths: GetStaticPaths = async () => {
   };
 };
 
+
+
 // جلب المنتجات في وقت البناء (Build time)
 export const getStaticProps: GetStaticProps<CategoryPageProps> = async context => {
   const category = context.params?.category;
@@ -196,13 +198,20 @@ export const getStaticProps: GetStaticProps<CategoryPageProps> = async context =
   }
 
   // جلب المنتجات حسب التصنيف
-  const products = await getProductsByCategory(category);
+  let products = await getProductsByCategory(category);
+
+  // ترتيب المنتجات من الأحدث إلى الأقدم حسب ObjectId (MongoDB)
+  products = products.sort((a: { _id: { toString: () => string; }; }, b: { _id: { toString: () => string; }; }) => {
+    const aTime = new Date(parseInt(a._id.toString().substring(0, 8), 16) * 1000);
+    const bTime = new Date(parseInt(b._id.toString().substring(0, 8), 16) * 1000);
+    return bTime.getTime() - aTime.getTime();
+  });
 
   return {
     props: {
       category,
       products,
     },
-    revalidate: 60, // يعيد البناء كل 60 ثانية (يمكن تغييره)
+    revalidate: 60, // يعيد البناء كل 60 ثانية
   };
 };
