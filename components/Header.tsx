@@ -38,8 +38,8 @@ export default function Header() {
                 <Image
                   src="/og-image.jpg"
                   alt="Logo"
-                  width={60}
-                  height={60}
+                  width={40}
+                  height={40}
                   unoptimized
                   style={{
                     borderRadius: '50%',
@@ -109,7 +109,7 @@ export default function Header() {
           display: flex;
           align-items: center;
           justify-content: space-between;
-          padding: 12px 24px;
+          padding: 6px 16px;
           border-bottom: 1px solid #e0e0e0;
         }
 
@@ -117,11 +117,11 @@ export default function Header() {
   display: flex;
   gap: 16px; /* مسافة بين التصنيفات */
   overflow-x: auto; /* للسماح بالتمرير الأفقي إذا زاد العرض */
-  padding: 6px 12px; /* تقليل الحشو العمودي ليصبح رقيق */
+  padding:  0 12px; /* تقليل الحشو العمودي ليصبح رقيق */
   background-color: #fff; /* خلفية بيضاء أنيقة */
   border-radius: 10px;
   box-shadow: 0 1px 5px rgba(0,0,0,0.1);
-  height: 36px; /* ارتفاع أقل (يمكنك تعديل القيمة حسب رغبتك) */
+  height: 28px; /* ارتفاع أقل (يمكنك تعديل القيمة حسب رغبتك) */
   align-items: center;
   font-weight: 600;
   font-size: 0.9rem;
@@ -156,7 +156,7 @@ export default function Header() {
 
         .store-name {
           font-weight: 700;
-          font-size: 2rem;
+          font-size: 1.4rem;
           color: #222;
           font-family: 'Poppins', sans-serif;
           letter-spacing: 1px;

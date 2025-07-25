@@ -8,6 +8,7 @@ interface ProductSliderProps {
 
 const ProductSlider: React.FC<ProductSliderProps> = ({ images }) => {
   const [current, setCurrent] = useState(0);
+  const [zoomedImage, setZoomedImage] = useState<string | null>(null);
   const sliderRef = useRef<Slider>(null);
 
   const settings = {
@@ -44,32 +45,33 @@ const ProductSlider: React.FC<ProductSliderProps> = ({ images }) => {
   }
 
   return (
-    <div style={{ maxWidth: 600, margin: '0 auto' }}>
+    <div style={{ maxWidth: '100%', margin: '0 auto', padding: '0 16px' }}>
       {/* السلايدر الكبير */}
       <div
         style={{
           borderRadius: 12,
           overflow: 'hidden',
           boxShadow: '0 4px 12px rgba(0,0,0,0.1)',
+          backgroundColor: '#fff',
         }}
       >
         <Slider ref={sliderRef} {...settings}>
           {images.map((src, index) => (
-            <div key={index}>
-              <Image
-                src={src}
-                alt={`صورة ${index + 1}`}
-                width={800}
-                height={600}
-                style={{
-                  width: '100%',
-                  height: 'auto',
-                  objectFit: 'cover',
-                  userSelect: 'none',
-                }}
-                draggable={false}
-                priority={index === 0} // لتحميل أول صورة بسرعة
-              />
+            <div key={index} onClick={() => setZoomedImage(src)} style={{ cursor: 'zoom-in' }}>
+              <div style={{ width: '100%', height: '400px', position: 'relative' }}>
+                <Image
+                  src={src}
+                  alt={`صورة ${index + 1}`}
+                  fill
+                  style={{
+                    objectFit: 'contain',
+                    userSelect: 'none',
+                    cursor: 'pointer',
+                  }}
+                  priority={index === 0}
+                  draggable={false}
+                />
+              </div>
             </div>
           ))}
         </Slider>
@@ -127,6 +129,62 @@ const ProductSlider: React.FC<ProductSliderProps> = ({ images }) => {
           );
         })}
       </div>
+
+      {/* الصورة المكبرة عند الضغط */}
+      {zoomedImage && (
+        <div
+          onClick={() => setZoomedImage(null)}
+          style={{
+            position: 'fixed',
+            top: 0,
+            left: 0,
+            width: '100vw',
+            height: '100vh',
+            backgroundColor: 'rgba(0,0,0,0.9)',
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'center',
+            zIndex: 9999,
+            cursor: 'zoom-out',
+          }}
+        >
+          {/* زر الإغلاق */}
+          <button
+            onClick={(e) => {
+              e.stopPropagation(); // منع الإغلاق إذا ضغط على الزر
+              setZoomedImage(null);
+            }}
+            style={{
+              position: 'absolute',
+              top: 20,
+              right: 20,
+              background: 'transparent',
+              color: '#fff',
+              border: 'none',
+              fontSize: '2rem',
+              cursor: 'pointer',
+              zIndex: 10000,
+            }}
+          >
+            ✖
+          </button>
+
+          <Image
+            src={zoomedImage}
+            alt="صورة مكبرة"
+            width={1000}
+            height={800}
+            style={{
+              maxWidth: '90%',
+              maxHeight: '90%',
+              objectFit: 'contain',
+              userSelect: 'none',
+              borderRadius: 8,
+              boxShadow: '0 0 20px rgba(255, 255, 255, 0.2)',
+            }}
+          />
+        </div>
+      )}
     </div>
   );
 };
