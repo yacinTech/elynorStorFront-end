@@ -10,6 +10,7 @@ import "slick-carousel/slick/slick-theme.css";
 import '@fortawesome/fontawesome-free/css/all.min.css';
 import WhatsAppButton from '../components/WhatsAppButton';
 import NewsletterForm from '../components/NewsletterForm';
+import ContactSection from '../components/ContactSection';
 
 export default function MyApp({ Component, pageProps }: AppProps) {
   return (
@@ -54,6 +55,7 @@ export default function MyApp({ Component, pageProps }: AppProps) {
 
       <Header />
       <Component {...pageProps} />
+      <ContactSection />
       <WhatsAppButton />
       <NewsletterForm />
       <Footer />

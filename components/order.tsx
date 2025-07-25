@@ -1,5 +1,7 @@
 import { useState } from 'react';
 import { submitOrder } from '../lib/api';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 declare global {
   interface Window {
@@ -18,8 +20,8 @@ export default function OrderForm({ productId }: OrderFormProps) {
     phone: '',
     quantity: 1,
   });
+
   const [loading, setLoading] = useState(false);
-  const [success, setSuccess] = useState(false);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
@@ -40,6 +42,7 @@ export default function OrderForm({ productId }: OrderFormProps) {
         city: '',
       });
 
+      // Facebook Pixel event
       if (typeof window !== 'undefined' && typeof window.fbq === 'function') {
         window.fbq('track', 'InitiateCheckout', {
           content_ids: [productId],
@@ -49,47 +52,32 @@ export default function OrderForm({ productId }: OrderFormProps) {
         });
       }
 
-      setSuccess(true);
+      toast.success(' تم إرسال الطلب بنجاح! شكرًا لثقتك.', {
+        position: 'top-center',
+        autoClose: 4000,
+      });
+
+      // تفريغ الحقول بعد النجاح
+      setForm({
+        customerName: '',
+        address: '',
+        phone: '',
+        quantity: 1,
+      });
     } catch {
-      alert('حدث خطأ أثناء إرسال الطلب');
+      toast.error('❌ حدث خطأ أثناء إرسال الطلب. حاول مرة أخرى.', {
+        position: 'top-center',
+        autoClose: 4000,
+      });
     } finally {
       setLoading(false);
     }
   };
 
-  if (success) {
-    return (
-      <div className="success-msg">
-        <p
-          style={{
-            color: 'green',
-            fontWeight: 'bold',
-            display: 'flex',
-            alignItems: 'center',
-            gap: '10px',
-          }}
-        >
-          <i className="fas fa-check-circle"></i>
-          تم إرسال الطلب بنجاح! شكرًا لثقتك.
-        </p>
-
-        <style jsx>{`
-          .success-msg {
-            text-align: center;
-            color: #2e7d32;
-            background: #e8f5e9;
-            padding: 20px;
-            font-weight: bold;
-            border-radius: 12px;
-            font-size: 1.1rem;
-          }
-        `}</style>
-      </div>
-    );
-  }
-
- return (
+  return (
     <div className="order-container">
+      <ToastContainer />
+
       <h2>طلب المنتج</h2>
       <form onSubmit={handleSubmit} className="order-form">
         <div className="form-grid">

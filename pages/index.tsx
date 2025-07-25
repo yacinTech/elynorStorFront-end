@@ -4,8 +4,6 @@ import Image from 'next/image';
 import { useState } from 'react';
 import { getAllProducts } from '../lib/api';
 import ProductCard from '../components/ProductCard';
-import WhatsAppButton from '../components/WhatsAppButton';
-import NewsletterForm from '../components/NewsletterForm';
 import { useOnScreen } from '../hooks/useOnScreen';
 import TopBanner from '../components/TopBanner';
 import '@fortawesome/fontawesome-free/css/all.min.css';
@@ -190,6 +188,7 @@ export default function Home({ products }: HomeProps) {
                   عرض المزيد
                 </button>
                  <AboutPage />
+                 
               </div>
              
 

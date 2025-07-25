@@ -23,7 +23,7 @@ export default function Header() {
   const extraLinks = [
     { name: 'من نحن', href: '/about' },
     { name: 'سياسة الخصوصية', href: '/privacy' },
-    { name: 'تواصل معنا', href: "#newsletter" },
+    { name: 'تواصل معنا', href: "#contact" },
   ];
 
   return (
