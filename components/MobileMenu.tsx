@@ -88,7 +88,7 @@ export default function MobileMenu({ categories, extraLinks, onClose }: MobileMe
           flex-direction: column;
           transform: translateX(100%);
           transition: transform 0.3s ease;
-          overflow-y: auto;
+          overflow-y: hidden;
           -webkit-overflow-scrolling: touch; /* سلاسة التمرير في iOS */
             overscroll-behavior: contain; /* يمنع التأثير على الصفحة الرئيسية */
   touch-action: pan-y; /* يسمح بالسحب العمودي */
@@ -118,16 +118,18 @@ export default function MobileMenu({ categories, extraLinks, onClose }: MobileMe
           color: #f06595;
         }
 
-        ul {
+ ul {
   list-style: none;
   padding: 0;
   margin: 0;
+  flex-grow: 1;
   display: flex;
   flex-direction: column;
   gap: 14px;
- 
+  max-height: calc(100vh - 60px);
+  overflow-y: auto; /* ✅ نطبق السكرول هنا فقط */
+  -webkit-overflow-scrolling: touch; /* لأجهزة iOS */
 }
-
 
         .section-title {
           font-weight: 700;
