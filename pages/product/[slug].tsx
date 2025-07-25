@@ -143,7 +143,7 @@ export default function ProductDetails({ product, related }: Props) {
       lineHeight: '1.5',
       marginBottom: '20px',
       textAlign: 'center',
-      whiteSpace: 'normal',
+      whiteSpace: 'pre-line',
       overflowWrap: 'break-word',
       wordBreak: 'break-word',
     }}
