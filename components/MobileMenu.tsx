@@ -118,17 +118,23 @@ export default function MobileMenu({ categories, extraLinks, onClose }: MobileMe
           color: #f06595;
         }
 
- ul {
+ul {
   list-style: none;
   padding: 0;
   margin: 0;
   flex-grow: 1;
   display: flex;
   flex-direction: column;
-  gap: 14px;
+  gap: 10px; /* تم تقليله */
   max-height: calc(100vh - 60px);
-  overflow-y: auto; /* ✅ نطبق السكرول هنا فقط */
-  -webkit-overflow-scrolling: touch; /* لأجهزة iOS */
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+ul li {
+  font-size: 0.95rem; /* بدل 1rem */
+  padding: 8px 12px;  /* بدل 12px أو أكثر */
+  font-weight: 500;   /* أو 400 حسب الشكل */
 }
 
         .section-title {
