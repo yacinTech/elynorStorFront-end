@@ -116,14 +116,16 @@ export default function MobileMenu({ categories, extraLinks, onClose }: MobileMe
         }
 
         ul {
-          list-style: none;
-          padding: 0;
-          margin: 0;
-          display: flex;
-          flex-direction: column;
-          gap: 14px; /* تقليل الفجوة بين العناصر */
-          font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        }
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  max-height: calc(100vh - 60px); /* يمنع تجاوز القائمة */
+  overflow-y: auto; /* يضيف سكرول */
+}
+
 
         .section-title {
           font-weight: 700;
