@@ -135,30 +135,48 @@ export default function ProductDetails({ product, related }: Props) {
           >
             {product.name}
           </h2>
-         <p
-          style={{
-            fontSize: '1.1rem',
-            fontWeight: 'bold',
-            color: '#e60023',
-            textAlign: 'center',
-            display: 'flex',
-            justifyContent: 'center',
-            gap: '12px',
-            alignItems: 'center',
-          }}
-        >
-          <span
-            style={{
-              textDecoration: 'line-through',
-              color: '#999',
-              fontWeight: 'normal',
-              fontSize: '1rem',
-            }}
-          >
-            {Math.round(product.price * 1.4)} درهم
-          </span>
-          <span>{product.price} درهم</span>
-        </p>
+          <>
+  <p
+    style={{
+      fontSize: '1rem',
+      color: '#444',
+      lineHeight: '1.5',
+      marginBottom: '20px',
+      textAlign: 'center',
+      whiteSpace: 'normal',
+      overflowWrap: 'break-word',
+      wordBreak: 'break-word',
+    }}
+  >
+    {product.description}
+  </p>
+
+  <p
+    style={{
+      fontSize: '1.1rem',
+      fontWeight: 'bold',
+      color: '#e60023',
+      textAlign: 'center',
+      display: 'flex',
+      justifyContent: 'center',
+      gap: '12px',
+      alignItems: 'center',
+    }}
+  >
+    <span
+      style={{
+        textDecoration: 'line-through',
+        color: '#999',
+        fontWeight: 'normal',
+        fontSize: '1rem',
+      }}
+    >
+      {Math.round(product.price * 1.4)} درهم
+    </span>
+    <span>{product.price} درهم</span>
+  </p>
+</>
+
           <p
             style={{
               fontSize: '1rem',
