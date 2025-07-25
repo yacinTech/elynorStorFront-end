@@ -4,13 +4,15 @@ import Image from 'next/image';
 
 interface Product {
   _id: string;
-  slug: string;  // أضفت هذا الحقل
+  slug: string;
   name: string;
   price: number;
   images: string[];
 }
 
 export default function ProductCard({ product }: { product: Product }) {
+  const oldPrice = Math.round(product.price * 1.4); // السعر قبل الخصم
+
   return (
     <div className="product-card">
       <Link href={`/product/${product.slug}`} style={{ color: 'inherit', textDecoration: 'none' }}>
@@ -30,8 +32,13 @@ export default function ProductCard({ product }: { product: Product }) {
         ) : (
           <div className="image-placeholder">لا توجد صورة</div>
         )}
+
         <h3>{product.name}</h3>
-        <div className="price-badge">{product.price} درهم</div>
+
+        <div className="price-wrapper">
+          <span className="old-price">{oldPrice} درهم</span>
+          <span className="new-price">{product.price} درهم</span>
+        </div>
       </Link>
 
       <style jsx>{`
@@ -69,15 +76,27 @@ export default function ProductCard({ product }: { product: Product }) {
           color: #333;
         }
 
-        .price-badge {
-          display: inline-block;
+        .price-wrapper {
           margin-top: 8px;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          gap: 4px;
+        }
+
+        .old-price {
+          font-size: 0.9rem;
+          color: #999;
+          text-decoration: line-through;
+        }
+
+        .new-price {
           background-color: #f9f3e9;
           color: #c97b00;
           font-weight: bold;
           padding: 6px 12px;
           border-radius: 20px;
-          font-size: 0.95rem;
+          font-size: 1rem;
           border: 1px solid #f0e0c0;
         }
 
