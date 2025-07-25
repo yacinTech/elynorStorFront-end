@@ -52,7 +52,7 @@ export default function Footer() {
         }}>
           <Link href="/" legacyBehavior><a style={linkStyle}>الرئيسية</a></Link>
           <Link href="/about" legacyBehavior><a style={linkStyle}>من نحن</a></Link>
-          <Link href="/contact" legacyBehavior><a style={linkStyle}>تواصل معنا</a></Link>
+          <Link href="#contact" legacyBehavior><a style={linkStyle}>تواصل معنا</a></Link>
           <Link href="/privacy" legacyBehavior><a style={linkStyle}>سياسة الخصوصية</a></Link>
         </div>
 

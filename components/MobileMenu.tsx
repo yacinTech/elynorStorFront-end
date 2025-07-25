@@ -10,17 +10,20 @@ interface MobileMenuProps {
 export default function MobileMenu({ categories, extraLinks, onClose }: MobileMenuProps) {
   const [isVisible, setIsVisible] = useState(false);
 
-  // لتفعيل الانزلاق السلس عند الظهور
   useEffect(() => {
     setIsVisible(true);
+    // منع تمرير الصفحة عند فتح القائمة
+    document.body.style.overflow = 'hidden';
+    return () => {
+      document.body.style.overflow = '';
+    };
   }, []);
 
-  // لإخفاء القائمة بسلاسة قبل اغلاقها
   const handleClose = () => {
     setIsVisible(false);
     setTimeout(() => {
       onClose();
-    }, 300); // مدة الانزلاق متطابقة مع CSS transition
+    }, 300);
   };
 
   return (
@@ -33,7 +36,6 @@ export default function MobileMenu({ categories, extraLinks, onClose }: MobileMe
           ×
         </button>
         <ul>
-          {/* القسم الأول: الرئيسية */}
           <li className="section-title">الرئيسية</li>
           <li key="الرئيسية">
             <Link href="/" legacyBehavior>
@@ -41,7 +43,6 @@ export default function MobileMenu({ categories, extraLinks, onClose }: MobileMe
             </Link>
           </li>
 
-          {/* القسم الثاني: روابط إضافية */}
           <li className="section-title">معلومات</li>
           {extraLinks
             .filter(link => link.name !== 'الرئيسية')
@@ -53,7 +54,6 @@ export default function MobileMenu({ categories, extraLinks, onClose }: MobileMe
               </li>
             ))}
 
-          {/* القسم الثالث: التصنيفات */}
           <li className="section-title">التصنيفات</li>
           {categories.map(cat => (
             <li key={cat}>
@@ -82,13 +82,14 @@ export default function MobileMenu({ categories, extraLinks, onClose }: MobileMe
           width: 80%;
           max-width: 320px;
           height: 100vh;
-          padding: 24px 20px;
+          padding: 16px 16px; /* تصغير الحشو */
           box-shadow: -4px 0 12px rgba(0,0,0,0.15);
           display: flex;
           flex-direction: column;
           transform: translateX(100%);
           transition: transform 0.3s ease;
           overflow-y: auto;
+          -webkit-overflow-scrolling: touch; /* سلاسة التمرير في iOS */
         }
 
         .slide-in {
@@ -100,12 +101,12 @@ export default function MobileMenu({ categories, extraLinks, onClose }: MobileMe
         }
 
         .close-btn {
-          font-size: 2.5rem;
+          font-size: 2rem; /* تصغير حجم الزر */
           background: none;
           border: none;
           align-self: flex-end;
           cursor: pointer;
-          margin-bottom: 30px;
+          margin-bottom: 20px; /* تقليل المسافة */
           color: #444;
           transition: color 0.2s ease;
         }
@@ -120,29 +121,32 @@ export default function MobileMenu({ categories, extraLinks, onClose }: MobileMe
           margin: 0;
           display: flex;
           flex-direction: column;
-          gap: 20px;
+          gap: 14px; /* تقليل الفجوة بين العناصر */
           font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
 
         .section-title {
           font-weight: 700;
-          font-size: 1.2rem;
+          font-size: 1rem; /* تصغير الخط */
           color: #8e44ad;
           border-bottom: 2px solid #f06595;
-          padding-bottom: 6px;
-          margin-bottom: 10px;
+          padding-bottom: 4px; /* تقليل الحشو */
+          margin-bottom: 6px; /* تقليل المسافة */
           user-select: none;
         }
 
         li a {
           color: #333;
           font-weight: 600;
-          font-size: 1.1rem;
+          font-size: 0.95rem; /* تصغير الخط */
           text-decoration: none;
-          padding: 8px 4px;
+          padding: 6px 6px; /* تقليل الحشو */
           display: block;
           border-radius: 6px;
           transition: background-color 0.2s ease, color 0.2s ease;
+          white-space: nowrap; /* اجعل النص في سطر واحد لمنع كسر النص */
+          overflow: hidden;
+          text-overflow: ellipsis;
         }
 
         li a:hover {
@@ -152,14 +156,14 @@ export default function MobileMenu({ categories, extraLinks, onClose }: MobileMe
 
         /* Scrollbar for nice UX */
         .mobile-menu::-webkit-scrollbar {
-          width: 8px;
+          width: 6px; /* تصغير عرض scrollbar */
         }
         .mobile-menu::-webkit-scrollbar-track {
           background: #f1f1f1;
         }
         .mobile-menu::-webkit-scrollbar-thumb {
           background: #ccc;
-          border-radius: 4px;
+          border-radius: 3px;
         }
         .mobile-menu::-webkit-scrollbar-thumb:hover {
           background: #b39ddb;

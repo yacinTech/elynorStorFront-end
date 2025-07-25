@@ -3,12 +3,9 @@ import Head from 'next/head';
 import Link from 'next/link';
 import { GetStaticPaths, GetStaticProps } from 'next';
 import { getProductsByCategory } from '../../lib/api';
-import WhatsAppButton from '../../components/WhatsAppButton';
-import NewsletterForm from '../../components/NewsletterForm';
 import Image from 'next/image';
 import SEO from '../../components/SEO';
 import TopBanner from '../../components/TopBanner';
-
 
 interface Product {
   slug: string;
@@ -52,54 +49,54 @@ export default function CategoryPage({ category, products }: CategoryPageProps) 
       <TopBanner />
 
       <div
-  style={{
-    padding: '40px 20px',
-    backgroundColor: '#f9f9f9',
-    borderRadius: '12px',
-    boxShadow: '0 4px 12px rgba(0, 0, 0, 0.08)',
-    textAlign: 'center',
-  }}
->
-  <h1
-    style={{
-      marginBottom: '25px',
-      fontSize: '2rem',
-      color: '#222',
-      fontWeight: '700',
-      letterSpacing: '0.5px',
-      borderBottom: '2px solid #8e44ad',
-      display: 'inline-block',
-      paddingBottom: '8px',
-    }}
-  >
-    المنتجات في تصنيف: {category}
-  </h1>
-
-
+        style={{
+          padding: '40px 20px',
+          backgroundColor: '#f9f9f9',
+          borderRadius: '12px',
+          boxShadow: '0 4px 12px rgba(0, 0, 0, 0.08)',
+          textAlign: 'center',
+        }}
+      >
+        <h1
+          style={{
+            marginBottom: '25px',
+            fontSize: '2rem',
+            color: '#222',
+            fontWeight: '700',
+            letterSpacing: '0.5px',
+            borderBottom: '2px solid #8e44ad',
+            display: 'inline-block',
+            paddingBottom: '8px',
+          }}
+        >
+          المنتجات في تصنيف: {category}
+        </h1>
 
         {products.length === 0 ? (
           <p>لا توجد منتجات في هذا التصنيف.</p>
         ) : (
-          <div style={{
-            display: 'grid',
-            gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))',
-            gap: '24px'
-          }}>
+          <div
+            style={{
+              display: 'grid',
+              gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))',
+              gap: '24px',
+            }}
+          >
             {products.map(product => (
-                  <Link
-                    key={product._id}
-                    href={`/product/${product.slug}`}
-                    style={{ textDecoration: 'none', color: 'inherit' }}
-                  >
-
-                <div style={{
-                  border: '1px solid #eee',
-                  borderRadius: '16px',
-                  padding: '16px',
-                  backgroundColor: '#fff',
-                  boxShadow: '0 4px 12px rgba(0, 0, 0, 0.06)',
-                  transition: 'transform 0.3s ease, box-shadow 0.3s ease',
-                }}
+              <Link
+                key={product._id}
+                href={`/product/${product.slug}`}
+                style={{ textDecoration: 'none', color: 'inherit' }}
+              >
+                <div
+                  style={{
+                    border: '1px solid #eee',
+                    borderRadius: '16px',
+                    padding: '16px',
+                    backgroundColor: '#fff',
+                    boxShadow: '0 4px 12px rgba(0, 0, 0, 0.06)',
+                    transition: 'transform 0.3s ease, box-shadow 0.3s ease',
+                  }}
                   onMouseEnter={e => {
                     (e.currentTarget as HTMLDivElement).style.transform = 'translateY(-4px)';
                     (e.currentTarget as HTMLDivElement).style.boxShadow = '0 8px 20px rgba(0, 0, 0, 0.1)';
@@ -116,7 +113,7 @@ export default function CategoryPage({ category, products }: CategoryPageProps) 
                       height: '220px',
                       borderRadius: '12px',
                       marginBottom: '12px',
-                      overflow: 'hidden',  // لمنع خروج الصورة عن الحدود
+                      overflow: 'hidden',
                     }}
                   >
                     <Image
@@ -126,26 +123,53 @@ export default function CategoryPage({ category, products }: CategoryPageProps) 
                       objectFit="cover"
                     />
                   </div>
-                  <h3 style={{
-                    margin: '0 0 8px',
-                    fontSize: '1.2rem',
-                    color: '#222'
-                  }}>{product.name}</h3>
-                  <p style={{
-                    margin: 0,
-                    fontSize: '1rem',
-                    color: '#0070f3',
-                    fontWeight: 600
-                  }}>
-                    {product.price} درهم
-                  </p>
+                  <h3
+                    style={{
+                      margin: '0 0 8px',
+                      fontSize: '1.2rem',
+                      color: '#222',
+                    }}
+                  >
+                    {product.name}
+                  </h3>
+                  {/* السعر قبل وبعد الخصم */}
+                  <div
+                    style={{
+                      marginTop: '10px',
+                      display: 'flex',
+                      flexDirection: 'column',
+                      alignItems: 'center',
+                      gap: '4px',
+                    }}
+                  >
+                    <span
+                      style={{
+                        fontSize: '0.9rem',
+                        color: '#999',
+                        textDecoration: 'line-through',
+                      }}
+                    >
+                      {Math.round(product.price * 1.4)} درهم
+                    </span>
+                    <span
+                      style={{
+                        backgroundColor: '#f9f3e9',
+                        color: '#c97b00',
+                        fontWeight: 'bold',
+                        padding: '6px 12px',
+                        borderRadius: '20px',
+                        fontSize: '1rem',
+                        border: '1px solid #f0e0c0',
+                      }}
+                    >
+                      {product.price} درهم
+                    </span>
+                  </div>
                 </div>
               </Link>
             ))}
           </div>
         )}
-
-       
       </div>
     </>
   );
@@ -154,7 +178,7 @@ export default function CategoryPage({ category, products }: CategoryPageProps) 
 // توليد مسارات ثابتة لجميع التصنيفات
 export const getStaticPaths: GetStaticPaths = async () => {
   const paths = STATIC_CATEGORIES.map(cat => ({
-    params: { category: cat }
+    params: { category: cat },
   }));
 
   return {
@@ -164,7 +188,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
 };
 
 // جلب المنتجات في وقت البناء (Build time)
-export const getStaticProps: GetStaticProps<CategoryPageProps> = async (context) => {
+export const getStaticProps: GetStaticProps<CategoryPageProps> = async context => {
   const category = context.params?.category;
 
   if (typeof category !== 'string') {

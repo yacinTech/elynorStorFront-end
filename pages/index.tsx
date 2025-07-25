@@ -67,10 +67,11 @@ export default function Home({ products }: HomeProps) {
         <meta property="og:image:height" content="630" />
        
       </Head>
-            <TopBanner />
+                  <TopBanner />
 
 
-      <div style={{ maxWidth: '1100px', margin: 'auto', padding: '20px' }}>
+
+      <div style={{ maxWidth: '1100px', margin: 'auto', padding: '5px' }}>
          
         {/* قسم الترحيب مع تأثير الصعود التدريجي عند التمرير */}
         <div
