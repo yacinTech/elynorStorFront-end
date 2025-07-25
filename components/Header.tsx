@@ -16,8 +16,8 @@ export default function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [hovered, setHovered] = useState(false);
 
+  // الروابط الإضافية
   const extraLinks = [
-    { name: 'الرئيسية', href: '/' }, // تمت إضافته
     { name: 'من نحن', href: '/about' },
     { name: 'سياسة الخصوصية', href: '/privacy' },
     { name: 'تواصل معنا', href: '#contact' },
@@ -25,7 +25,6 @@ export default function Header() {
 
   return (
     <>
-      {/* القسم العلوي */}
       <header className="main-header">
         <div style={{ display: 'flex', alignItems: 'center' }}>
           <Link href="/" legacyBehavior>
@@ -51,19 +50,26 @@ export default function Header() {
                   transform: hovered ? 'scale(1.1) rotate(2deg)' : 'none',
                   transition: 'transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease',
                 }}
+                className="logo-image"
               />
+
               <span className="store-name">ELYNOR</span>
             </a>
           </Link>
         </div>
 
-        {/* روابط القسم العلوي */}
+        {/* قائمة سطح المكتب */}
         <nav className="desktop-nav">
-          {extraLinks.map((link) => (
-            <Link key={link.name} href={link.href} legacyBehavior>
-              <a className="nav-link">{link.name}</a>
-            </Link>
-          ))}
+          {[...categories, ...extraLinks.map(link => link.name)].map((item) => {
+            const linkObj = extraLinks.find(link => link.name === item);
+            const href = linkObj ? linkObj.href : `/category/${encodeURIComponent(item)}`;
+
+            return (
+              <Link key={item} href={href} legacyBehavior>
+                <a className="nav-link">{item}</a>
+              </Link>
+            );
+          })}
         </nav>
 
         {/* زر القائمة للجوال */}
@@ -76,18 +82,6 @@ export default function Header() {
         </button>
       </header>
 
-      {/* القسم السفلي (للتصنيفات فقط) */}
-      <div className="category-bar">
-        <nav className="desktop-nav">
-          {categories.map((item) => (
-            <Link key={item} href={`/category/${encodeURIComponent(item)}`} legacyBehavior>
-              <a className="nav-link">{item}</a>
-            </Link>
-          ))}
-        </nav>
-      </div>
-
-      {/* القائمة الجانبية للجوال */}
       {mobileMenuOpen && (
         <MobileMenu
           categories={categories}
@@ -108,12 +102,6 @@ export default function Header() {
           position: sticky;
           top: 0;
           z-index: 1000;
-        }
-
-        .category-bar {
-          background-color: #fafafa;
-          border-bottom: 1px solid #e0e0e0;
-          padding: 8px 24px;
         }
 
         .store-name {
@@ -176,6 +164,8 @@ export default function Header() {
           font-size: 2rem;
           cursor: pointer;
           color: #333;
+          margin: 0; /* إزالة أي هامش */
+          padding: 0; /* إزالة الحشوة لو موجودة */
         }
 
         @media (max-width: 768px) {
@@ -187,8 +177,13 @@ export default function Header() {
             display: block;
           }
 
-          .category-bar {
-            padding: 12px;
+          /* تصغير العنوان واللوغو */
+          .store-name {
+            font-size: 1.5rem; /* تصغير 10% */
+          }
+          .logo-image {
+            width: 35px !important; /* 10% تصغير عن 60 */
+            height: 35px !important;
           }
         }
       `}</style>

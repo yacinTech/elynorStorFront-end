@@ -39,6 +39,7 @@ export default function TopBanner() {
           direction: rtl;
           z-index: 1;
           margin-bottom: 10px;
+          margin-top: 0;
         }
 
         .scrolling-text {
