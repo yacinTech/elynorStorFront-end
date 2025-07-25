@@ -90,6 +90,9 @@ export default function MobileMenu({ categories, extraLinks, onClose }: MobileMe
           transition: transform 0.3s ease;
           overflow-y: auto;
           -webkit-overflow-scrolling: touch; /* سلاسة التمرير في iOS */
+            overscroll-behavior: contain; /* يمنع التأثير على الصفحة الرئيسية */
+  touch-action: pan-y; /* يسمح بالسحب العمودي */
+  position: fixed; /* تأكد من ثباتها */
         }
 
         .slide-in {
