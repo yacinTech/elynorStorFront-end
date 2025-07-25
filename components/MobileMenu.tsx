@@ -125,8 +125,7 @@ export default function MobileMenu({ categories, extraLinks, onClose }: MobileMe
   display: flex;
   flex-direction: column;
   gap: 14px;
-  max-height: calc(100vh - 60px); /* يمنع تجاوز القائمة */
-  overflow-y: auto; /* يضيف سكرول */
+ 
 }
 
 
