@@ -1,13 +1,13 @@
 import React from 'react';
+import { FaTruck, FaHeadset, FaPercent, FaStar, FaGift } from 'react-icons/fa';
 
 const phrases = [
-  { icon: 'fa-solid fa-truck', text: 'التوصيل مجاني لجميع الطلبات' },
-  { icon: 'fas fa-headset', text: 'خدمة الزبائن متوفرة 24 ساعة' },
-  { icon: 'fas fa-percent', text: 'خصومات تصل إلى 50% على المنتجات المختارة' },
-  { icon: 'fas fa-star', text: 'جودة عالية وأسعار منافسة' },
-  { icon: 'fas fa-gift', text: 'اشترك الآن واحصل على عروض حصرية' },
+  { icon: <FaTruck style={{ marginLeft: 8, color: '#A5D8FF' }} aria-hidden="true" />, text: 'التوصيل مجاني لجميع الطلبات' },
+  { icon: <FaHeadset style={{ marginLeft: 8, color: '#A5D8FF' }} aria-hidden="true" />, text: 'خدمة الزبائن متوفرة 24 ساعة' },
+  { icon: <FaPercent style={{ marginLeft: 8, color: '#A5D8FF' }} aria-hidden="true" />, text: 'خصومات تصل إلى 50% على المنتجات المختارة' },
+  { icon: <FaStar style={{ marginLeft: 8, color: '#A5D8FF' }} aria-hidden="true" />, text: 'جودة عالية وأسعار منافسة' },
+  { icon: <FaGift style={{ marginLeft: 8, color: '#A5D8FF' }} aria-hidden="true" />, text: 'اشترك الآن واحصل على عروض حصرية' },
 ];
-
 
 export default function TopBanner() {
   return (
@@ -16,7 +16,7 @@ export default function TopBanner() {
         <div className="scrolling-text">
           {phrases.map((item, index) => (
             <span key={index} className="phrase">
-              <i className={item.icon} style={{ marginLeft: '8px', color: '#A5D8FF' }} aria-hidden="true"></i>
+              {item.icon}
               {item.text}
               <span className="separator">•</span>
             </span>
@@ -53,8 +53,9 @@ export default function TopBanner() {
           align-items: center;
         }
 
-        .phrase i {
+        .phrase svg {
           font-size: 1.2rem;
+          flex-shrink: 0;
         }
 
         .separator {
@@ -87,4 +88,3 @@ export default function TopBanner() {
     </>
   );
 }
-

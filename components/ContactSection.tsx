@@ -1,5 +1,6 @@
 // components/ContactSection.tsx
 import { useState } from 'react';
+import { FaFacebook, FaInstagram, FaWhatsapp } from 'react-icons/fa';
 
 export default function ContactSection() {
   const [form, setForm] = useState({ name: '', email: '', message: '' });
@@ -14,13 +15,13 @@ export default function ContactSection() {
 👤 الاسم: ${name}
 📧 الإيميل: ${email}
 📝 الرسالة: ${message}`;
-    const whatsappNumber = '212646342598'; // رقمك بصيغة دولية بدون "+"
+    const whatsappNumber = '212646342598'; // رقم واتساب بصيغة دولية بدون "+"
     const url = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(text)}`;
     window.open(url, '_blank');
   };
 
   return (
-    <section id='contact' style={{ background: '#fdfbff', padding: '40px 20px', textAlign: 'center' }}>
+    <section id="contact" style={{ background: '#fdfbff', padding: '40px 20px', textAlign: 'center' }}>
       <h2 style={{ fontSize: '2rem', color: '#6d28d9', marginBottom: '30px' }}>
         تواصل معنا
       </h2>
@@ -54,25 +55,40 @@ export default function ContactSection() {
           required
         />
 
-        <button
-          onClick={handleSend}
-          style={buttonStyle}
-        >
+        <button onClick={handleSend} style={buttonStyle}>
           إرسال عبر واتساب
         </button>
       </div>
 
       <div style={{ marginTop: '40px' }}>
         <h3 style={{ marginBottom: '10px', color: '#333' }}>تابعنا على:</h3>
-        <div style={{ fontSize: '1.8rem' }}>
-          <a href="https://www.facebook.com/share/18tUZLu7Rz/?mibextid=wwXIfr" target="_blank" rel="noreferrer" style={iconStyle}>
-            <i className="fab fa-facebook"></i>
+        <div style={{ fontSize: '2.2rem', display: 'flex', justifyContent: 'center', gap: '25px' }}>
+          <a
+            href="https://www.facebook.com/share/18tUZLu7Rz/?mibextid=wwXIfr"
+            target="_blank"
+            rel="noreferrer"
+            aria-label="Facebook"
+            style={iconStyle}
+          >
+            <FaFacebook />
           </a>
-          <a href="https://www.instagram.com/elynorofficiel?igsh=ejAwbnlkNHUxY2sy&utm_source=qr" target="_blank" rel="noreferrer" style={iconStyle}>
-            <i className="fab fa-instagram"></i>
+          <a
+            href="https://www.instagram.com/elynorofficiel?igsh=ejAwbnlkNHUxY2sy&utm_source=qr"
+            target="_blank"
+            rel="noreferrer"
+            aria-label="Instagram"
+            style={iconStyle}
+          >
+            <FaInstagram />
           </a>
-          <a href="http://wa.me/212646342598" target="_blank" rel="noreferrer" style={iconStyle}>
-            <i className="fab fa-whatsapp"></i>
+          <a
+            href="http://wa.me/212646342598"
+            target="_blank"
+            rel="noreferrer"
+            aria-label="WhatsApp"
+            style={iconStyle}
+          >
+            <FaWhatsapp />
           </a>
         </div>
       </div>
@@ -104,6 +120,8 @@ const buttonStyle: React.CSSProperties = {
 
 const iconStyle: React.CSSProperties = {
   color: '#6d28d9',
-  margin: '0 10px',
+  cursor: 'pointer',
   transition: 'color 0.3s',
+  display: 'flex',
+  alignItems: 'center',
 };
