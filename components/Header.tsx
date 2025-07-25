@@ -3,8 +3,6 @@ import { useState } from 'react';
 import MobileMenu from './MobileMenu';
 import Image from 'next/image';
 
-
-
 export default function Header() {
   const [categories] = useState<string[]>([
     'الإلكترونيات',
@@ -12,72 +10,60 @@ export default function Header() {
     'الملابس والأزياء',
     'عناية شخصية',
     'منتجات الأطفال',
-    'الرياضة والرحلات'
-    
+    'الرياضة والرحلات',
   ]);
 
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [hovered, setHovered] = useState(false);
 
-  // الروابط الإضافية
   const extraLinks = [
+    { name: 'الرئيسية', href: '/' }, // تمت إضافته
     { name: 'من نحن', href: '/about' },
     { name: 'سياسة الخصوصية', href: '/privacy' },
-    { name: 'تواصل معنا', href: "#contact" },
+    { name: 'تواصل معنا', href: '#contact' },
   ];
 
   return (
     <>
-    
-       <header className="main-header">
-        
-      <div style={{ display: 'flex', alignItems: 'center' }}>
-        <Link href="/" legacyBehavior>
-          <a
-            style={{ display: 'flex', alignItems: 'center', textDecoration: 'none' }}
-            onMouseEnter={() => setHovered(true)}
-            onMouseLeave={() => setHovered(false)}
-          >
-            <Image
-              src="/og-image.jpg"
-              alt="Logo"
-              width={60}
-              height={60}
-              unoptimized
-              style={{
-                borderRadius: '50%',
-                border: `2px solid ${hovered ? '#f06595' : '#ddd'}`,
-                boxShadow: hovered
-                  ? '0 4px 12px rgba(0, 0, 0, 0.2)'
-                  : '0 2px 5px rgba(0, 0, 0, 0.1)',
-                objectFit: 'cover',
-                marginRight: '12px',
-                transform: hovered ? 'scale(1.1) rotate(2deg)' : 'none',
-                transition: 'transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease',
-              }}
-            />
-
-
-
-
+      {/* القسم العلوي */}
+      <header className="main-header">
+        <div style={{ display: 'flex', alignItems: 'center' }}>
+          <Link href="/" legacyBehavior>
+            <a
+              style={{ display: 'flex', alignItems: 'center', textDecoration: 'none' }}
+              onMouseEnter={() => setHovered(true)}
+              onMouseLeave={() => setHovered(false)}
+            >
+              <Image
+                src="/og-image.jpg"
+                alt="Logo"
+                width={60}
+                height={60}
+                unoptimized
+                style={{
+                  borderRadius: '50%',
+                  border: `2px solid ${hovered ? '#f06595' : '#ddd'}`,
+                  boxShadow: hovered
+                    ? '0 4px 12px rgba(0, 0, 0, 0.2)'
+                    : '0 2px 5px rgba(0, 0, 0, 0.1)',
+                  objectFit: 'cover',
+                  marginRight: '12px',
+                  transform: hovered ? 'scale(1.1) rotate(2deg)' : 'none',
+                  transition: 'transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease',
+                }}
+              />
               <span className="store-name">ELYNOR</span>
             </a>
           </Link>
         </div>
 
-        {/* قائمة سطح المكتب */}
+        {/* روابط القسم العلوي */}
         <nav className="desktop-nav">
-          {[...categories, ...extraLinks.map(link => link.name)].map((item) => {
-            // تحقق إذا العنصر من التصنيفات أو من الروابط الإضافية
-            const linkObj = extraLinks.find(link => link.name === item);
-            const href = linkObj ? linkObj.href : `/category/${encodeURIComponent(item)}`;
-
-            return (
-              <Link key={item} href={href} legacyBehavior>
-                <a className="nav-link">{item}</a>
-              </Link>
-            );
-          })}
+          {extraLinks.map((link) => (
+            <Link key={link.name} href={link.href} legacyBehavior>
+              <a className="nav-link">{link.name}</a>
+            </Link>
+          ))}
         </nav>
 
         {/* زر القائمة للجوال */}
@@ -89,6 +75,17 @@ export default function Header() {
           ☰
         </button>
       </header>
+
+      {/* القسم السفلي (للتصنيفات فقط) */}
+      <div className="category-bar">
+        <nav className="desktop-nav">
+          {categories.map((item) => (
+            <Link key={item} href={`/category/${encodeURIComponent(item)}`} legacyBehavior>
+              <a className="nav-link">{item}</a>
+            </Link>
+          ))}
+        </nav>
+      </div>
 
       {/* القائمة الجانبية للجوال */}
       {mobileMenuOpen && (
@@ -113,73 +110,64 @@ export default function Header() {
           z-index: 1000;
         }
 
-    .logo-container {
-  display: flex;
-  align-items: center;
-}
-
-.logo-link {
-  display: flex;
-  align-items: center;
-  text-decoration: none;
-}
-
-
-
+        .category-bar {
+          background-color: #fafafa;
+          border-bottom: 1px solid #e0e0e0;
+          padding: 8px 24px;
+        }
 
         .store-name {
-  font-weight: 700;
-  font-size: 2rem;
-  color: #222;
-  font-family: 'Poppins', sans-serif; /* خط أنيق */
-  letter-spacing: 1px;                /* تباعد خفيف بين الحروف */
-  text-transform: uppercase;          /* تحويل الاسم إلى أحرف كبيرة */
-  background: linear-gradient(to right, #ff6b6b, #f06595); /* تدرج لوني جميل */
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent; /* يجعل التدرج داخل النص */
-  transition: transform 0.3s ease;
-  margin-right: 12px; /* مسافة بين الشعار والاسم */
-}
+          font-weight: 700;
+          font-size: 2rem;
+          color: #222;
+          font-family: 'Poppins', sans-serif;
+          letter-spacing: 1px;
+          text-transform: uppercase;
+          background: linear-gradient(to right, #ff6b6b, #f06595);
+          -webkit-background-clip: text;
+          -webkit-text-fill-color: transparent;
+          transition: transform 0.3s ease;
+          margin-right: 12px;
+        }
 
-.store-name:hover {
-  transform: scale(1.05); /* تكبير بسيط عند المرور */
-}
-
+        .store-name:hover {
+          transform: scale(1.05);
+        }
 
         .desktop-nav {
-  display: flex;
-  gap: 24px; /* تباعد أفضل بين الروابط */
-  align-items: center;
-}
+          display: flex;
+          gap: 24px;
+          align-items: center;
+        }
 
-.nav-link {
-  text-decoration: none;
-  color: #444;
-  font-weight: 600;
-  font-size: 1.05rem;
-  position: relative;
-  padding: 6px 0;
-  transition: color 0.3s ease;
-}
+        .nav-link {
+          text-decoration: none;
+          color: #444;
+          font-weight: 600;
+          font-size: 1.05rem;
+          position: relative;
+          padding: 6px 0;
+          transition: color 0.3s ease;
+        }
 
-.nav-link::after {
-  content: '';
-  position: absolute;
-  left: 0;
-  bottom: 0;
-  width: 0%;
-  height: 2px;
-  background-color: #8e44ad;
-  transition: width 0.3s ease;
-}
+        .nav-link::after {
+          content: '';
+          position: absolute;
+          left: 0;
+          bottom: 0;
+          width: 0%;
+          height: 2px;
+          background-color: #8e44ad;
+          transition: width 0.3s ease;
+        }
 
-.nav-link:hover {
-  color: #8e44ad; /* لون بنفسجي أنيق */
-}
+        .nav-link:hover {
+          color: #8e44ad;
+        }
 
-.nav-link:hover::after {
-  width: 100%;
-}
+        .nav-link:hover::after {
+          width: 100%;
+        }
 
         .mobile-menu-button {
           display: none;
@@ -197,6 +185,10 @@ export default function Header() {
 
           .mobile-menu-button {
             display: block;
+          }
+
+          .category-bar {
+            padding: 12px;
           }
         }
       `}</style>
