@@ -1,9 +1,9 @@
-// components/ContactSection.tsx
 import { useState } from 'react';
 import { FaFacebook, FaInstagram, FaWhatsapp } from 'react-icons/fa';
 
 export default function ContactSection() {
   const [form, setForm] = useState({ name: '', email: '', message: '' });
+  const [error, setError] = useState('');
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     setForm({ ...form, [e.target.name]: e.target.value });
@@ -11,13 +11,26 @@ export default function ContactSection() {
 
   const handleSend = () => {
     const { name, email, message } = form;
+
+    // تحقق من ملء جميع الحقول
+    if (!name.trim() || !email.trim() || !message.trim()) {
+      setError('يرجى تعبئة جميع الحقول قبل الإرسال.');
+      return;
+    }
+
+    setError(''); // إزالة رسالة الخطأ
+
     const text = `
 👤 الاسم: ${name}
 📧 الإيميل: ${email}
 📝 الرسالة: ${message}`;
+
     const whatsappNumber = '212646342598'; // رقم واتساب بصيغة دولية بدون "+"
     const url = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(text)}`;
     window.open(url, '_blank');
+
+    // تفريغ الحقول بعد الإرسال
+    setForm({ name: '', email: '', message: '' });
   };
 
   return (
@@ -54,6 +67,8 @@ export default function ContactSection() {
           style={{ ...inputStyle, resize: 'vertical' }}
           required
         />
+
+        {error && <p style={{ color: 'red', marginTop: '8px' }}>{error}</p>}
 
         <button onClick={handleSend} style={buttonStyle}>
           إرسال عبر واتساب
