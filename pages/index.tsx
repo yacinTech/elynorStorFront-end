@@ -72,18 +72,21 @@ export default function Home({ products }: HomeProps) {
       
 
       <div style={{ maxWidth: '1100px', margin: 'auto', padding: '5px' }}>
-        <div
-  style={{
-    marginBottom: '60px',
-    maxWidth: '100%',
-    overflowX: 'hidden',
-    paddingLeft: '1rem',
-    paddingRight: '1rem',
-    boxSizing: 'border-box',
-  }}
->
-  <NavbarHero />
+      <div style={{ maxWidth: '1100px', margin: 'auto', padding: '5px', boxSizing: 'border-box' }}>
+  <div
+    style={{
+      marginBottom: '60px',
+      width: '100%', // بدل maxWidth بـ width 100% ليملأ الحاوية الأب
+      overflowX: 'hidden', // يخفي التمرير الأفقي داخل هذه الحاوية فقط
+      paddingLeft: '1rem',
+      paddingRight: '1rem',
+      boxSizing: 'border-box',
+    }}
+  >
+    <NavbarHero />
+  </div>
 </div>
+
 
         
          
@@ -96,13 +99,12 @@ export default function Home({ products }: HomeProps) {
        <div
   style={{
     width: '100%',
-    maxWidth: '100vw',  // أقصى عرض يساوي عرض الشاشة بالكامل
-    overflowX: 'hidden', // منع التمرير الأفقي
+    maxWidth: '100vw', // لا تتجاوز عرض الشاشة
+    boxSizing: 'border-box',
+    paddingLeft: '1rem', // حشوة تمنع التصاق الصورة بالحافة
+    paddingRight: '1rem',
     display: 'flex',
     justifyContent: 'center',
-    paddingLeft: '1rem', // حشوة يمنع التصاق الصورة بحافة الشاشة
-    paddingRight: '1rem',
-    boxSizing: 'border-box',
   }}
 >
   <Image
@@ -112,7 +114,7 @@ export default function Home({ products }: HomeProps) {
     height={600}
     style={{
       width: '100%',
-      maxWidth: '900px', // الحد الأقصى للعرض
+      maxWidth: '900px', // حد أقصى معقول للعرض
       height: 'auto',
       borderRadius: '16px',
       objectFit: 'cover',
