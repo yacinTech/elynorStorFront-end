@@ -119,7 +119,7 @@ export default function Home({ products }: HomeProps) {
             <p style={{ textAlign: 'center' }}>لا توجد منتجات حالياً.</p>
           ) : (
             <>
-              <div className="product-grid">
+              <div id='products' className="product-grid">
                 {visibleProducts.map((product) => (
                   <ProductCard key={product._id} product={product} />
                 ))}

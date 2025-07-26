@@ -46,8 +46,8 @@ export default function NavbarHero() {
 </h1>
 
         <p className={styles.heroDescription}>
-          Welcome to Elynor, your one-stop shop offering a wide range of products
-          across various categories to meet all your needs and desires.
+         Bienvenue chez Elynor, votre boutique tout-en-un proposant une large gamme de produits dans diverses catégories pour répondre à tous vos besoins et envies.
+
         </p>
        <div className={styles.heroButtons}>
   <a href="#products" className={styles.btnPrimary}>
