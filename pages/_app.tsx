@@ -14,7 +14,7 @@ import ContactSection from '../components/ContactSection';
 
 export default function MyApp({ Component, pageProps }: AppProps) {
   return (
-    <>
+    <div style={{ overflowX: 'hidden', maxWidth: '100vw' }}>
       <Head>
         <link
           rel="stylesheet"
@@ -60,6 +60,6 @@ export default function MyApp({ Component, pageProps }: AppProps) {
       <WhatsAppButton />
       <NewsletterForm />
       <Footer />
-    </>
+    </div>
   );
 }

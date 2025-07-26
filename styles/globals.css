@@ -7,6 +7,22 @@
 @tailwind utilities;
 
 
+/* styles/globals.css */
+
+html, body {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  overflow-x: hidden; /* يمنع التمرير الأفقي */
+  max-width: 100vw; /* يمنع تجاوز العرض الكامل */
+}
+
+*, *::before, *::after {
+  box-sizing: inherit;
+}
+
+
+
 
 
 body {

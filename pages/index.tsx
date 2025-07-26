@@ -64,12 +64,14 @@ export default function Home({ products }: HomeProps) {
       </Head>
 
       <TopBanner />
+        
 
       <main style={{ maxWidth: '1100px', margin: '0 auto', padding: '0 1rem' }}>
         {/* Hero Section */}
         <section style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', minHeight: '80vh' }}>
           <NavbarHero />
         </section>
+      
 
         {/* Welcome Section */}
         <section
@@ -77,7 +79,7 @@ export default function Home({ products }: HomeProps) {
           className={`welcome-section ${isVisible ? 'visible' : ''}`}
           style={{ textAlign: 'center', marginBottom: '40px' }}
         >
-          <div style={{ width: '100%', display: 'flex', justifyContent: 'center' }}>
+          <div style={{ width: '100%', display: 'flex', justifyContent: 'center', marginTop: '20px' }}>
             <Image
               src="/Elynor1.png"
               alt="متجر Elynor"
