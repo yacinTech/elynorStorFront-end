@@ -77,7 +77,6 @@ export default function Home({ products }: HomeProps) {
     style={{
       marginBottom: '60px',
       width: '100%', // بدل maxWidth بـ width 100% ليملأ الحاوية الأب
-      overflowX: 'hidden', // يخفي التمرير الأفقي داخل هذه الحاوية فقط
       paddingLeft: '1rem',
       paddingRight: '1rem',
       boxSizing: 'border-box',
