@@ -1,4 +1,13 @@
-/* styles/globals.css */
+/* The following @tailwind directives must be processed by Tailwind CSS.
+   If you see an error like "Unknown at rule @tailwind", make sure your build process uses Tailwind (e.g., PostCSS with Tailwind plugin).
+   Do not open this file directly in the browser.
+*/
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+
 
 body {
   font-family: Arial, sans-serif;

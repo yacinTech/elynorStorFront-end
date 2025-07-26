@@ -1,0 +1,324 @@
+/* Overlay */
+.navOverlay {
+  position: fixed;
+  inset: 0;
+  background-color: rgba(31, 41, 55, 0.4);
+  z-index: 30;
+}
+
+.hidden {
+  display: none;
+}
+
+.main {
+  width: 100%;
+    padding-bottom: 0;
+
+}
+
+/* Hero Section */
+.heroSection {
+  position: relative;
+  padding-top: 2.5rem;
+  padding-bottom: 0;
+}
+
+@media (min-width: 1280px) {
+  .heroSection {
+    padding-top: 3.5rem;
+  }
+}
+@media (max-width: 768px) {
+  .heroSection {
+    margin-bottom: 0 !important;
+  }
+}
+
+/* الحاوية الرئيسية */
+.heroContainer {
+  max-width: 1200px;
+  margin: 0 auto;
+  width: 100%;
+  padding-left: 1.25rem;
+  padding-right: 1.25rem;
+
+  /* عرض أفقي للعناصر */
+  display: flex;
+  flex-direction: column; /* الافتراضي للشاشات الصغيرة */
+  gap: 2.5rem; /* زيادة الفجوة بين العناصر داخل الحاوية */
+  align-items: center; /* للمحاذاة المركزية في العمود */
+  text-align: center;
+}
+
+@media (min-width: 1024px) {
+  .heroContainer {
+    flex-direction: row; /* صف أفقي */
+    gap: 3rem; /* زيادة الفجوة قليلاً في الشاشات الكبيرة */
+    align-items: center;
+    text-align: left;
+  }
+}
+
+/* حاوية النص (العنوان + فقرة + أزرار) */
+.heroText {
+  max-width: 48rem;
+  width: 100%;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  align-items: center;
+  padding: 0;
+  flex: 1 1 50%;
+
+  gap: 1rem; /* إضافة فجوات بين العناصر داخل النص */
+}
+
+@media (min-width: 1024px) {
+  .heroText {
+    align-items: flex-start;
+    text-align: left;
+  }
+}
+
+.heroTitle {
+  font-weight: 600;
+  font-size: 1.75rem;
+  line-height: 1.2;
+  color: #3730a3;
+  margin-top: 0.5rem;
+  margin-bottom: 0.75rem;
+  white-space: normal; /* السماح بكسور الأسطر */
+}
+
+
+@media (min-width: 640px) {
+  .heroTitle {
+    font-size: 2.25rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .heroTitle {
+    font-size: 3rem;
+    margin-top: 0; /* إزالة المسافة العلوية على الشاشات الكبيرة */
+  }
+}
+
+@media (min-width: 1280px) {
+  .heroTitle {
+    font-size: 3.75rem;
+  }
+}
+
+/* النص المميز داخل العنوان */
+.highlight {
+  background-color: #eef2ff;
+  border: 1px dashed #4f46e5;
+  color: #818cf8;
+  padding: 0 0.75rem;
+  display: inline-block;
+}
+
+/* الفقرة */
+.heroDescription {
+  margin-top: 0;
+  color: #4b5563;
+  font-size: 1.125rem;
+  max-width: 42rem;
+  margin-bottom: 1.5rem;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+@media (min-width: 1024px) {
+  .heroDescription {
+    max-width: none;
+    margin-left: 0;
+    margin-right: 0;
+  }
+}
+
+/* أزرار الهيرو */
+.heroButtons {
+  margin-top: 0;
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  flex-wrap: nowrap;
+  width: 100%;
+  max-width: 300px;
+}
+
+@media (min-width: 1024px) {
+  .heroButtons {
+    justify-content: flex-start;
+    max-width: none;
+    width: auto;
+  }
+}
+
+/* زر رئيسي */
+.btnPrimary {
+  flex: 1;
+  padding: 0.75rem 1.5rem;
+  background-color: #4f46e5;
+  color: white;
+  border-radius: 0.5rem;
+  text-decoration: none;
+  transition: background-color 0.3s ease;
+  text-align: center;
+  white-space: nowrap;
+}
+
+.btnPrimary:hover {
+  background-color: #4338ca;
+}
+
+/* زر ثانوي */
+.btnSecondary {
+  flex: 1;
+  padding: 0.75rem 1.5rem;
+  background-color: #f3f4f6;
+  color: #4f46e5;
+  border-radius: 0.5rem;
+  text-decoration: none;
+  transition: background-color 0.3s ease;
+  text-align: center;
+  white-space: nowrap;
+}
+
+.btnSecondary:hover {
+  background-color: #e0e7ff;
+}
+
+/* حاوية الصورة */
+.heroImageContainer {
+  flex: 1 1 50%;
+  max-width: 48rem;
+  margin-left: auto;
+  margin-right: 0;
+  position: relative;
+  width: 100%;
+}
+
+@media (max-width: 1023px) {
+  .heroImageContainer {
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 100%;
+  }
+}
+
+/* الصورة */
+.heroImage {
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+  position: relative;
+}
+
+/* بطاقة العملاء */
+.employeeCard {
+  position: absolute;
+  left: 50%;
+  bottom: -1.5rem;
+  transform: translateX(-50%);
+  width: 12rem;
+  padding: 0.75rem;
+  border-radius: 0.5rem;
+  background-color: white;
+  border: 1px solid #e5e7eb;
+  color: #3730a3;
+  font-size: 0.75rem;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  z-index: 10;
+}
+
+@media (max-width: 480px) {
+  .employeeCard {
+    width: 9rem;
+    padding: 0.5rem;
+    font-size: 0.65rem;
+    bottom: -1rem;
+  }
+}
+
+@media (min-width: 481px) and (max-width: 767px) {
+  .employeeCard {
+    width: 10rem;
+    padding: 0.6rem;
+    font-size: 0.7rem;
+    bottom: -1.2rem;
+  }
+}
+
+@media (min-width: 768px) and (max-width: 1023px) {
+  .employeeCard {
+    width: 11rem;
+    padding: 0.7rem;
+    font-size: 0.75rem;
+    bottom: -1.3rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .employeeCard {
+    width: 15rem;
+    padding: 1rem;
+    font-size: 1rem;
+    bottom: -2.5rem;
+  }
+}
+
+.employeeImages {
+  display: flex;
+  margin-left: -0.25rem;
+  gap: 0;
+}
+
+.employeeImage {
+  width: 1.75rem;
+  height: 1.75rem;
+  border-radius: 9999px;
+  object-fit: cover;
+  border: 4px solid white;
+  margin-left: -0.25rem;
+}
+
+@media (min-width: 769px) {
+  .employeeImage {
+    width: 2.25rem;
+    height: 2.25rem;
+  }
+}
+
+.firstEmployeeImage {
+  margin-left: 0;
+}
+
+.employeeCount {
+  font-weight: 600;
+  margin-top: 0.5rem;
+  margin-bottom: 0.25rem;
+}
+
+.employeeRating {
+  color: #6b7280;
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+.star {
+  color: #fbbf24;
+  font-size: 1rem;
+  line-height: 1;
+}
+
+@media (min-width: 769px) {
+  .star {
+    font-size: 1.25rem;
+  }
+}

@@ -7,7 +7,8 @@ import ProductCard from '../components/ProductCard';
 import { useOnScreen } from '../hooks/useOnScreen';
 import TopBanner from '../components/TopBanner';
 import '@fortawesome/fontawesome-free/css/all.min.css';
-import AboutPage from './about';
+import NavbarHero from '../components/Hero/NavbarHero';
+import AboutUs from '../components/AboutUs';
 
 
 
@@ -67,11 +68,11 @@ export default function Home({ products }: HomeProps) {
         <meta property="og:image:height" content="630" />
        
       </Head>
-                  <TopBanner />
-
-
+      <TopBanner />
+      <div style={{marginBottom: '60px'}}><NavbarHero /></div>
 
       <div style={{ maxWidth: '1100px', margin: 'auto', padding: '5px' }}>
+        
          
         {/* قسم الترحيب مع تأثير الصعود التدريجي عند التمرير */}
         <div
@@ -79,46 +80,72 @@ export default function Home({ products }: HomeProps) {
           className={`welcome-section ${isVisible ? 'visible' : ''}`}
           style={{ textAlign: 'center', marginBottom: '40px' }}
         >
-          <Image
-            src="/introu.jpg"
-            alt="متجر Elynor"
-            width={800}
-            height={400}
-            style={{
-              width: '100%',
-              height: 'auto',
-              borderRadius: '12px',
-              marginBottom: '20px',
-              objectFit: 'cover',
-            }}
-          />
-          <h2
-            style={{
-              fontSize: '2.4rem',
-              color: '#6d28d9',
-              fontWeight: 'bold',
-              marginBottom: '16px',
-              textShadow: '1px 1px 2px rgba(0,0,0,0.1)',
-              textAlign: 'center',
-            }}
-          >
-            مرحباً بكم في متجر Elynor
-          </h2>
-          <p
-            style={{
-              fontSize: '1.2rem',
-              color: '#333',
-              lineHeight: '1.9',
-              background: '#f4f0ff',
-              padding: '20px',
-              borderRadius: '12px',
-              boxShadow: '0 4px 10px rgba(0, 0, 0, 0.05)',
-              textAlign: 'center',
-            }}
-          >
-            يسعدنا أن نرحب بكم في متجر Elynor، حيث نعرض لكم منتجات أنيقة، عالية الجودة ومختارة بعناية لتلائم ذوقكم.
-            نحن نهتم بتوفير تجربة تسوق مريحة وآمنة وسريعة التوصيل. شكراً لاختياركم لنا.
-          </p>
+       <div
+  style={{
+    width: '100%',
+    display: 'flex',
+    justifyContent: 'center',
+    padding: '1rem',
+  }}
+>
+  <Image
+    src="/Elynor1.png"
+    alt="متجر Elynor"
+    width={1200}
+    height={600}
+    style={{
+      width: '100%',
+      maxWidth: '900px', // تم تكبير الحد الأقصى
+      height: 'auto',
+      borderRadius: '16px',
+      objectFit: 'cover',
+      boxShadow: '0 6px 18px rgba(0, 0, 0, 0.15)',
+      transition: 'transform 0.3s ease',
+    }}
+    onMouseOver={(e) => {
+      e.currentTarget.style.transform = 'scale(1.03)';
+    }}
+    onMouseOut={(e) => {
+      e.currentTarget.style.transform = 'scale(1)';
+    }}
+  />
+</div>
+
+        <h2
+  style={{
+    fontSize: '2.6rem',
+    color: '#5b21b6',
+    fontWeight: '800',
+    marginBottom: '1rem',
+    textShadow: '2px 2px 4px rgba(0,0,0,0.1)',
+    textAlign: 'center',
+    fontFamily: 'Cairo, sans-serif',
+    letterSpacing: '0.5px',
+  }}
+>
+  أهلاً بكم في عالم Elynor
+</h2>
+
+<p
+  style={{
+    fontSize: '1.3rem',
+    color: '#444',
+    lineHeight: '2',
+    background: '#f3e8ff',
+    padding: '24px',
+    borderRadius: '16px',
+    boxShadow: '0 6px 16px rgba(0, 0, 0, 0.06)',
+    textAlign: 'center',
+    fontFamily: 'Cairo, sans-serif',
+    maxWidth: '700px',
+    margin: '0 auto',
+  }}
+>
+  اكتشفوا في متجر <strong style={{ color: '#7c3aed' }}>Elynor</strong> تشكيلة فريدة من المنتجات المختارة بذوق رفيع، تجمع بين الأناقة والجودة.
+  نحن هنا لنقدم لكم تجربة تسوق ممتعة، آمنة وسريعة، مع خدمة عملاء متميزة تضع رضاكم أولاً.
+  شكراً لثقتكم بنا ومرحباً بكم دائماً في عالـم التميز.
+</p>
+
         </div>
 
         <h1
@@ -154,7 +181,7 @@ export default function Home({ products }: HomeProps) {
           <p style={{ textAlign: 'center' }}>لا توجد منتجات حالياً.</p>
         ) : (
           <>
-            <div className="product-grid">
+            <div id='products' className="product-grid">
               {visibleProducts.map((product) => (
                 <ProductCard key={product._id} product={product} />
               ))}
@@ -188,12 +215,13 @@ export default function Home({ products }: HomeProps) {
                 >
                   عرض المزيد
                 </button>
-                 <AboutPage />
-                 
+
+                
               </div>
              
 
             )}
+            <AboutUs />
           </>
         )}
 

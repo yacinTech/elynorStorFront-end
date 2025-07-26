@@ -1,10 +1,10 @@
 // pages/_app.tsx
+import '../styles/globals.css';
 import type { AppProps } from 'next/app';
 import Head from 'next/head';
 import Script from 'next/script';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
-import '../styles/globals.css';
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import '@fortawesome/fontawesome-free/css/all.min.css';
@@ -54,6 +54,7 @@ export default function MyApp({ Component, pageProps }: AppProps) {
       />
 
       <Header />
+      
       <Component {...pageProps} />
       <ContactSection />
       <WhatsAppButton />

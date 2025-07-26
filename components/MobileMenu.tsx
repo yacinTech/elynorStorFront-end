@@ -46,6 +46,16 @@ export default function MobileMenu({ categories, extraLinks, onClose }: MobileMe
             </Link>
           </li>
 
+          
+
+          <li className="section-title">التصنيفات</li>
+          {categories.map(cat => (
+            <li key={cat}>
+              <Link href={`/category/${encodeURIComponent(cat)}`} legacyBehavior>
+                <a onClick={handleClose}>{cat}</a>
+              </Link>
+            </li>
+          ))}
           <li className="section-title">معلومات</li>
           {extraLinks
             .filter(link => link.name !== 'الرئيسية')
@@ -56,16 +66,9 @@ export default function MobileMenu({ categories, extraLinks, onClose }: MobileMe
                 </Link>
               </li>
             ))}
-
-          <li className="section-title">التصنيفات</li>
-          {categories.map(cat => (
-            <li key={cat}>
-              <Link href={`/category/${encodeURIComponent(cat)}`} legacyBehavior>
-                <a onClick={handleClose}>{cat}</a>
-              </Link>
-            </li>
-          ))}
         </ul>
+
+        
       </nav>
 
       <style jsx>{`
