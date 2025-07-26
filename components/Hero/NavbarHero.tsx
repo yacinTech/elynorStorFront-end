@@ -41,7 +41,7 @@ export default function NavbarHero() {
       {/* Left Text */}
       <div className={styles.heroText}>
         <h1 className={styles.heroTitle}>
-  Discover Quality & Style with{" "}
+  Discover Quality & Style with{" "} <br />
   <span className={styles.highlight}>Elynor Store</span>
 </h1>
 
