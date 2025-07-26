@@ -69,9 +69,22 @@ export default function Home({ products }: HomeProps) {
        
       </Head>
       <TopBanner />
-      <div style={{marginBottom: '60px'}}><NavbarHero /></div>
+      
 
       <div style={{ maxWidth: '1100px', margin: 'auto', padding: '5px' }}>
+        <div
+  style={{
+    marginBottom: '60px',
+    maxWidth: '100%',
+    overflowX: 'hidden',
+    paddingLeft: '1rem',
+    paddingRight: '1rem',
+    boxSizing: 'border-box',
+  }}
+>
+  <NavbarHero />
+</div>
+
         
          
         {/* قسم الترحيب مع تأثير الصعود التدريجي عند التمرير */}
@@ -83,9 +96,13 @@ export default function Home({ products }: HomeProps) {
        <div
   style={{
     width: '100%',
+    maxWidth: '100vw',  // أقصى عرض يساوي عرض الشاشة بالكامل
+    overflowX: 'hidden', // منع التمرير الأفقي
     display: 'flex',
     justifyContent: 'center',
-    padding: '1rem',
+    paddingLeft: '1rem', // حشوة يمنع التصاق الصورة بحافة الشاشة
+    paddingRight: '1rem',
+    boxSizing: 'border-box',
   }}
 >
   <Image
@@ -95,7 +112,7 @@ export default function Home({ products }: HomeProps) {
     height={600}
     style={{
       width: '100%',
-      maxWidth: '900px', // تم تكبير الحد الأقصى
+      maxWidth: '900px', // الحد الأقصى للعرض
       height: 'auto',
       borderRadius: '16px',
       objectFit: 'cover',
@@ -110,6 +127,7 @@ export default function Home({ products }: HomeProps) {
     }}
   />
 </div>
+
 
         <h2
   style={{
