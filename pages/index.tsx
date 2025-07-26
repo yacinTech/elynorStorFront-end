@@ -79,26 +79,26 @@ export default function Home({ products }: HomeProps) {
           className={`welcome-section ${isVisible ? 'visible' : ''}`}
           style={{ textAlign: 'center', marginBottom: '40px' }}
         >
-          <div style={{ width: '100%', display: 'flex', justifyContent: 'center', marginTop: '20px' }}>
-            <Image
-              src="/Elynor1.png"
-              alt="متجر Elynor"
-              width={1200}
-              height={600}
-              style={{
-                width: '100%',
-                maxWidth: '900px',
-                height: 'auto',
-                maxHeight: '300px',
-                borderRadius: '16px',
-                objectFit: 'cover',
-                boxShadow: '0 6px 18px rgba(0, 0, 0, 0.15)',
-                transition: 'transform 0.3s ease',
-              }}
-              onMouseOver={(e) => (e.currentTarget.style.transform = 'scale(1.03)')}
-              onMouseOut={(e) => (e.currentTarget.style.transform = 'scale(1)')}
-            />
-          </div>
+         <div style={{ width: '100%', display: 'flex', justifyContent: 'center', marginTop: '20px' }}>
+  <Image
+    src="/Elynor1.png"
+    alt="متجر Elynor"
+    width={1200}
+    height={600}
+    style={{
+      width: '100%',
+      maxWidth: '900px',
+      height: 'auto',  // يتناسب مع العرض
+      borderRadius: '16px',
+      objectFit: 'cover',
+      boxShadow: '0 6px 18px rgba(0, 0, 0, 0.15)',
+      transition: 'transform 0.3s ease',
+    }}
+    onMouseOver={(e) => (e.currentTarget.style.transform = 'scale(1.03)')}
+    onMouseOut={(e) => (e.currentTarget.style.transform = 'scale(1)')}
+  />
+</div>
+
 
           <h2 style={{ fontSize: '2.6rem', color: '#5b21b6', fontWeight: 800, margin: '1rem 0' }}>
             أهلاً بكم في عالم Elynor
