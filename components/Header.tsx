@@ -36,24 +36,25 @@ export default function Header() {
                 onMouseLeave={() => setHovered(false)}
               >
                 <Image
-                  src="/og-image.jpg"
-                  alt="Logo"
-                  width={40}
-                  height={40}
-                  unoptimized
-                  style={{
-                    borderRadius: '50%',
-                    border: `2px solid ${hovered ? '#f06595' : '#ddd'}`,
-                    boxShadow: hovered
-                      ? '0 4px 12px rgba(0, 0, 0, 0.2)'
-                      : '0 2px 5px rgba(0, 0, 0, 0.1)',
-                    objectFit: 'cover',
-                    marginRight: '4px', // مسافة صغيرة بين الصورة والعنوان
-                    transform: hovered ? 'scale(1.1) rotate(2deg)' : 'none',
-                    transition: 'transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease',
-                  }}
-                  className="logo-image"
-                />
+  src="/og-image.jpg"
+  alt="Logo"
+  width={40}
+  height={40}
+  unoptimized
+  style={{
+    borderRadius: '50%',
+    border: `2px solid ${hovered ? '#f06595' : '#ddd'}`,
+    boxShadow: hovered
+      ? '0 4px 12px rgba(0, 0, 0, 0.2)'
+      : '0 2px 5px rgba(0, 0, 0, 0.1)',
+    objectFit: 'cover',
+    marginLeft: '6px', // ⭐️ مسافة بين الصورة والعنوان على اليسار الآن
+    transform: hovered ? 'scale(1.1) rotate(2deg)' : 'none',
+    transition: 'transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease',
+  }}
+  className="logo-image"
+/>
+
                 <span className="store-name">ELYNOR</span>
               </a>
             </Link>
@@ -121,12 +122,14 @@ export default function Header() {
         }
 
         .logo-wrapper {
-          margin: 0;
-          padding: 0;
-          display: flex;
-          align-items: center;
-          justify-content: flex-start; /* يبدأ من أقصى اليسار */
-        }
+  margin: 0;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  direction: rtl; /* ⭐️ هذا أهم شيء ليبدأ اللوجو من أقصى اليسار */
+}
+
 
         .store-name {
           font-weight: 700;

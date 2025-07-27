@@ -1,6 +1,7 @@
 import React, { useState, useRef } from 'react';
 import Slider from 'react-slick';
 import Image from 'next/image';
+import ImageModal from './ImageModal';
 
 interface ProductSliderProps {
   images: string[];
@@ -148,60 +149,7 @@ const ProductSlider: React.FC<ProductSliderProps> = ({ images }) => {
       </div>
 
       {/* الصورة المكبرة عند الضغط */}
-      {zoomedImage && (
-        <div
-          onClick={() => setZoomedImage(null)}
-          style={{
-            position: 'fixed',
-            top: 0,
-            left: 0,
-            width: '100vw',
-            height: '100vh',
-            backgroundColor: 'rgba(0,0,0,0.9)',
-            display: 'flex',
-            justifyContent: 'center',
-            alignItems: 'center',
-            zIndex: 9999,
-            cursor: 'zoom-out',
-          }}
-        >
-          {/* زر الإغلاق */}
-          <button
-            onClick={(e) => {
-              e.stopPropagation(); // منع الإغلاق إذا ضغط على الزر
-              setZoomedImage(null);
-            }}
-            style={{
-              position: 'absolute',
-              top: 20,
-              right: 20,
-              background: 'transparent',
-              color: '#fff',
-              border: 'none',
-              fontSize: '2rem',
-              cursor: 'pointer',
-              zIndex: 10000,
-            }}
-          >
-            ✖
-          </button>
-
-          <Image
-            src={zoomedImage}
-            alt="صورة مكبرة"
-            width={1000}
-            height={800}
-            style={{
-              maxWidth: '90%',
-              maxHeight: '90%',
-              objectFit: 'contain',
-              userSelect: 'none',
-              borderRadius: 8,
-              boxShadow: '0 0 20px rgba(255, 255, 255, 0.2)',
-            }}
-          />
-        </div>
-      )}
+     {zoomedImage && <ImageModal image={zoomedImage} onClose={() => setZoomedImage(null)} />}
 
       {/* CSS خاص بالـ slick arrows و dots لضبط z-index */}
       <style jsx>{`
