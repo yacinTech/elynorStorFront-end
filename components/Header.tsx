@@ -98,7 +98,10 @@ export default function Header() {
 
       <style jsx>{`
         .main-header {
-          position: sticky;
+          position: fixed;
+          top: 0;
+          width: 100%;
+          z-index: 1000;
           top: 0;
           z-index: 1000;
           background-color: #fff;
