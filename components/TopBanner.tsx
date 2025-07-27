@@ -2,11 +2,11 @@ import React from 'react';
 import { FaTruck, FaHeadset, FaPercent, FaStar, FaGift } from 'react-icons/fa';
 
 const phrases = [
-  { icon: <FaTruck style={{ marginLeft: 8, color: '#A5D8FF' }} aria-hidden="true" />, text: 'التوصيل مجاني لجميع الطلبات' },
-  { icon: <FaHeadset style={{ marginLeft: 8, color: '#A5D8FF' }} aria-hidden="true" />, text: 'خدمة الزبائن متوفرة 24 ساعة' },
-  { icon: <FaPercent style={{ marginLeft: 8, color: '#A5D8FF' }} aria-hidden="true" />, text: 'خصومات تصل إلى 50% على المنتجات المختارة' },
-  { icon: <FaStar style={{ marginLeft: 8, color: '#A5D8FF' }} aria-hidden="true" />, text: 'جودة عالية وأسعار منافسة' },
-  { icon: <FaGift style={{ marginLeft: 8, color: '#A5D8FF' }} aria-hidden="true" />, text: 'اشترك الآن واحصل على عروض حصرية' },
+  { icon: <FaTruck style={{ marginLeft: 8, color: '#A5D8FF' }} />, text: 'التوصيل مجاني لجميع الطلبات' },
+  { icon: <FaHeadset style={{ marginLeft: 8, color: '#A5D8FF' }} />, text: 'خدمة الزبائن متوفرة 24 ساعة' },
+  { icon: <FaPercent style={{ marginLeft: 8, color: '#A5D8FF' }} />, text: 'خصومات تصل إلى 50% على المنتجات المختارة' },
+  { icon: <FaStar style={{ marginLeft: 8, color: '#A5D8FF' }} />, text: 'جودة عالية وأسعار منافسة' },
+  { icon: <FaGift style={{ marginLeft: 8, color: '#A5D8FF' }} />, text: 'اشترك الآن واحصل على عروض حصرية' },
 ];
 
 export default function TopBanner() {
@@ -25,43 +25,27 @@ export default function TopBanner() {
       </div>
 
       <style jsx>{`
-       .top-banner {
-  width: 100% !important;
-  
-  position: relative;
-  background-color: #6d28d9;
-  color: white;
-  font-weight: 600;
-  padding: 10px 0;
-  overflow: hidden;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  font-size: 1rem;
-  direction: rtl;
-  z-index: 1;
-  display: block;
-
-}
-  .top-banner {
-  height: 24px;
-padding: 0 12px;
-
-  overflow: hidden; /* لمنع المحتوى من زيادة الارتفاع */
-}
-  .top-banner {
-  position: relative;
-  z-index: 0; /* اجعلها 0 أو أقل من z-index للهيدر */
-  height: 28px;
-  padding: 0 12px;
-}
-
-
-
+        .top-banner {
+          width: 100%;
+          height: 52px;
+          background-color: #6d28d9;
+          color: white;
+          overflow: hidden;
+          font-weight: 600;
+          font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+          font-size: 1rem;
+          direction: rtl;
+          position: relative;
+          z-index: 1;
+          display: flex;
+          align-items: center;
+          padding-top: 4px; /* لإنزال النص قليلاً */
+        }
 
         .scrolling-text {
           display: inline-block;
           white-space: nowrap;
-          animation: scrollLeft 20s linear infinite;
+          animation: scrollLeft 30s linear infinite; /* ⬅ تقليل السرعة */
         }
 
         .phrase {
@@ -72,7 +56,6 @@ padding: 0 12px;
 
         .phrase svg {
           font-size: 1.2rem;
-          flex-shrink: 0;
         }
 
         .separator {
@@ -91,12 +74,19 @@ padding: 0 12px;
 
         @media (max-width: 600px) {
           .top-banner {
+            height: 48px;
             font-size: 0.85rem;
-            padding: 8px 0;
+            padding-top: 6px;
           }
+
+          .scrolling-text {
+            animation: scrollLeft 20s linear infinite; /* ⬅ سرعة أبطأ من السابق */
+          }
+
           .phrase {
             margin: 0 1rem;
           }
+
           .separator {
             margin: 0 0.5rem;
           }

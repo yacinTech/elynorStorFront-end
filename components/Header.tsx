@@ -48,7 +48,7 @@ export default function Header() {
                       ? '0 4px 12px rgba(0, 0, 0, 0.2)'
                       : '0 2px 5px rgba(0, 0, 0, 0.1)',
                     objectFit: 'cover',
-                    marginRight: '12px',
+                    marginRight: '4px', // مسافة صغيرة بين الصورة والعنوان
                     transform: hovered ? 'scale(1.1) rotate(2deg)' : 'none',
                     transition: 'transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease',
                   }}
@@ -66,7 +66,6 @@ export default function Header() {
               </Link>
             ))}
           </nav>
-          
 
           {/* زر الجوال */}
           <button
@@ -102,60 +101,32 @@ export default function Header() {
           top: 0;
           width: 100%;
           background-color: #fff;
-            margin-bottom: 0 !important;
-  padding-bottom: 0 !important;
-  border-bottom: none !important;
-  box-shadow: none !important;
+          margin-bottom: 0 !important;
+          padding-bottom: 0 !important;
+          border-bottom: none !important;
+          box-shadow: none !important;
+          z-index: 1000;
         }
 
         .top-bar {
           display: flex;
           align-items: center;
           justify-content: space-between;
-          padding: 6px 16px;
+          padding-left: 0; /* إزالة الهامش من اليسار */
+          padding-right: 0; /* إزالة الهامش من اليمين */
+          padding-top: 6px;
+          padding-bottom: 6px;
           border-bottom: 1px solid #e0e0e0;
+          width: 100%;
         }
 
-        .category-bar {
-  display: flex;
-  gap: 16px; /* مسافة بين التصنيفات */
-  overflow-x: auto; /* للسماح بالتمرير الأفقي إذا زاد العرض */
-  padding:  0 12px; /* تقليل الحشو العمودي ليصبح رقيق */
-  background-color: #fff; /* خلفية بيضاء أنيقة */
-  border-radius: 10px;
-  box-shadow: 0 1px 5px rgba(0,0,0,0.1);
-  height: 24px; /* ارتفاع أقل (يمكنك تعديل القيمة حسب رغبتك) */
-  align-items: center;
-  font-weight: 600;
-  font-size: 0.9rem;
-  color: #444;
-  user-select: none;
-}
-
-.category-bar::-webkit-scrollbar {
-  height: 5px;
-}
-
-.category-bar::-webkit-scrollbar-thumb {
-  background-color: #8e44ad;
-  border-radius: 5px;
-}
-
-.category-bar-item {
-  padding: 4px 10px;
-  border-radius: 20px;
-  cursor: pointer;
-  white-space: nowrap;
-  transition: background-color 0.25s, color 0.25s;
-}
-
-.category-bar-item:hover,
-.category-bar-item.active {
-  background-color: #8e44ad;
-  color: white;
-}
-
-
+        .logo-wrapper {
+          margin: 0;
+          padding: 0;
+          display: flex;
+          align-items: center;
+          justify-content: flex-start; /* يبدأ من أقصى اليسار */
+        }
 
         .store-name {
           font-weight: 700;
@@ -168,7 +139,7 @@ export default function Header() {
           -webkit-background-clip: text;
           -webkit-text-fill-color: transparent;
           transition: transform 0.3s ease;
-          margin-right: 12px;
+          margin-left: 4px; /* مسافة صغيرة بين الصورة والعنوان */
         }
 
         .store-name:hover {
@@ -219,76 +190,107 @@ export default function Header() {
           color: #333;
         }
 
-       /* تعديل على top-bar للهاتف */
-@media (max-width: 768px) {
-  .top-bar {
-    padding: 8px 16px; /* تقليل الحشو لجعل الشريط أنحف */
-    height: 48px; /* ارتفاع أقل، رقيق */
-  }
+        /* تعديل على top-bar للهاتف */
+        @media (max-width: 768px) {
+          .top-bar {
+            padding: 8px 16px; /* تقليل الحشو لجعل الشريط أنحف */
+            height: 48px; /* ارتفاع أقل، رقيق */
+          }
 
-  .mobile-menu-button {
-    display: block;
-    font-size: 1.9rem; /* حجم زر مناسب لكن غير ضخم */
-    padding: 4px 8px;
-    color: #8e44ad;
-    border-radius: 6px;
-    transition: background-color 0.2s ease;
-  }
-  .mobile-menu-button:hover,
-  .mobile-menu-button:focus {
-    background-color: rgba(142, 68, 173, 0.1);
-    outline: none;
-  }
+          .mobile-menu-button {
+            display: block;
+            font-size: 1.9rem; /* حجم زر مناسب لكن غير ضخم */
+            padding: 4px 8px;
+            color: #8e44ad;
+            border-radius: 6px;
+            transition: background-color 0.2s ease;
+          }
+          .mobile-menu-button:hover,
+          .mobile-menu-button:focus {
+            background-color: rgba(142, 68, 173, 0.1);
+            outline: none;
+          }
 
-  .logo-wrapper a {
-    display: flex;
-    align-items: center;
-    gap: 8px; /* مسافة متناسقة بين اللوجو والعنوان */
-  }
+          .logo-wrapper a {
+            display: flex;
+            align-items: center;
+            gap: 8px; /* مسافة متناسقة بين اللوجو والعنوان */
+          }
 
-  .logo-image {
-    width: 36px !important; /* حجم أقل للوجو لجعله متناسق */
-    height: 36px !important;
-    border-radius: 50%;
-    border: 2px solid #8e44ad;
-    box-shadow: 0 2px 8px rgba(142, 68, 173, 0.3);
-    transition: transform 0.3s ease;
-  }
+          .logo-image {
+            width: 36px !important; /* حجم أقل للوجو لجعله متناسق */
+            height: 36px !important;
+            border-radius: 50%;
+            border: 2px solid #8e44ad;
+            box-shadow: 0 2px 8px rgba(142, 68, 173, 0.3);
+            transition: transform 0.3s ease;
+          }
 
-  .logo-wrapper a:hover .logo-image {
-    transform: scale(1.1) rotate(2deg);
-    border-color: #f06595;
-    box-shadow: 0 4px 12px rgba(240, 101, 149, 0.6);
-  }
+          .logo-wrapper a:hover .logo-image {
+            transform: scale(1.1) rotate(2deg);
+            border-color: #f06595;
+            box-shadow: 0 4px 12px rgba(240, 101, 149, 0.6);
+          }
 
-  .store-name {
-    font-size: 1.3rem !important;
-    font-weight: 700;
-    letter-spacing: 1.2px;
-    color: #8e44ad;
-    white-space: nowrap;
-    user-select: none;
-    /* لإظهار العنوان بشكل واضح وجذاب */
-  }
+          .store-name {
+            font-size: 1.3rem !important;
+            font-weight: 700;
+            letter-spacing: 1.2px;
+            color: #8e44ad;
+            white-space: nowrap;
+            user-select: none;
+            /* لإظهار العنوان بشكل واضح وجذاب */
+          }
 
-  /* إخفاء الروابط في الشريط العلوي للجوال */
-  .desktop-nav {
-    display: none !important;
-  }
+          /* إخفاء الروابط في الشريط العلوي للجوال */
+          .desktop-nav {
+            display: none !important;
+          }
 
-  /* إخفاء شريط التصنيفات في الجوال */
-  .category-bar {
-    display: none !important;
-  }
-}
+          /* إخفاء شريط التصنيفات في الجوال */
+          .category-bar {
+            display: none !important;
+          }
+        }
 
-/* الهيكل العام للشريط العلوي */
-.top-bar {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
+        .category-bar {
+          display: flex;
+          gap: 16px; /* مسافة بين التصنيفات */
+          overflow-x: auto; /* للسماح بالتمرير الأفقي إذا زاد العرض */
+          padding: 0; /* تقليل الحشو العمودي ليصبح رقيق */
+          background-color: #fff; /* خلفية بيضاء أنيقة */
+          border-radius: 10px;
+          box-shadow: 0 1px 5px rgba(0,0,0,0.1);
+          height: 24px; /* ارتفاع أقل (يمكنك تعديل القيمة حسب رغبتك) */
+          align-items: center;
+          font-weight: 600;
+          font-size: 0.9rem;
+          color: #444;
+          user-select: none;
+        }
 
+        .category-bar::-webkit-scrollbar {
+          height: 5px;
+        }
+
+        .category-bar::-webkit-scrollbar-thumb {
+          background-color: #8e44ad;
+          border-radius: 5px;
+        }
+
+        .category-bar-item {
+          padding: 4px 10px;
+          border-radius: 20px;
+          cursor: pointer;
+          white-space: nowrap;
+          transition: background-color 0.25s, color 0.25s;
+        }
+
+        .category-bar-item:hover,
+        .category-bar-item.active {
+          background-color: #8e44ad;
+          color: white;
+        }
       `}</style>
     </>
   );
