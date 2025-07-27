@@ -6,7 +6,8 @@
 
 import Head from 'next/head';
 import Image from 'next/image';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+
 import { getAllProducts } from '../lib/api';
 import ProductCard from '../components/ProductCard';
 import { useOnScreen } from '../hooks/useOnScreen';
@@ -47,6 +48,23 @@ export default function Home({ products }: HomeProps) {
 
   const loadMore = () => setVisibleCount((prev) => prev + 10);
 
+
+
+  const [spacerHeight, setSpacerHeight] = useState(74);
+
+  useEffect(() => {
+    function handleResize() {
+      const width = window.innerWidth;
+      if (width <= 400) setSpacerHeight(40);
+      else if (width <= 640) setSpacerHeight(50);
+      else setSpacerHeight(74);
+    }
+
+    handleResize(); // تعيين الارتفاع عند تحميل الصفحة
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
   return (
     <>
       <Head>
@@ -62,54 +80,60 @@ export default function Home({ products }: HomeProps) {
         <meta property="og:image:width" content="1200" />
         <meta property="og:image:height" content="630" />
       </Head>
-
+       <div style={{ height: `${spacerHeight}px` }} />
       <TopBanner />
-        
 
       <main style={{ maxWidth: '1100px', margin: '0 auto', padding: '0 1rem' }}>
-        {/* Hero Section */}
         <section style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', minHeight: '80vh' }}>
           <NavbarHero />
         </section>
-      
 
-        {/* Welcome Section */}
         <section
           ref={ref}
           className={`welcome-section ${isVisible ? 'visible' : ''}`}
           style={{ textAlign: 'center', marginBottom: '40px' }}
         >
-         <div style={{ width: '100%', display: 'flex', justifyContent: 'center', marginTop: '20px' }}>
-  <Image
-    src="/Elynor1.png"
-    alt="متجر Elynor"
-    width={1200}
-    height={600}
-    style={{
-      width: '100%',
-      maxWidth: '900px',
-      height: 'auto',  // يتناسب مع العرض
-      borderRadius: '16px',
-      objectFit: 'cover',
-      boxShadow: '0 6px 18px rgba(0, 0, 0, 0.15)',
-      transition: 'transform 0.3s ease',
-    }}
-    onMouseOver={(e) => (e.currentTarget.style.transform = 'scale(1.03)')}
-    onMouseOut={(e) => (e.currentTarget.style.transform = 'scale(1)')}
-  />
-</div>
-
+          <div style={{ width: '100%', display: 'flex', justifyContent: 'center', marginTop: '20px' }}>
+            <Image
+              src="/Elynor1.png"
+              alt="متجر Elynor"
+              width={1200}
+              height={600}
+              style={{
+                width: '100%',
+                maxWidth: '900px',
+                height: 'auto',
+                borderRadius: '16px',
+                objectFit: 'cover',
+                boxShadow: '0 6px 18px rgba(0, 0, 0, 0.15)',
+                transition: 'transform 0.3s ease',
+              }}
+              onMouseOver={(e) => (e.currentTarget.style.transform = 'scale(1.03)')}
+              onMouseOut={(e) => (e.currentTarget.style.transform = 'scale(1)')}
+            />
+          </div>
 
           <h2 style={{ fontSize: '2.6rem', color: '#5b21b6', fontWeight: 800, margin: '1rem 0' }}>
             أهلاً بكم في عالم Elynor
           </h2>
 
-          <p style={{ fontSize: '1.3rem', color: '#444', lineHeight: '2', background: '#f3e8ff', padding: '24px', borderRadius: '16px', boxShadow: '0 6px 16px rgba(0, 0, 0, 0.06)', maxWidth: '700px', margin: '0 auto' }}>
-            اكتشفوا في متجر <strong style={{ color: '#7c3aed' }}>Elynor</strong> تشكيلة فريدة من المنتجات المختارة بذوق رفيع، تجمع بين الأناقة والجودة. نحن هنا لنقدم لكم تجربة تسوق ممتعة، آمنة وسريعة، مع خدمة عملاء متميزة تضع رضاكم أولاً. شكراً لثقتكم بنا ومرحباً بكم دائماً في عالـم التميز.
+          <p
+            style={{
+              fontSize: '1.3rem',
+              color: '#444',
+              lineHeight: '2',
+              background: '#f3e8ff',
+              padding: '24px',
+              borderRadius: '16px',
+              boxShadow: '0 6px 16px rgba(0, 0, 0, 0.06)',
+              maxWidth: '700px',
+              margin: '0 auto',
+            }}
+          >
+            اكتشفوا في متجر <strong style={{ color: '#7c3aed' }}>Elynor</strong> تشكيلة فريدة من المنتجات المختارة بذوق رفيع، تجمع بين الأناقة والجودة. نحن هنا لنقدم لكم تجربة تسوق ممتعة، آمنة وسريعة، مع خدمة عملاء متميزة.
           </p>
         </section>
 
-        {/* Products Section */}
         <section>
           <h1 style={{ textAlign: 'center', fontSize: '2rem', fontWeight: 700, color: '#4B0082', marginBottom: '30px' }}>
             جميع المنتجات
@@ -119,7 +143,7 @@ export default function Home({ products }: HomeProps) {
             <p style={{ textAlign: 'center' }}>لا توجد منتجات حالياً.</p>
           ) : (
             <>
-              <div id='products' className="product-grid">
+              <div id="products" className="product-grid">
                 {visibleProducts.map((product) => (
                   <ProductCard key={product._id} product={product} />
                 ))}
@@ -129,7 +153,15 @@ export default function Home({ products }: HomeProps) {
                 <div style={{ textAlign: 'center', marginTop: '20px' }}>
                   <button
                     onClick={loadMore}
-                    style={{ padding: '10px 25px', fontSize: '1rem', backgroundColor: '#6d28d9', color: 'white', border: 'none', borderRadius: '8px', cursor: 'pointer' }}
+                    style={{
+                      padding: '10px 25px',
+                      fontSize: '1rem',
+                      backgroundColor: '#6d28d9',
+                      color: 'white',
+                      border: 'none',
+                      borderRadius: '8px',
+                      cursor: 'pointer',
+                    }}
                   >
                     عرض المزيد
                   </button>
@@ -147,6 +179,7 @@ export default function Home({ products }: HomeProps) {
             gap: 20px;
             padding-bottom: 40px;
           }
+
           .welcome-section {
             opacity: 0;
             transform: translateY(40px);
@@ -154,6 +187,7 @@ export default function Home({ products }: HomeProps) {
             max-width: 800px;
             margin: 0 auto;
           }
+
           .welcome-section.visible {
             opacity: 1;
             transform: translateY(0);

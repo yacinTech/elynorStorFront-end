@@ -25,22 +25,38 @@ export default function TopBanner() {
       </div>
 
       <style jsx>{`
-        .top-banner {
-          position: relative;
-          width: 100%;
-          background-color: #6d28d9;
-          color: white;
-          font-weight: 600;
-          padding: 10px 0;
-          overflow: hidden;
-          box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
-          font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-          font-size: 1rem;
-          direction: rtl;
-          z-index: 1;
-          margin-bottom: 10px;
-          margin-top: 0;
-        }
+       .top-banner {
+  width: 100% !important;
+  
+  position: relative;
+  background-color: #6d28d9;
+  color: white;
+  font-weight: 600;
+  padding: 10px 0;
+  overflow: hidden;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-size: 1rem;
+  direction: rtl;
+  z-index: 1;
+  display: block;
+
+}
+  .top-banner {
+  height: 24px;
+padding: 0 12px;
+
+  overflow: hidden; /* لمنع المحتوى من زيادة الارتفاع */
+}
+  .top-banner {
+  position: relative;
+  z-index: 0; /* اجعلها 0 أو أقل من z-index للهيدر */
+  height: 28px;
+  padding: 0 12px;
+}
+
+
+
 
         .scrolling-text {
           display: inline-block;

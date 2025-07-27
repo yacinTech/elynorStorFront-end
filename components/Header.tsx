@@ -101,11 +101,11 @@ export default function Header() {
           position: fixed;
           top: 0;
           width: 100%;
-          z-index: 1000;
-          top: 0;
-          z-index: 1000;
           background-color: #fff;
-          box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+            margin-bottom: 0 !important;
+  padding-bottom: 0 !important;
+  border-bottom: none !important;
+  box-shadow: none !important;
         }
 
         .top-bar {
@@ -124,7 +124,7 @@ export default function Header() {
   background-color: #fff; /* خلفية بيضاء أنيقة */
   border-radius: 10px;
   box-shadow: 0 1px 5px rgba(0,0,0,0.1);
-  height: 28px; /* ارتفاع أقل (يمكنك تعديل القيمة حسب رغبتك) */
+  height: 24px; /* ارتفاع أقل (يمكنك تعديل القيمة حسب رغبتك) */
   align-items: center;
   font-weight: 600;
   font-size: 0.9rem;

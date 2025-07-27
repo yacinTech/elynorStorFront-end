@@ -5,7 +5,8 @@ import NewsletterForm from '../components/NewsletterForm';
 // pages/privacy.tsx
 export default function PrivacyPage() {
   return (
-    <div style={{ maxWidth: '800px', margin: '40px auto', padding: '20px', lineHeight: '1.8', color: '#333' }}>
+    <div style={{ maxWidth: '800px', margin: '80px auto 40px', padding: '20px', lineHeight: '1.8', color: '#333' }}>
+
       <h1 style={{ fontSize: '2rem', marginBottom: '20px', textAlign: 'center' }}>سياسة الخصوصية</h1>
       <p>
         نحن نحترم خصوصيتك ونلتزم بحماية بياناتك. عند استخدامك لمتجرنا، فإننا نجمع فقط المعلومات الضرورية لمعالجة الطلبات وتحسين تجربتك.

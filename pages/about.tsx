@@ -15,15 +15,15 @@ export default function AboutPage() {
         <link rel="canonical" href="https://elynor-store.vercel.app/about" />
       </Head>
       <div
-        style={{
-          maxWidth: '800px',
-          margin: '40px auto',
-          padding: '20px',
-        lineHeight: '1.8',
-        color: '#333',
-        textAlign: 'center',
-      }}
-    >
+  style={{
+    maxWidth: '800px',
+    margin: '80px auto 40px',  // ↑ margin-top أكبر (80px)
+    padding: '20px',
+    lineHeight: '1.8',
+    color: '#333',
+    textAlign: 'center',
+  }}
+>
       {/* الصورة التمهيدية */}
       <div style={{ marginBottom: '30px' }}>
         <Image

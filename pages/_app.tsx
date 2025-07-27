@@ -11,6 +11,7 @@ import '@fortawesome/fontawesome-free/css/all.min.css';
 import WhatsAppButton from '../components/WhatsAppButton';
 import NewsletterForm from '../components/NewsletterForm';
 import ContactSection from '../components/ContactSection';
+import TopBanner from '../components/TopBanner';
 
 export default function MyApp({ Component, pageProps }: AppProps) {
   return (
@@ -52,8 +53,12 @@ export default function MyApp({ Component, pageProps }: AppProps) {
           `,
         }}
       />
+      
+      <div style={{ position: 'fixed', top: 0, left: 0, right: 0, zIndex: 10000 }}>
+        <Header />
+      </div>
+  
 
-      <Header />
       
       <Component {...pageProps} />
       <ContactSection />

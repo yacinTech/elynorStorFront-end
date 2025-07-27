@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { GetServerSideProps, GetServerSidePropsContext } from 'next';
 import Head from 'next/head';
 import ProductCard from '../../components/ProductCard';
@@ -14,7 +14,6 @@ declare global {
     fbq?: (...args: unknown[]) => void;
   }
 }
-
 
 type Product = {
   _id: string;
@@ -48,7 +47,6 @@ export default function ProductDetails({ product, related }: Props) {
     }
   }, [product]);
 
-
   if (!product) return <p>المنتج غير موجود.</p>;
 
   const fullImageUrl =
@@ -57,6 +55,27 @@ export default function ProductDetails({ product, related }: Props) {
       : `https://elynor-store.vercel.app${product.images?.[0] || '/logo.png'}`;
 
   const productUrl = `https://elynor-store.vercel.app/product/${product.slug}`;
+
+  // Define the header height (adjust as needed or make dynamic if required)
+  const headerHeight = 74;
+
+
+
+    const [spacerHeight, setSpacerHeight] = useState(74);
+
+  useEffect(() => {
+    function handleResize() {
+      const width = window.innerWidth;
+      if (width <= 400) setSpacerHeight(40);
+      else if (width <= 640) setSpacerHeight(50);
+      else setSpacerHeight(74);
+    }
+
+    handleResize(); // تعيين الارتفاع عند تحميل الصفحة
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
 
   return (
     <>
@@ -104,20 +123,32 @@ export default function ProductDetails({ product, related }: Props) {
           }}
         />
       </Head>
-
+ <div style={{ height: `${spacerHeight}px` }} />
       <TopBanner />
 
-      <div style={{ maxWidth: '900px', margin: 'auto', padding: '20px' }}>
+      {/* المحتوى الرئيسي */}
+      <main
+        style={{
+          maxWidth: '900px',
+          margin: '20px auto 60px', // مسافة من الأعلى للفراغ أسفل البنر والهيدر الطبيعي (غير مثبت)
+          padding: '20px',
+          backgroundColor: '#fff',
+          borderRadius: 12,
+          boxShadow: '0 4px 12px rgba(0,0,0,0.05)',
+          position: 'relative',
+          zIndex: 0,
+        }}
+      >
         <ProductSlider images={product.images || []} />
 
-        <div
+        <section
           style={{
             backgroundColor: '#f9f9f9',
             padding: '16px',
             borderRadius: '12px',
             boxShadow: '0 4px 12px rgba(0, 0, 0, 0.08)',
             maxWidth: '600px',
-            margin: '0 auto 30px',
+            margin: '30px auto',
             fontFamily: 'Segoe UI, sans-serif',
           }}
         >
@@ -128,54 +159,51 @@ export default function ProductDetails({ product, related }: Props) {
               marginBottom: '12px',
               color: '#333',
               textAlign: 'center',
-              whiteSpace: 'normal',
-              overflowWrap: 'break-word',
               wordBreak: 'break-word',
+              overflowWrap: 'break-word',
             }}
           >
             {product.name}
           </h2>
-          <>
-  <p
-    style={{
-      fontSize: '1rem',
-      color: '#444',
-      lineHeight: '1.5',
-      marginBottom: '20px',
-      textAlign: 'center',
-      whiteSpace: 'pre-line',
-      overflowWrap: 'break-word',
-      wordBreak: 'break-word',
-    }}
-  >
-    {product.description}
-  </p>
 
-  <p
-    style={{
-      fontSize: '1.1rem',
-      fontWeight: 'bold',
-      color: '#e60023',
-      textAlign: 'center',
-      display: 'flex',
-      justifyContent: 'center',
-      gap: '12px',
-      alignItems: 'center',
-    }}
-  >
-    <span
-      style={{
-        textDecoration: 'line-through',
-        color: '#999',
-        fontWeight: 'normal',
-        fontSize: '1rem',
-      }}
-    >
-      {Math.round(product.price * 1.4)} درهم
-    </span>
-    <span>{product.price} درهم</span>
-  </p>
-</>
+          <p
+            style={{
+              fontSize: '1rem',
+              color: '#444',
+              lineHeight: 1.5,
+              marginBottom: '20px',
+              textAlign: 'center',
+              whiteSpace: 'pre-line',
+              wordBreak: 'break-word',
+            }}
+          >
+            {product.description}
+          </p>
+
+          <p
+            style={{
+              fontSize: '1.1rem',
+              fontWeight: 'bold',
+              color: '#e60023',
+              textAlign: 'center',
+              display: 'flex',
+              justifyContent: 'center',
+              gap: '12px',
+              alignItems: 'center',
+            }}
+          >
+            <span
+              style={{
+                textDecoration: 'line-through',
+                color: '#999',
+                fontWeight: 'normal',
+                fontSize: '1rem',
+              }}
+            >
+              {Math.round(product.price * 1.4)} درهم
+            </span>
+            <span>{product.price} درهم</span>
+          </p>
 
           <p
             style={{
@@ -186,12 +214,12 @@ export default function ProductDetails({ product, related }: Props) {
           >
             التصنيف: {product.category}
           </p>
-        </div>
+        </section>
 
         <OrderForm productId={product._id} />
 
         {related.length > 0 && (
-          <div style={{ marginTop: '40px' }}>
+          <section style={{ marginTop: '40px' }}>
             <h3 style={{ textAlign: 'center' }}>منتجات مشابهة</h3>
             <div
               style={{
@@ -205,9 +233,9 @@ export default function ProductDetails({ product, related }: Props) {
                 <ProductCard key={p._id} product={p} />
               ))}
             </div>
-          </div>
+          </section>
         )}
-      </div>
+      </main>
     </>
   );
 }
@@ -224,7 +252,6 @@ export const getServerSideProps: GetServerSideProps<Props> = async (
     const others = await getProductsByCategory(product.category);
     const filtered = others.filter((p: Product) => p._id !== product._id);
 
-    // Generic function with proper typing
     function getRandomItems<T>(arr: T[], n: number): T[] {
       const shuffled = arr.slice();
       for (let i = shuffled.length - 1; i > 0; i--) {

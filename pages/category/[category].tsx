@@ -60,6 +60,7 @@ export default function CategoryPage({ category, products }: CategoryPageProps) 
         <h1
           style={{
             marginBottom: '25px',
+            marginTop: '50px',
             fontSize: '2rem',
             color: '#222',
             fontWeight: '700',
