@@ -31,6 +31,23 @@ type Props = {
 };
 
 export default function ProductDetails({ product, related }: Props) {
+  // تعريف الهامش الأعلى ديناميكياً حسب حجم الشاشة
+  const [spacerHeight, setSpacerHeight] = useState(74);
+
+  useEffect(() => {
+    function handleResize() {
+      const width = window.innerWidth;
+      if (width <= 400) setSpacerHeight(40);
+      else if (width <= 640) setSpacerHeight(50);
+      else setSpacerHeight(74);
+    }
+
+    handleResize();
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
+  // FB Pixel Tracking عند تغيير المنتج
   useEffect(() => {
     if (
       product &&
@@ -55,27 +72,6 @@ export default function ProductDetails({ product, related }: Props) {
       : `https://elynor-store.vercel.app${product.images?.[0] || '/logo.png'}`;
 
   const productUrl = `https://elynor-store.vercel.app/product/${product.slug}`;
-
-  // Define the header height (adjust as needed or make dynamic if required)
-  const headerHeight = 74;
-
-
-
-    const [spacerHeight, setSpacerHeight] = useState(74);
-
-  useEffect(() => {
-    function handleResize() {
-      const width = window.innerWidth;
-      if (width <= 400) setSpacerHeight(40);
-      else if (width <= 640) setSpacerHeight(50);
-      else setSpacerHeight(74);
-    }
-
-    handleResize(); // تعيين الارتفاع عند تحميل الصفحة
-    window.addEventListener('resize', handleResize);
-    return () => window.removeEventListener('resize', handleResize);
-  }, []);
-
 
   return (
     <>
@@ -123,14 +119,14 @@ export default function ProductDetails({ product, related }: Props) {
           }}
         />
       </Head>
- <div style={{ height: `${spacerHeight}px` }} />
+
+      <div style={{ height: `${spacerHeight}px` }} />
       <TopBanner />
 
-      {/* المحتوى الرئيسي */}
       <main
         style={{
           maxWidth: '900px',
-          margin: '20px auto 60px', // مسافة من الأعلى للفراغ أسفل البنر والهيدر الطبيعي (غير مثبت)
+          margin: '20px auto 60px',
           padding: '20px',
           backgroundColor: '#fff',
           borderRadius: 12,

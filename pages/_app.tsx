@@ -11,7 +11,8 @@ import '@fortawesome/fontawesome-free/css/all.min.css';
 import WhatsAppButton from '../components/WhatsAppButton';
 import NewsletterForm from '../components/NewsletterForm';
 import ContactSection from '../components/ContactSection';
-import TopBanner from '../components/TopBanner';
+import Image from 'next/image';
+
 
 export default function MyApp({ Component, pageProps }: AppProps) {
   return (
@@ -25,7 +26,7 @@ export default function MyApp({ Component, pageProps }: AppProps) {
           referrerPolicy="no-referrer"
         />
         <noscript>
-          <img
+          <Image
             height="1"
             width="1"
             style={{ display: 'none' }}
