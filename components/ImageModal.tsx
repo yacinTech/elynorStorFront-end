@@ -1,4 +1,3 @@
-// components/ImageModal.tsx
 import ReactDOM from 'react-dom';
 import Image from 'next/image';
 
@@ -33,17 +32,21 @@ export default function ImageModal({ image, onClose }: Props) {
           onClose();
         }}
         style={{
-          position: 'absolute',
-          top: 20,
-          right: 20,
+          position: 'fixed',
+          top: 'clamp(8px, 2vw, 24px)', // مرن حسب الشاشة
+          right: 'clamp(8px, 2vw, 24px)',
           background: 'transparent',
           color: '#fff',
           border: 'none',
-          fontSize: '2.4rem',
+          fontSize: 'clamp(1.5rem, 4vw, 2.5rem)', // حجم مرن
           fontWeight: 'bold',
           cursor: 'pointer',
           zIndex: 1000000,
+          lineHeight: 1,
+          padding: 4,
+          transition: 'transform 0.2s ease',
         }}
+        aria-label="Close"
       >
         ✖
       </button>
