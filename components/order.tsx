@@ -119,85 +119,114 @@ export default function OrderForm({ productId }: OrderFormProps) {
         </button>
       </form>
 
-      <style jsx>{`
-        .order-container {
-          width: 100%;
-          max-width: 600px;
-          margin: auto;
-          background: #ffffff;
-          padding: 2rem;
-          border-radius: 16px;
-          box-shadow: 0 12px 25px rgba(0, 0, 0, 0.1);
-          box-sizing: border-box;
-        }
+    <style jsx>{`
+ .order-container {
+  max-width: 600px;
+  margin: 2rem auto;
+  background: #fff;
+  padding: 2rem;
+  border-radius: 16px;
+  box-shadow: 0 12px 25px rgba(0, 0, 0, 0.1);
+  box-sizing: border-box;
+}
 
-        h2 {
-          text-align: center;
-          font-size: 1.8rem;
-          color: #1a202c;
-          margin-bottom: 1.5rem;
-        }
+h2 {
+  text-align: center;
+  font-size: 1.8rem;
+  color: #1a202c;
+  margin-bottom: 1.5rem;
+  font-weight: 700;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
 
-        .order-form {
-          display: flex;
-          flex-direction: column;
-          gap: 1.2rem;
-        }
+.order-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.4rem;
+}
 
-        .form-grid {
-          display: grid;
-          grid-template-columns: 1fr 1fr;
-          gap: 1rem;
-        }
+.form-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
 
-        input,
-        textarea {
-          width: 100%;
-          padding: 14px;
-          font-size: 1rem;
-          border: 1px solid #ccc;
-          border-radius: 10px;
-          transition: 0.3s ease;
-          background-color: #f9f9f9;
-        }
+input,
+textarea {
+  width: 100%;
+  padding: 14px 16px;
+  font-size: 1rem;
+  border: 1.8px solid #ccc;
+  border-radius: 10px;
+  background-color: #f9f9f9;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+  box-sizing: border-box;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  resize: vertical;
+}
 
-        input:focus,
-        textarea:focus {
-          border-color: #3182ce;
-          outline: none;
-          background-color: #ebf8ff;
-        }
+input:focus,
+textarea:focus {
+  border-color: #3182ce;
+  box-shadow: 0 0 8px rgba(49, 130, 206, 0.5);
+  outline: none;
+  background-color: #e8f0fe;
+}
 
-        button {
-          background-color: #3182ce;
-          color: white;
-          padding: 14px;
-          font-size: 1.1rem;
-          border: none;
-          border-radius: 10px;
-          cursor: pointer;
-          transition: background 0.3s ease;
-        }
+button {
+  background-color: #3182ce;
+  color: white;
+  padding: 16px;
+  font-size: 1.15rem;
+  font-weight: 600;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
 
-        button:hover {
-          background-color: #2b6cb0;
-        }
+button:hover:not(:disabled) {
+  background-color: #2c6cc1;
+  box-shadow: 0 4px 12px rgba(44, 108, 193, 0.5);
+}
 
-        button:disabled {
-          background: #a0aec0;
-          cursor: not-allowed;
-        }
+button:disabled {
+  background-color: #a0aec0;
+  cursor: not-allowed;
+  box-shadow: none;
+}
 
-        @media (max-width: 600px) {
-          .form-grid {
-            grid-template-columns: 1fr;
-          }
+/* Responsive for smaller screens */
+@media (max-width: 600px) {
+  .order-container {
+    padding-left: 8px;   /* هامش ضيق جداً */
+    padding-right: 8px;  /* هامش ضيق جداً */
+    border-radius: 12px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.07);
+  }
 
-          .order-container {
-            padding: 1.5rem 1rem;
-          }
-        }
-      `}</style>
+  .form-grid {
+    grid-template-columns: 1fr;
+  }
+
+  input,
+  textarea {
+    border-radius: 0;
+    border-left: 1.8px solid #ccc;
+    border-right: 1.8px solid #ccc;
+    margin: 0 4px; /* هامش جانبي بسيط جداً ليريح حدود الحقول */
+  }
+
+  button {
+    width: 100%;
+    border-radius: 0 0 12px 12px;
+  }
+}
+
+
+`}</style>
+
     </div>
   );
 }
