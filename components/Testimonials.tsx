@@ -1,7 +1,6 @@
 // components/Testimonials.tsx
 import React from 'react';
 import styles from './Testimonials.module.css';
-import Image from 'next/image';
 
 type Testimonial = {
   name: string;
@@ -45,7 +44,7 @@ const Testimonials = () => {
         {testimonials.map((t, index) => (
           <div key={index} className={styles.card}>
             <div className={styles.avatarWrapper}>
-              <Image src={t.image || '/default-avatar.png'} alt={t.name} className={styles.avatar} />
+              <img src={t.image || '/default-avatar.png'} alt={t.name} className={styles.avatar} />
             </div>
             <p className={styles.comment}>“{t.comment}”</p>
             <div className={styles.footer}>
