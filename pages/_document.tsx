@@ -43,7 +43,9 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 })(window,document,'script','dataLayer','GTM-NV2TZQJQ');`,
             }}
           />
-           <noscript>
+          
+      </Head>
+       <noscript>
             <iframe
               src="https://www.googletagmanager.com/ns.html?id=GTM-NV2TZQJQ"
               height="0"
@@ -51,7 +53,6 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
               style={{ display: 'none', visibility: 'hidden' }}
             />
           </noscript>
-      </Head>
       <body>
         <Main />
         <NextScript />
