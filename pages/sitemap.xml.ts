@@ -28,7 +28,7 @@ const generateSitemap = (products: Product[]) => {
 
   const productsXml = products.map(product => `
     <url>
-      <loc>${BASE_URL}/${product.slug}</loc>
+      <loc>${BASE_URL}/product/${product.slug}</loc>
       <lastmod>${new Date().toISOString()}</lastmod>
     </url>
   `).join('');
