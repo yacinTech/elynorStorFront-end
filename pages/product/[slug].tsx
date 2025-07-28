@@ -243,7 +243,13 @@ export const getServerSideProps: GetServerSideProps<Props> = async (
 
   try {
     const product = await getProductBySlug(slug);
-    if (!product) return { props: { product: null, related: [] } };
+
+    // ✅ إذا لم يوجد المنتج، نُرجع 404 حقيقية
+    if (!product) {
+      return {
+        notFound: true,
+      };
+    }
 
     const others = await getProductsByCategory(product.category);
     const filtered = others.filter((p: Product) => p._id !== product._id);
@@ -267,6 +273,8 @@ export const getServerSideProps: GetServerSideProps<Props> = async (
     };
   } catch (error) {
     console.error(error);
-    return { props: { product: null, related: [] } };
+    return {
+      notFound: true, 
+    };
   }
 };
