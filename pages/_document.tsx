@@ -6,10 +6,7 @@ export default function Document() {
     <Html lang="ar">
       <Head>
 
-        <link
-          rel="stylesheet"
-          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
-        />
+       
 
 
         <link
@@ -21,13 +18,7 @@ export default function Document() {
         />
 
 
-        <link
-          rel="stylesheet"
-          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
-          integrity="sha512-p0dAipIpZ+vEB5A1uJ0q+uCSlQGKs8lwRl3z2RZdz1T1QHnWb3YfNUdW1TGh84GYG8Ew2Lr9G2rhNq0u9Sd1Pg=="
-          crossOrigin="anonymous"
-          
-        />
+      
         {/* Google Site Verification */}
         <meta name="google-site-verification" content="O1netl10RwInIUmxF8lpN1qqE7cBow_ZJjDSodqR110" />
 
