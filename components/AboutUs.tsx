@@ -1,7 +1,4 @@
 import Image from 'next/image';
-
-import Head from 'next/head';
-import SEO from './SEO';
 import Testimonials from './Testimonials';
 
 export default function AboutUs() {
