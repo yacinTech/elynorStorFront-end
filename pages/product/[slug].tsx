@@ -23,6 +23,7 @@ type Product = {
   price: number;
   category: string;
   images: string[];
+  seoKeywords?: string[];
 };
 
 type Props = {
@@ -83,6 +84,21 @@ export default function ProductDetails({ product, related }: Props) {
         />
         <meta name="robots" content="index, follow" />
         <link rel="icon" href="/og-image.jpg" />
+
+              <meta
+        name="keywords"
+        content={
+          [
+            product.name,
+            ...(Array.isArray(product.seoKeywords) && product.seoKeywords.length > 0
+              ? product.seoKeywords
+              : product.description
+              ? product.description.split(' ').slice(0, 10)
+              : ['منتجات', 'تسوق', 'متجر', 'elynor'])
+          ].join(', ')
+        }
+      />
+
 
         <meta property="og:type" content="product" />
         <meta property="og:title" content={product.name} />
