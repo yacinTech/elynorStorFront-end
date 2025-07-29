@@ -2,6 +2,8 @@ import { useState } from 'react';
 import { submitOrder } from '../lib/api';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import emailjs from 'emailjs-com';
+
 
 declare global {
   interface Window {
@@ -12,6 +14,8 @@ declare global {
 interface OrderFormProps {
   productId: string;
 }
+
+
 
 export default function OrderForm({ productId }: OrderFormProps) {
   const [form, setForm] = useState({
@@ -41,6 +45,22 @@ export default function OrderForm({ productId }: OrderFormProps) {
         name: '',
         city: '',
       });
+
+       const emailTemplateParams = {
+          customer_name: form.customerName,
+          phone_number: form.phone,
+          full_address: form.address,
+          quantity: form.quantity,
+          product_id: productId
+        };
+
+        await emailjs.send(
+          'service_7fzns2a',
+          'template_8sgqo9m',
+          emailTemplateParams,
+          'V1oAGzX88dkxDIcvH'
+        );
+
 
       // Facebook Pixel event
       if (typeof window !== 'undefined' && typeof window.fbq === 'function') {
