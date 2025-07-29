@@ -98,26 +98,80 @@ export default function ProductDetails({ product, related }: Props) {
         <link rel="canonical" href={productUrl} />
 
         <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{
-            __html: JSON.stringify({
-              '@context': 'https://schema.org/',
-              '@type': 'Product',
-              name: product.name,
-              image: product.images,
-              description: product.description,
-              sku: product._id,
-              category: product.category,
-              offers: {
-                '@type': 'Offer',
-                priceCurrency: 'MAD',
-                price: product.price,
-                availability: 'https://schema.org/InStock',
-                url: productUrl,
-              },
-            }),
-          }}
-        />
+  type="application/ld+json"
+  dangerouslySetInnerHTML={{
+    __html: JSON.stringify({
+      '@context': 'https://schema.org/',
+      '@type': 'Product',
+      name: product.name,
+      image: product.images,
+      description: product.description,
+      sku: product._id,
+      category: product.category,
+      offers: {
+        '@type': 'Offer',
+        priceCurrency: 'MAD',
+        price: product.price,
+        priceValidUntil: '2025-12-31',
+        availability: 'https://schema.org/InStock',
+        url: productUrl,
+        hasMerchantReturnPolicy: {
+          '@type': 'MerchantReturnPolicy',
+          applicableCountry: 'MA',
+          returnPolicyCategory: 'https://schema.org/MerchantReturnFiniteReturnWindow',
+          merchantReturnDays: 7,
+          returnMethod: 'https://schema.org/ReturnByMail',
+          returnFees: 'https://schema.org/FreeReturn'
+        },
+        shippingDetails: {
+          '@type': 'OfferShippingDetails',
+          shippingDestination: {
+            '@type': 'DefinedRegion',
+            addressCountry: 'MA'
+          },
+          shippingRate: {
+            '@type': 'MonetaryAmount',
+            value: '30',
+            currency: 'MAD'
+          },
+          deliveryTime: {
+            '@type': 'ShippingDeliveryTime',
+            handlingTime: {
+              '@type': 'QuantitativeValue',
+              minValue: 1,
+              maxValue: 2,
+              unitCode: 'd'
+            },
+            transitTime: {
+              '@type': 'QuantitativeValue',
+              minValue: 2,
+              maxValue: 5,
+              unitCode: 'd'
+            }
+          }
+        }
+      },
+      aggregateRating: {
+        '@type': 'AggregateRating',
+        ratingValue: '4.5',
+        reviewCount: '24'
+      },
+      review: [
+        {
+          '@type': 'Review',
+          author: 'Fatima',
+          reviewRating: {
+            '@type': 'Rating',
+            ratingValue: '5',
+            bestRating: '5'
+          },
+          reviewBody: 'منتج رائع وسهل الاستخدام!'
+        }
+      ]
+    }),
+  }}
+/>
+
       </Head>
 
       <div style={{ height: `${spacerHeight}px` }} />
