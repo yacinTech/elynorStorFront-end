@@ -71,7 +71,7 @@ export default function Home({ products }: HomeProps) {
           <title>متجر ELYNOR | تسوق بأناقة وجودة</title>
 
           {/* أيقونة الموقع (favicon) */}
-          <link rel="icon" href="/og-image.jpg" type="image/jpeg" />
+          <link rel="icon" href="https://elynor-store.vercel.app/og-image.jpg" type="image/jpeg" />
 
           {/* الوصف والكلمات المفتاحية */}
           <meta name="description" content={description} />
