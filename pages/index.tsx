@@ -68,18 +68,39 @@ export default function Home({ products }: HomeProps) {
   return (
     <>
       <Head>
-        <title>متجر ELYNOR | تسوق بأناقة وجودة</title>
-        <link rel="icon" href="/og-image.jpg" />
-        <meta name="description" content={description} />
-        <meta name="keywords" content={keywords} />
-        <meta property="og:url" content="https://elynor-store.vercel.app/" />
-        <meta property="og:title" content="متجر ELYNOR | تسوق بأناقة وجودة" />
-        <meta property="og:description" content={description} />
-        <meta property="og:type" content="website" />
-        <meta property="og:image" content={ogImage} />
-        <meta property="og:image:width" content="1200" />
-        <meta property="og:image:height" content="630" />
+          <title>متجر ELYNOR | تسوق بأناقة وجودة</title>
+
+          {/* أيقونة الموقع (favicon) */}
+          <link rel="icon" href="/og-image.jpg" type="image/jpeg" />
+
+          {/* الوصف والكلمات المفتاحية */}
+          <meta name="description" content={description} />
+          <meta name="keywords" content={keywords} />
+
+          {/* بيانات Open Graph الأساسية */}
+          <meta property="og:url" content="https://elynor-store.vercel.app/" />
+          <meta property="og:title" content="متجر ELYNOR | تسوق بأناقة وجودة" />
+          <meta property="og:description" content={description} />
+          <meta property="og:type" content="website" />
+          <meta property="og:image" content={ogImage} />
+          <meta property="og:image:width" content="1200" />
+          <meta property="og:image:height" content="630" />
+
+          {/* بيانات الشعار لمحركات البحث */}
+          <script
+            type="application/ld+json"
+            dangerouslySetInnerHTML={{
+              __html: JSON.stringify({
+                "@context": "https://schema.org",
+                "@type": "Organization",
+                "name": "Elynor",
+                "url": "https://elynor-store.vercel.app",
+                "logo": "https://elynor-store.vercel.app/og-image.jpg"
+              }),
+            }}
+          />
       </Head>
+
        <div style={{ height: `${spacerHeight}px` }} />
       <TopBanner />
 

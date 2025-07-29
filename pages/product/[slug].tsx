@@ -90,7 +90,7 @@ export default function ProductDetails({ product, related }: Props) {
           content={product.description?.slice(0, 160) || 'تفاصيل المنتج من متجر Elynor'}
         />
         <meta name="robots" content="index, follow" />
-        <link rel="icon" href="/og-image.jpg" />
+        <link rel="icon" href="/og-image.jpg"  type="image/jpg" />
 
               <meta
         name="keywords"
