@@ -15,6 +15,12 @@ declare global {
   }
 }
 
+type Review = {
+  author: string;
+  rating: number;  
+  comment: string;
+};
+
 type Product = {
   _id: string;
   slug: string;
@@ -24,6 +30,7 @@ type Product = {
   category: string;
   images: string[];
   seoKeywords?: string[];
+  reviews?: Review[];
 };
 
 type Props = {
