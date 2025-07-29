@@ -11,6 +11,7 @@ import '@fortawesome/fontawesome-free/css/all.min.css';
 import WhatsAppButton from '../components/WhatsAppButton';
 import NewsletterForm from '../components/NewsletterForm';
 import ContactSection from '../components/ContactSection';
+import { ToastContainer } from 'react-toastify';
 
 
 export default function MyApp({ Component, pageProps }: AppProps) {
@@ -63,6 +64,12 @@ export default function MyApp({ Component, pageProps }: AppProps) {
 
       
       <Component {...pageProps} />
+      <ToastContainer
+        position="top-center"
+        autoClose={4000}
+        style={{ zIndex: 99999, marginTop: '80px' }}
+      />
+
       <ContactSection />
       <WhatsAppButton />
       <NewsletterForm />

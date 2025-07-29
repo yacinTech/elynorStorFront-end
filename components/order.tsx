@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { submitOrder } from '../lib/api';
-import { ToastContainer, toast } from 'react-toastify';
+import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 declare global {
@@ -76,7 +76,7 @@ export default function OrderForm({ productId }: OrderFormProps) {
 
   return (
     <div className="order-container">
-      <ToastContainer />
+      
 
       <h2>طلب المنتج</h2>
       <form onSubmit={handleSubmit} className="order-form">
