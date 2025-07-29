@@ -67,6 +67,39 @@ export default function Home({ products }: HomeProps) {
     return () => window.removeEventListener('resize', handleResize);
   }, []);
 
+  const structuredData = {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "Organization",
+        "name": "ELYNOR",
+        "url": "https://elynor-store.vercel.app",
+        "logo": "https://elynor-store.vercel.app/og-image.jpg"
+      },
+      {
+        "@type": "WebSite",
+        "url": "https://elynor-store.vercel.app/",
+        "name": "ELYNOR",
+        "potentialAction": {
+          "@type": "SearchAction",
+          "target": "https://elynor-store.vercel.app/search?q={search_term_string}",
+          "query-input": "required name=search_term_string"
+        }
+      },
+      {
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          {
+            "@type": "ListItem",
+            "position": 1,
+            "name": "الرئيسية",
+            "item": "https://elynor-store.vercel.app/"
+          }
+        ]
+      }
+    ]
+  };
+
   return (
     <>
       <Head>
@@ -88,7 +121,10 @@ export default function Home({ products }: HomeProps) {
           <meta property="og:image:width" content="1200" />
           <meta property="og:image:height" content="630" />
 
-          {/* بيانات الشعار لمحركات البحث */}
+          <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
+        />
          
       </Head>
 
@@ -206,20 +242,7 @@ export default function Home({ products }: HomeProps) {
           }
         `}</style>
       </main>
-       <Script
-        id="structured-data"
-        type="application/ld+json"
-        strategy="afterInteractive"
-        dangerouslySetInnerHTML={{
-          __html: JSON.stringify({
-            "@context": "https://schema.org",
-            "@type": "Organization",
-            "name": "ELYNOR",
-            "url": "https://elynor-store.vercel.app",
-            "logo": "https://elynor-store.vercel.app/og-image.jpg"
-          }),
-        }}
-      />
+      
     </>
   );
 }
