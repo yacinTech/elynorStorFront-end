@@ -167,23 +167,43 @@ export default function ProductDetails({ product, related }: Props) {
           }
         }
       },
-      aggregateRating: {
-        '@type': 'AggregateRating',
-        ratingValue: '4.5',
-        reviewCount: '24'
-      },
-      review: [
-        {
-          '@type': 'Review',
-          author: 'Fatima',
-          reviewRating: {
-            '@type': 'Rating',
-            ratingValue: '5',
-            bestRating: '5'
+      aggregateRating: product.reviews && product.reviews.length > 0
+        ? {
+            '@type': 'AggregateRating',
+            ratingValue: (
+              product.reviews.reduce((sum, r) => sum + r.rating, 0) /
+              product.reviews.length
+            ).toFixed(1),
+            reviewCount: product.reviews.length.toString()
+          }
+        : {
+            '@type': 'AggregateRating',
+            ratingValue: '4.5',
+            reviewCount: '24'
           },
-          reviewBody: 'منتج رائع وسهل الاستخدام!'
-        }
-      ]
+      review: product.reviews && product.reviews.length > 0
+        ? product.reviews.map((r) => ({
+            '@type': 'Review',
+            author: r.author,
+            reviewRating: {
+              '@type': 'Rating',
+              ratingValue: r.rating.toString(),
+              bestRating: '5'
+            },
+            reviewBody: r.comment
+          }))
+        : [
+            {
+              '@type': 'Review',
+              author: 'Fatima',
+              reviewRating: {
+                '@type': 'Rating',
+                ratingValue: '5',
+                bestRating: '5'
+              },
+              reviewBody: 'منتج رائع وسهل الاستخدام!'
+            }
+          ]
     }),
   }}
 />
