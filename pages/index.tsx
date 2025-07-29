@@ -6,6 +6,8 @@
 
 import Head from 'next/head';
 import Image from 'next/image';
+import Script from 'next/script';
+
 import { useState, useEffect } from 'react';
 
 import { getAllProducts } from '../lib/api';
@@ -87,18 +89,7 @@ export default function Home({ products }: HomeProps) {
           <meta property="og:image:height" content="630" />
 
           {/* بيانات الشعار لمحركات البحث */}
-          <script
-            type="application/ld+json"
-            dangerouslySetInnerHTML={{
-              __html: JSON.stringify({
-                "@context": "https://schema.org",
-                "@type": "Organization",
-                "name": "Elynor",
-                "url": "https://elynor-store.vercel.app",
-                "logo": "https://elynor-store.vercel.app/og-image.jpg"
-              }),
-            }}
-          />
+         
       </Head>
 
        <div style={{ height: `${spacerHeight}px` }} />
@@ -215,6 +206,20 @@ export default function Home({ products }: HomeProps) {
           }
         `}</style>
       </main>
+       <Script
+        id="structured-data"
+        type="application/ld+json"
+        strategy="afterInteractive"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "Organization",
+            "name": "ELYNOR",
+            "url": "https://elynor-store.vercel.app",
+            "logo": "https://elynor-store.vercel.app/og-image.jpg"
+          }),
+        }}
+      />
     </>
   );
 }
