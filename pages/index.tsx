@@ -67,38 +67,46 @@ export default function Home({ products }: HomeProps) {
     return () => window.removeEventListener('resize', handleResize);
   }, []);
 
-  const structuredData = {
-    "@context": "https://schema.org",
-    "@graph": [
-      {
-        "@type": "Organization",
-        "name": "ELYNOR",
-        "url": "https://elynor-store.vercel.app",
-        "logo": "https://elynor-store.vercel.app/og-image.jpg"
+ const structuredData = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "name": "ELYNOR",
+      "url": "https://elynor-store.vercel.app",
+      "logo": "https://elynor-store.vercel.app/og-image.jpg",
+      "contactPoint": {
+        "@type": "ContactPoint",
+        "telephone": "+212625902672",
+        "contactType": "customer service",
+        "areaServed": "MA",
+        "availableLanguage": "Arabic"
       },
-      {
-        "@type": "WebSite",
-        "url": "https://elynor-store.vercel.app/",
-        "name": "ELYNOR",
-        "potentialAction": {
-          "@type": "SearchAction",
-          "target": "https://elynor-store.vercel.app/search?q={search_term_string}",
-          "query-input": "required name=search_term_string"
+      "sameAs": [
+        "https://www.facebook.com/profile.php?id=61571124188604",
+        "https://www.instagram.com/elynorofficiel/?igsh=ejAwbnlkNHUxY2sy&utm_source=qr#",
+        
+      ]
+    },
+    {
+      "@type": "WebSite",
+      "url": "https://elynor-store.vercel.app/",
+      "name": "ELYNOR"
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "الرئيسية",
+          "item": "https://elynor-store.vercel.app/"
         }
-      },
-      {
-        "@type": "BreadcrumbList",
-        "itemListElement": [
-          {
-            "@type": "ListItem",
-            "position": 1,
-            "name": "الرئيسية",
-            "item": "https://elynor-store.vercel.app/"
-          }
-        ]
-      }
-    ]
-  };
+      ]
+    }
+  ]
+};
+
 
   return (
     <>
