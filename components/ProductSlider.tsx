@@ -74,96 +74,132 @@ const ProductSlider: React.FC<ProductSliderProps> = ({ images }) => {
                 onClick={() => setZoomedImage(src)}
                 style={{ cursor: 'zoom-in' }}
               >
-                <div style={{ width: '100%', height: '400px', position: 'relative' }}>
-                  <Image
-                    src={src}
-                    alt={`صورة ${index + 1}`}
-                    fill
-                    style={{
-                      objectFit: 'contain',
-                      userSelect: 'none',
-                      cursor: 'pointer',
-                    }}
-                    priority={index === 0}
-                    draggable={false}
-                  />
-                </div>
+               <div style={{ width: '100%', height: '400px', position: 'relative', border: '4px solid #f0f0f0', borderRadius: '12px', overflow: 'hidden' }}>
+  <Image
+    src={src}
+    alt={`صورة ${index + 1}`}
+    fill
+    style={{
+      objectFit: 'cover',
+      userSelect: 'none',
+      transition: 'transform 0.3s ease',
+    }}
+    onMouseOver={(e) => (e.currentTarget.style.transform = 'scale(1.02)')}
+    onMouseOut={(e) => (e.currentTarget.style.transform = 'scale(1)')}
+    priority={index === 0}
+    draggable={false}
+  />
+</div>
+
               </div>
             ))}
           </Slider>
         </div>
 
         {/* صور مصغرة */}
-        <div
+<div
+  style={{
+    marginTop: 12,
+    display: 'flex',
+    justifyContent: 'center',
+    gap: 8,
+    overflowX: 'auto',      // يسمح بالتمرير أفقي فقط عند زيادة الصور
+    padding: '8px 0',
+    maxWidth: '100%',
+    boxSizing: 'border-box',
+  }}
+  className="product-slider-thumbnails"
+>
+
+
+  {images.map((src, index) => {
+    const isActive = index === current;
+    return (
+      <div
+        key={index}
+        onClick={() => {
+          sliderRef.current?.slickGoTo(index);
+        }}
+        style={{
+  cursor: 'pointer',
+  borderRadius: 12,
+  border: isActive ? '2px solid #4caf50' : '1px solid #ccc',
+  boxShadow: isActive
+    ? '0 0 10px rgba(76, 175, 80, 0.6)'
+    : '0 0 6px rgba(0,0,0,0.1)',
+  opacity: isActive ? 1 : 0.6,
+  transition: 'all 0.3s ease',
+  flexShrink: 0,
+  width: 80,
+  height: 60,
+  overflow: 'hidden',
+  backgroundColor: '#fff',
+}}
+
+      >
+        <Image
+          src={src}
+          alt={`صورة مصغرة ${index + 1}`}
+          width={80}
+          height={60}
           style={{
-            marginTop: 12,
-            display: 'flex',
-            justifyContent: 'center',
-            gap: 8,
-            overflowX: 'auto',
-            paddingBottom: 4,
+            width: '100%',
+            height: '100%',
+            objectFit: 'cover',
+            userSelect: 'none',
+            pointerEvents: 'none',
           }}
-          className="product-slider-thumbnails"
-        >
-          {images.map((src, index) => {
-            const isActive = index === current;
-            return (
-              <div
-                key={index}
-                onClick={() => {
-                  sliderRef.current?.slickGoTo(index);
-                }}
-                style={{
-                  cursor: 'pointer',
-                  borderRadius: 8,
-                  border: isActive ? '3px solid #4caf50' : '3px solid transparent',
-                  boxShadow: isActive
-                    ? '0 0 8px 2px rgba(76, 175, 80, 0.7)'
-                    : 'none',
-                  opacity: isActive ? 1 : 0.5,
-                  transition: 'all 0.3s ease',
-                  flexShrink: 0,
-                  width: 80,
-                  height: 60,
-                  overflow: 'hidden',
-                }}
-              >
-                <Image
-                  src={src}
-                  alt={`صورة مصغرة ${index + 1}`}
-                  width={80}
-                  height={60}
-                  style={{
-                    width: '100%',
-                    height: '100%',
-                    objectFit: 'cover',
-                    userSelect: 'none',
-                    pointerEvents: 'none',
-                  }}
-                  draggable={false}
-                />
-              </div>
-            );
-          })}
-        </div>
+          draggable={false}
+        />
+      </div>
+    );
+  })}
+</div>
       </div>
 
       {/* الصورة المكبرة عند الضغط */}
      {zoomedImage && <ImageModal image={zoomedImage} onClose={() => setZoomedImage(null)} />}
 
       {/* CSS خاص بالـ slick arrows و dots لضبط z-index */}
-      <style jsx>{`
-        :global(.slick-slider) {
-          position: relative;
-          z-index: 1; /* أقل من الهيدر */
-        }
-        :global(.slick-arrow) {
-          z-index: 2; /* فوق السلايدر */
-        }
-        :global(.slick-dots) {
-          z-index: 2; /* فوق السلايدر */
-        }
-      `}</style>
+    <style jsx>{`
+  :global(.slick-prev),
+  :global(.slick-next) {
+    width: 40px;
+    height: 40px;
+    z-index: 5;
+    background-color: rgba(255, 255, 255, 0.8);
+    border-radius: 50%;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+    display: flex !important;
+    align-items: center;
+    justify-content: center;
+  }
+
+  :global(.slick-prev) {
+    left: 10px;
+  }
+
+  :global(.slick-next) {
+    right: 10px;
+  }
+
+  :global(.slick-prev:before),
+  :global(.slick-next:before) {
+    color: #333;
+    font-size: 20px;
+  }
+
+  :global(.slick-dots li button:before) {
+    font-size: 10px;
+    color: #ccc;
+  }
+
+  :global(.slick-dots li.slick-active button:before) {
+    color: #4caf50;
+  }
+`}</style>
+
+
     </>
   );
 };
