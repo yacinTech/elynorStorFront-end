@@ -33,6 +33,8 @@ export default function MyApp({ Component, pageProps }: AppProps) {
             alt="fb pixel"
           />
         </noscript>
+
+        <link rel="icon" href="https://elynor-store.vercel.app/og-image.jpg" type="image/jpeg" />
       </Head>
 
       <Script
