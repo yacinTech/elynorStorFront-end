@@ -1,7 +1,6 @@
-// ProductReviews.tsx
 import React, { useState, useRef } from 'react';
 import styles from './ProductReviews.module.css';
-import { FaStar, FaRegStar, FaArrowLeft, FaArrowRight } from 'react-icons/fa';
+import { FaStar, FaRegStar, FaArrowLeft, FaArrowRight, FaPen } from 'react-icons/fa';
 
 type Review = {
   author: string;
@@ -11,9 +10,10 @@ type Review = {
 
 type Props = {
   reviews: Review[];
+  reviewFormUrl?: string;  // زر التعليق اختياري
 };
 
-const ProductReviews: React.FC<Props> = ({ reviews }) => {
+const ProductReviews: React.FC<Props> = ({ reviews, reviewFormUrl }) => {
   const [index, setIndex] = useState(0);
   const sliderRef = useRef<HTMLDivElement>(null);
 
@@ -44,10 +44,7 @@ const ProductReviews: React.FC<Props> = ({ reviews }) => {
             i === (index - 1 + reviews.length) % reviews.length ? 'prev' :
             i === (index + 1) % reviews.length ? 'next' : 'hidden';
           return (
-            <div
-              className={`${styles.card} ${styles[position]}`}
-              key={i}
-            >
+            <div className={`${styles.card} ${styles[position]}`} key={i}>
               <div className={styles.header}>
                 <span className={styles.author}>{review.author}</span>
                 <div className={styles.stars}>
@@ -63,9 +60,18 @@ const ProductReviews: React.FC<Props> = ({ reviews }) => {
       </div>
 
       <div className={styles.nav}>
-        <button onClick={prev}><FaArrowRight /></button>
-        <button onClick={next}><FaArrowLeft /></button>
+        <button aria-label="السابق" onClick={prev}><FaArrowRight /></button>
+        <button aria-label="التالي" onClick={next}><FaArrowLeft /></button>
       </div>
+
+      {reviewFormUrl && (
+        <div className={styles.buttonWrapper}>
+          <a href={reviewFormUrl} className={styles.reviewButton}>
+            <FaPen className={styles.icon} />
+            اترك لنا تعليقًا حول المنتج
+          </a>
+        </div>
+      )}
     </div>
   );
 };
