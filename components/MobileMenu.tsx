@@ -147,14 +147,14 @@ export default function MobileMenu({ categories, extraLinks, onClose }: MobileMe
         }
 
         .section-title {
-          font-weight: 700;
-          font-size: 1rem;
-          color: #8e44ad;
-          border-bottom: 2px solid #f06595;
-          padding-bottom: 4px;
-          margin-bottom: 6px;
-          user-select: none;
-        }
+            font-weight: 900;
+            font-size: 2.9rem; /* عدّل هذا الحجم كما تريد */
+            color: #8e44ad;
+            border-bottom: 2px solid #f06595;
+            padding-bottom: 4px;
+            margin-bottom: 6px;
+            user-select: none;
+          }
 
         li a {
           color: #333;
