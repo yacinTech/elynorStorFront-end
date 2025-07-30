@@ -10,12 +10,13 @@ type Review = {
 
 type Props = {
   reviews: Review[];
-  reviewFormUrl?: string;  // زر التعليق اختياري
+  reviewFormUrl?: string;
 };
 
 const ProductReviews: React.FC<Props> = ({ reviews, reviewFormUrl }) => {
   const [index, setIndex] = useState(0);
   const sliderRef = useRef<HTMLDivElement>(null);
+  const showNav = reviews.length > 1;
 
   const next = () => {
     if (window.innerWidth <= 600 && sliderRef.current) {
@@ -34,35 +35,45 @@ const ProductReviews: React.FC<Props> = ({ reviews, reviewFormUrl }) => {
   };
 
   return (
-    <div className={styles.container}>
+    <div className={`${styles.container} ${reviews.length === 1 ? styles.oneCard : ''}`}>
       <h2 className={styles.title}>آراء الزبائن</h2>
 
-      <div className={styles.cardStack} ref={sliderRef}>
-        {reviews.map((review, i) => {
-          const position =
-            i === index ? 'active' :
-            i === (index - 1 + reviews.length) % reviews.length ? 'prev' :
-            i === (index + 1) % reviews.length ? 'next' : 'hidden';
-          return (
-            <div className={`${styles.card} ${styles[position]}`} key={i}>
-              <div className={styles.header}>
-                <span className={styles.author}>{review.author}</span>
-                <div className={styles.stars}>
-                  {[...Array(5)].map((_, idx) =>
-                    idx < review.rating ? <FaStar key={idx} /> : <FaRegStar key={idx} />
-                  )}
+      {reviews.length === 0 ? (
+        <p className={styles.noReviews}>
+          لا توجد تعليقات بعد. كن أول من يشارك رأيه حول المنتج!
+        </p>
+      ) : (
+        <>
+          <div className={styles.cardStack} ref={sliderRef}>
+            {reviews.map((review, i) => {
+              const position =
+                i === index ? 'active' :
+                i === (index - 1 + reviews.length) % reviews.length ? 'prev' :
+                i === (index + 1) % reviews.length ? 'next' : 'hidden';
+              return (
+                <div className={`${styles.card} ${styles[position]}`} key={i}>
+                  <div className={styles.header}>
+                    <span className={styles.author}>{review.author}</span>
+                    <div className={styles.stars}>
+                      {[...Array(5)].map((_, idx) =>
+                        idx < review.rating ? <FaStar key={idx} /> : <FaRegStar key={idx} />
+                      )}
+                    </div>
+                  </div>
+                  <p className={styles.text}>{review.comment}</p>
                 </div>
-              </div>
-              <p className={styles.text}>{review.comment}</p>
-            </div>
-          );
-        })}
-      </div>
+              );
+            })}
+          </div>
 
-      <div className={styles.nav}>
-        <button aria-label="السابق" onClick={prev}><FaArrowRight /></button>
-        <button aria-label="التالي" onClick={next}><FaArrowLeft /></button>
-      </div>
+          {showNav && (
+            <div className={styles.nav}>
+              <button aria-label="السابق" onClick={prev}><FaArrowRight /></button>
+              <button aria-label="التالي" onClick={next}><FaArrowLeft /></button>
+            </div>
+          )}
+        </>
+      )}
 
       {reviewFormUrl && (
         <div className={styles.buttonWrapper}>

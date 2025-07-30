@@ -126,6 +126,29 @@
   font-size: 1.2rem;
 }
 
+.noReviews {
+  font-size: 1.1rem;
+  color: #6b7280;
+  padding: 3rem 1rem;
+}
+
+/* حالة وجود بطاقة واحدة */
+.oneCard .cardStack {
+  position: static;
+  display: flex;
+  justify-content: center;
+  min-height: auto;
+}
+
+.oneCard .card {
+  position: static;
+  transform: none !important;
+  opacity: 1 !important;
+  flex: 0 0 auto;
+  max-width: 100%;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+}
+
 /* للهواتف */
 @media (max-width: 600px) {
   .cardStack {
@@ -150,5 +173,12 @@
 
   .nav {
     margin-top: 1rem;
+  }
+  .header {
+    display: flex;
+    flex-direction: column; /* تجعل الاسم والنجوم عموديين */
+    align-items: flex-start; /* محاذاة البداية أفقياً */
+    gap: 0.3rem;
+    margin-bottom: 1rem;
   }
 }
