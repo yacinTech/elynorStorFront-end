@@ -6,6 +6,7 @@ import OrderForm from '../../components/order';
 import ProductSlider from '../../components/ProductSlider';
 import { getProductBySlug, getProductsByCategory } from '../../lib/api';
 import TopBanner from '../../components/TopBanner';
+import ProductReviews from '../../components/productsReviews/ProductReviews';
 
 export {};
 
@@ -310,6 +311,13 @@ export default function ProductDetails({ product, related }: Props) {
         </section>
 
         <OrderForm productId={product._id} />
+        <ProductReviews
+  reviews={product.reviews ?? []}
+  reviewFormUrl="#contact"
+/>
+
+
+
 
         {related.length > 0 && (
           <section style={{ marginTop: '40px' }}>

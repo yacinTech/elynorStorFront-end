@@ -1,0 +1,111 @@
+.container {
+  max-width: 600px;
+  margin: auto;
+  padding: 2rem 1rem;
+  text-align: center;
+  position: relative;
+}
+
+.title {
+  font-size: 1.8rem;
+  margin-bottom: 2rem;
+  color: #1f2937;
+}
+
+.cardStack {
+  position: relative;
+  height: auto;
+  min-height: 180px;
+}
+
+.card {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  width: 100%;
+  max-width: 100%;
+  background: white;
+  border-radius: 16px;
+  padding: 1.5rem;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+  transform: translateX(-50%) scale(0.9);
+  opacity: 0;
+  transition: all 0.4s ease;
+  z-index: 0;
+}
+
+.card.active {
+  transform: translateX(-50%) scale(1);
+  opacity: 1;
+  z-index: 3;
+}
+
+.card.prev,
+.card.next {
+  opacity: 0.3;
+  z-index: 1;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 1rem;
+}
+
+.author {
+  font-weight: 700;
+  color: #111827;
+  font-size: 1.1rem;
+}
+
+.stars {
+  color: #fbbf24;
+}
+
+.text {
+  color: #374151;
+  font-size: 1rem;
+  line-height: 1.6;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+}
+
+.nav {
+  margin-top: 1.5rem;
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+}
+
+.nav button {
+  background: #e5e7eb;
+  border: none;
+  padding: 0.5rem 0.8rem;
+  font-size: 1.2rem;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.nav button:hover {
+  background: #d1d5db;
+}
+
+/* الهواتف */
+@media (max-width: 600px) {
+  .cardStack {
+    display: flex;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    gap: 1rem;
+    padding-bottom: 1rem;
+  }
+
+  .card {
+    position: static;
+    transform: none !important;
+    opacity: 1 !important;
+    flex: 0 0 85%;
+    scroll-snap-align: center;
+  }
+}
