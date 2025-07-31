@@ -128,6 +128,16 @@ export default function MobileMenu({ categories, extraLinks, onClose }: MobileMe
           color: #f06595;
         }
 
+        .section-title {
+            font-weight: 900;
+            font-size: 2.9rem; 
+            color: #8e44ad;
+            border-bottom: 2px solid #f06595;
+            padding-bottom: 4px;
+            margin-bottom: 6px;
+            user-select: none;
+          }
+
         ul {
           list-style: none;
           padding: 0;
@@ -141,20 +151,12 @@ export default function MobileMenu({ categories, extraLinks, onClose }: MobileMe
           -webkit-overflow-scrolling: touch;
         }
         ul li {
-          font-size: 0.95rem;
+          font-size: 1.1rem;
           padding: 8px 12px;
-          font-weight: 500;
+          font-weight: 900;
         }
 
-        .section-title {
-            font-weight: 900;
-            font-size: 2.9rem; /* عدّل هذا الحجم كما تريد */
-            color: #8e44ad;
-            border-bottom: 2px solid #f06595;
-            padding-bottom: 4px;
-            margin-bottom: 6px;
-            user-select: none;
-          }
+        
 
         li a {
           color: #333;

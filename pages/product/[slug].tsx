@@ -121,7 +121,7 @@ export default function ProductDetails({ product, related }: Props) {
 
         <link rel="canonical" href={productUrl} />
 
-        <script
+<script
   type="application/ld+json"
   dangerouslySetInnerHTML={{
     __html: JSON.stringify({
@@ -192,7 +192,10 @@ export default function ProductDetails({ product, related }: Props) {
       review: product.reviews && product.reviews.length > 0
         ? product.reviews.map((r) => ({
             '@type': 'Review',
-            author: r.author,
+            author: {
+              '@type': 'Person',
+              name: r.author
+            },
             reviewRating: {
               '@type': 'Rating',
               ratingValue: r.rating.toString(),
@@ -203,7 +206,10 @@ export default function ProductDetails({ product, related }: Props) {
         : [
             {
               '@type': 'Review',
-              author: 'Fatima',
+              author: {
+                '@type': 'Person',
+                name: 'Fatima'
+              },
               reviewRating: {
                 '@type': 'Rating',
                 ratingValue: '5',

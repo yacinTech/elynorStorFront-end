@@ -68,8 +68,8 @@ const ProductReviews: React.FC<Props> = ({ reviews, reviewFormUrl }) => {
 
           {showNav && (
             <div className={styles.nav}>
-              <button aria-label="السابق" onClick={prev}><FaArrowRight /></button>
-              <button aria-label="التالي" onClick={next}><FaArrowLeft /></button>
+              <button aria-label="السابق" onClick={next}><FaArrowRight /></button>
+              <button aria-label="التالي" onClick={prev}><FaArrowLeft /></button>
             </div>
           )}
         </>
