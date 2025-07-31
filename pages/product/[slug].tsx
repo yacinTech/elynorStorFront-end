@@ -127,18 +127,18 @@ export default function ProductDetails({ product, related }: Props) {
     __html: JSON.stringify({
       '@context': 'https://schema.org/',
       '@type': 'Product',
-      name: product.name,
-      image: product.images,
-      description: product.description,
-      sku: product._id,
-      category: product.category,
+      name: product.name || '',
+      image: product.images && product.images.length > 0 ? product.images : [],
+      description: product.description || '',
+      sku: product._id || '',
+      category: product.category || '',
       offers: {
         '@type': 'Offer',
         priceCurrency: 'MAD',
-        price: product.price,
+        price: product.price != null ? product.price : '0',
         priceValidUntil: '2025-12-31',
         availability: 'https://schema.org/InStock',
-        url: productUrl,
+        url: productUrl || '',
         hasMerchantReturnPolicy: {
           '@type': 'MerchantReturnPolicy',
           applicableCountry: 'MA',
@@ -175,52 +175,37 @@ export default function ProductDetails({ product, related }: Props) {
           }
         }
       },
-      aggregateRating: product.reviews && product.reviews.length > 0
-        ? {
-            '@type': 'AggregateRating',
-            ratingValue: (
-              product.reviews.reduce((sum, r) => sum + r.rating, 0) /
-              product.reviews.length
-            ).toFixed(1),
-            reviewCount: product.reviews.length.toString()
-          }
-        : {
-            '@type': 'AggregateRating',
-            ratingValue: '4.5',
-            reviewCount: '24'
+      // حقل aggregateRating يظهر فقط إذا توجد تقييمات
+      ...(product.reviews && product.reviews.length > 0 && {
+        aggregateRating: {
+          '@type': 'AggregateRating',
+          ratingValue: (
+            product.reviews.reduce((sum, r) => sum + r.rating, 0) /
+            product.reviews.length
+          ).toFixed(1),
+          reviewCount: product.reviews.length.toString()
+        }
+      }),
+      // حقل review يظهر فقط إذا توجد تقييمات
+      ...(product.reviews && product.reviews.length > 0 && {
+        review: product.reviews.map((r) => ({
+          '@type': 'Review',
+          author: {
+            '@type': 'Person',
+            name: r.author || 'مستخدم'
           },
-      review: product.reviews && product.reviews.length > 0
-        ? product.reviews.map((r) => ({
-            '@type': 'Review',
-            author: {
-              '@type': 'Person',
-              name: r.author
-            },
-            reviewRating: {
-              '@type': 'Rating',
-              ratingValue: r.rating.toString(),
-              bestRating: '5'
-            },
-            reviewBody: r.comment
-          }))
-        : [
-            {
-              '@type': 'Review',
-              author: {
-                '@type': 'Person',
-                name: 'Fatima'
-              },
-              reviewRating: {
-                '@type': 'Rating',
-                ratingValue: '5',
-                bestRating: '5'
-              },
-              reviewBody: 'منتج رائع وسهل الاستخدام!'
-            }
-          ]
-    }),
+          reviewRating: {
+            '@type': 'Rating',
+            ratingValue: r.rating != null ? r.rating.toString() : '5',
+            bestRating: '5'
+          },
+          reviewBody: r.comment || ''
+        }))
+      })
+    })
   }}
 />
+
 
       </Head>
 
