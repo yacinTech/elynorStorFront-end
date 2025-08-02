@@ -257,7 +257,7 @@ export default function ProductDetails({ product, related }: Props) {
               color: '#444',
               lineHeight: 1.5,
               marginBottom: '20px',
-              textAlign: 'center',
+              textAlign: 'right',
               whiteSpace: 'pre-line',
               wordBreak: 'break-word',
             }}
