@@ -39,6 +39,24 @@ type Props = {
   related: Product[];
 };
 
+
+function parseSimpleMarkup(text: string) {
+  return text
+    .replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>') // عريض
+    .replace(/__(.+?)__/g, '<u>$1</u>')               // تحته خط
+    .replace(/@@(.+?)#([prgb])@@/g, (_, word, colorCode) => {
+      const colorMap: Record<string, string> = {
+        p: '#800080', // بنفسجي
+        r: '#e60023', // أحمر
+        g: '#008000', // أخضر
+        b: '#007BFF'  // أزرق
+      };
+      const color = colorMap[colorCode] || '#000';
+      return `<span style="color:${color}; font-weight:bold;">${word}</span>`;
+    });
+}
+
+
 export default function ProductDetails({ product, related }: Props) {
   // تعريف الهامش الأعلى ديناميكياً حسب حجم الشاشة
   const [spacerHeight, setSpacerHeight] = useState(74);
@@ -261,9 +279,8 @@ export default function ProductDetails({ product, related }: Props) {
               whiteSpace: 'pre-line',
               wordBreak: 'break-word',
             }}
-          >
-            {product.description}
-          </p>
+            dangerouslySetInnerHTML={{ __html: parseSimpleMarkup(product.description) }}
+          />
 
           <p
             style={{
