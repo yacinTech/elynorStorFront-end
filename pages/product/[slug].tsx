@@ -23,6 +23,7 @@ type Review = {
 };
 
 type Product = {
+  colors: string[] | undefined;
   _id: string;
   slug: string;
   name: string;
@@ -318,7 +319,13 @@ export default function ProductDetails({ product, related }: Props) {
           </p>
         </section>
 
-        <OrderForm productId={product._id} />
+        <OrderForm
+          productId={product._id}
+          productName={product.name}
+          colors={product.colors}
+        />
+
+
         <ProductReviews
   reviews={product.reviews ?? []}
   reviewFormUrl="#contact"

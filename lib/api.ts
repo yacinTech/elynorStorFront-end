@@ -31,6 +31,7 @@ export async function submitOrder(orderData: {
   city: string;
   phone: string;
   quantity: number;
+  color?: string;
 }) {
   const res = await fetch('https://elynor-store-020eb5c3d7a2.herokuapp.com/api/orders', {
     method: 'POST',
