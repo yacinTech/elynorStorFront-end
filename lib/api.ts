@@ -27,8 +27,8 @@ export async function getProductsByCategory(category: string) {
 // lib/api.tsx
 export async function submitOrder(orderData: {
   productId: string;
-  name: string;
-  city: string;
+  customerName: string; 
+  address: string;
   phone: string;
   quantity: number;
   color?: string;

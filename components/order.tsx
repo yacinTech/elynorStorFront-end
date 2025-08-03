@@ -44,13 +44,14 @@ export default function OrderForm({ productId, productName, colors = [] }: Order
   setLoading(true);
   try {
     await submitOrder({
-      productId,
-      name: form.customerName,
-      city: form.address,
-      phone: form.phone,
-      quantity: form.quantity,
-      color: selectedColor || undefined,
-    });
+  productId,
+  customerName: form.customerName, // ✅ صحيح الآن
+  address: form.address,           // ✅ صحيح الآن
+  phone: form.phone,
+  quantity: form.quantity,
+  color: selectedColor || undefined,
+});
+
 
     const emailTemplateParams = {
       customer_name: form.customerName,
