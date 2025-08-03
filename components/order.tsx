@@ -40,64 +40,66 @@ export default function OrderForm({ productId, productName, colors = [] }: Order
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setLoading(true);
-    try {
-      await submitOrder({
-        ...form,
-        productId,
-        color: selectedColor || undefined,
-        name: '',
-        city: '',
+  e.preventDefault();
+  setLoading(true);
+  try {
+    await submitOrder({
+      productId,
+      name: form.customerName,
+      city: form.address,
+      phone: form.phone,
+      quantity: form.quantity,
+      color: selectedColor || undefined,
+    });
+
+    const emailTemplateParams = {
+      customer_name: form.customerName,
+      phone_number: form.phone,
+      full_address: form.address,
+      quantity: form.quantity,
+      product_id: productId,
+      product_name: productName,
+      color: selectedColor || '',
+    };
+
+    await emailjs.send(
+      'service_7fzns2a',
+      'template_8sgqo9m',
+      emailTemplateParams,
+      'V1oAGzX88dkxDIcvH'
+    );
+
+    if (typeof window !== 'undefined' && typeof window.fbq === 'function') {
+      window.fbq('track', 'InitiateCheckout', {
+        content_ids: [productId],
+        content_type: 'product',
+        value: form.quantity,
+        currency: 'MAD',
       });
-
-      const emailTemplateParams = {
-        customer_name: form.customerName,
-        phone_number: form.phone,
-        full_address: form.address,
-        quantity: form.quantity,
-        product_id: productId,
-        product_name: productName,
-        color: selectedColor || '',
-      };
-
-      await emailjs.send(
-        'service_7fzns2a',
-        'template_8sgqo9m',
-        emailTemplateParams,
-        'V1oAGzX88dkxDIcvH'
-      );
-
-      if (typeof window !== 'undefined' && typeof window.fbq === 'function') {
-        window.fbq('track', 'InitiateCheckout', {
-          content_ids: [productId],
-          content_type: 'product',
-          value: form.quantity,
-          currency: 'MAD',
-        });
-      }
-
-      toast.success(' تم إرسال الطلب بنجاح! شكرًا لثقتك.', {
-        position: 'top-center',
-        autoClose: 4000,
-      });
-
-      setForm({
-        customerName: '',
-        address: '',
-        phone: '',
-        quantity: 1,
-      });
-      setSelectedColor('');
-    } catch {
-      toast.error('❌ حدث خطأ أثناء إرسال الطلب. حاول مرة أخرى.', {
-        position: 'top-center',
-        autoClose: 4000,
-      });
-    } finally {
-      setLoading(false);
     }
-  };
+
+    toast.success(' تم إرسال الطلب بنجاح! شكرًا لثقتك.', {
+      position: 'top-center',
+      autoClose: 4000,
+    });
+
+    setForm({
+      customerName: '',
+      address: '',
+      phone: '',
+      quantity: 1,
+    });
+    setSelectedColor('');
+  } catch {
+    toast.error('❌ حدث خطأ أثناء إرسال الطلب. حاول مرة أخرى.', {
+      position: 'top-center',
+      autoClose: 4000,
+    });
+  } finally {
+    setLoading(false);
+  }
+};
+
 
   return (
     <div className="order-container">
