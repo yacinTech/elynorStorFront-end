@@ -21,8 +21,10 @@ export default function MyApp({ Component, pageProps }: AppProps) {
  const categoryParam = router.query.category;
   const categoryStr = typeof categoryParam === 'string' ? categoryParam : categoryParam ? categoryParam[0] : '';
   const category = decodeURIComponent(categoryStr);
+  const isKidsCategoryPage = router.asPath.includes('/category/منتجات الأطفال');
 
-  const isCategoryPage = router.pathname === '/category/[category]';
+
+  
   return (
     <div style={{ overflowX: 'hidden', maxWidth: '100vw' }}>
       <Head>
@@ -74,7 +76,7 @@ export default function MyApp({ Component, pageProps }: AppProps) {
           `,
         }}
       />
-      {category === 'منتجات الأطفال' && (
+     {isKidsCategoryPage && (
               <>
                <Script id="facebook-pixel" strategy="afterInteractive">
                     {`
