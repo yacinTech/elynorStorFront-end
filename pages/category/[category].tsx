@@ -1,6 +1,8 @@
 // pages/category/[category].tsx
 import Head from 'next/head';
 import Link from 'next/link';
+import { useState, useEffect } from 'react';
+
 import { GetStaticPaths, GetStaticProps } from 'next';
 import { getProductsByCategory } from '../../lib/api';
 import Image from 'next/image';
@@ -33,6 +35,29 @@ const STATIC_CATEGORIES = [
 export default function CategoryPage({ category, products }: CategoryPageProps) {
   const description = `تصفح أفضل المنتجات في تصنيف ${category} بأفضل الأسعار والتفاصيل. اكتشف مجموعة واسعة من المنتجات المتنوعة.`;
   const keywords = `${category}, منتجات, شراء, تسوق, متجر إلكتروني`;
+  const [spacerHeight, setSpacerHeight] = useState(74); // القيمة الافتراضية لأجهزة الكمبيوتر
+
+useEffect(() => {
+  const handleResize = () => {
+  const width = window.innerWidth;
+
+  if (width <= 400) {
+    setSpacerHeight(40); // هواتف صغيرة
+  } else if (width <= 600) {
+    setSpacerHeight(40); // هواتف متوسطة
+  } else if (width <= 768) {
+    setSpacerHeight(40); // تابلت و شاشات صغيرة مثل 644px و 472px
+  } else {
+    setSpacerHeight(70); // شاشات كبيرة
+  }
+};
+
+
+  handleResize(); // استدعاء عند أول تحميل
+  window.addEventListener('resize', handleResize);
+  return () => window.removeEventListener('resize', handleResize);
+}, []);
+
 
   return (
     <>
@@ -46,17 +71,20 @@ export default function CategoryPage({ category, products }: CategoryPageProps) 
         {/* يمكنك إضافة صورة عامة هنا إن أردت */}
         <link rel="canonical" href={`https://yourdomain.com/category/${encodeURIComponent(category)}`} />
       </Head>
-      <TopBanner />
+      
+<div
+  style={{
+    paddingTop: `${spacerHeight}px`,
+  
+    backgroundColor: '#f9f9f9',
+    borderRadius: '12px',
+    boxShadow: '0 4px 12px rgba(0, 0, 0, 0.08)',
+    textAlign: 'center',
+  }}
+>
 
-      <div
-        style={{
-          padding: '40px 20px',
-          backgroundColor: '#f9f9f9',
-          borderRadius: '12px',
-          boxShadow: '0 4px 12px rgba(0, 0, 0, 0.08)',
-          textAlign: 'center',
-        }}
-      >
+  <TopBanner />
+
         <h1
           style={{
             marginBottom: '25px',
