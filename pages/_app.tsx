@@ -12,9 +12,17 @@ import WhatsAppButton from '../components/WhatsAppButton';
 import NewsletterForm from '../components/NewsletterForm';
 import ContactSection from '../components/ContactSection';
 import { ToastContainer } from 'react-toastify';
+import { useRouter } from 'next/router';
+
 
 
 export default function MyApp({ Component, pageProps }: AppProps) {
+  const router = useRouter();
+ const categoryParam = router.query.category;
+  const categoryStr = typeof categoryParam === 'string' ? categoryParam : categoryParam ? categoryParam[0] : '';
+  const category = decodeURIComponent(categoryStr);
+
+  const isCategoryPage = router.pathname === '/category/[category]';
   return (
     <div style={{ overflowX: 'hidden', maxWidth: '100vw' }}>
       <Head>
@@ -34,6 +42,16 @@ export default function MyApp({ Component, pageProps }: AppProps) {
             alt="fb pixel"
           />
         </noscript>
+               <noscript>
+              <img
+                height="1"
+                width="1"
+                style={{ display: 'none' }}
+                src="https://www.facebook.com/tr?id=610812365430824&ev=PageView&noscript=1"
+                alt="fb pixel"
+              />
+            </noscript>
+
 
         <link rel="icon" href="https://elynor-store.vercel.app/og-image.jpg" type="image/jpeg" />
       </Head>
@@ -56,6 +74,30 @@ export default function MyApp({ Component, pageProps }: AppProps) {
           `,
         }}
       />
+      {category === 'منتجات الأطفال' && (
+              <>
+               <Script id="facebook-pixel" strategy="afterInteractive">
+                    {`
+                      !function(f,b,e,v,n,t,s) {
+                        if(f.fbq) return; n = f.fbq = function() {
+                          n.callMethod ? n.callMethod.apply(n, arguments) : n.queue.push(arguments)
+                        };
+                        if(!f._fbq) f._fbq = n; n.push = n; n.loaded = !0; n.version = '2.0'; n.queue = [];
+                        t = b.createElement(e); t.async = !0;
+                        t.src = v;
+                        s = b.getElementsByTagName(e)[0];
+                        s.parentNode.insertBefore(t, s);
+                      }(window, document, 'script', 'https://connect.facebook.net/en_US/fbevents.js');
+                      fbq('init', '610812365430824');
+                      fbq('track', 'PageView');
+                    `}
+                  </Script>
+      
+      
+           
+              </>
+            )}
+            
       
       <div style={{ position: 'fixed', top: 0, left: 0, right: 0, zIndex: 10000 }}>
         <Header />
