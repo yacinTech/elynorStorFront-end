@@ -53,6 +53,29 @@ export default function MyApp({ Component, pageProps }: AppProps) {
                 alt="fb pixel"
               />
             </noscript>
+             {isKidsCategoryPage && (
+              <>
+               <Script id="facebook-pixel" strategy="afterInteractive">
+                    {`
+                      !function(f,b,e,v,n,t,s) {
+                        if(f.fbq) return; n = f.fbq = function() {
+                          n.callMethod ? n.callMethod.apply(n, arguments) : n.queue.push(arguments)
+                        };
+                        if(!f._fbq) f._fbq = n; n.push = n; n.loaded = !0; n.version = '2.0'; n.queue = [];
+                        t = b.createElement(e); t.async = !0;
+                        t.src = v;
+                        s = b.getElementsByTagName(e)[0];
+                        s.parentNode.insertBefore(t, s);
+                      }(window, document, 'script', 'https://connect.facebook.net/en_US/fbevents.js');
+                      fbq('init', '610812365430824');
+                      fbq('track', 'PageView');
+                    `}
+                  </Script>
+      
+      
+           
+              </>
+            )}
 
 
         <link rel="icon" href="https://elynor-store.vercel.app/og-image.jpg" type="image/jpeg" />
@@ -76,29 +99,7 @@ export default function MyApp({ Component, pageProps }: AppProps) {
           `,
         }}
       />
-     {isKidsCategoryPage && (
-              <>
-               <Script id="facebook-pixel" strategy="afterInteractive">
-                    {`
-                      !function(f,b,e,v,n,t,s) {
-                        if(f.fbq) return; n = f.fbq = function() {
-                          n.callMethod ? n.callMethod.apply(n, arguments) : n.queue.push(arguments)
-                        };
-                        if(!f._fbq) f._fbq = n; n.push = n; n.loaded = !0; n.version = '2.0'; n.queue = [];
-                        t = b.createElement(e); t.async = !0;
-                        t.src = v;
-                        s = b.getElementsByTagName(e)[0];
-                        s.parentNode.insertBefore(t, s);
-                      }(window, document, 'script', 'https://connect.facebook.net/en_US/fbevents.js');
-                      fbq('init', '610812365430824');
-                      fbq('track', 'PageView');
-                    `}
-                  </Script>
-      
-      
-           
-              </>
-            )}
+    
             
       
       <div style={{ position: 'fixed', top: 0, left: 0, right: 0, zIndex: 10000 }}>
