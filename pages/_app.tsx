@@ -17,14 +17,26 @@ import { useRouter } from 'next/router';
 export default function MyApp({ Component, pageProps }: AppProps) {
   const router = useRouter();
 
-  // التحقق إذا كنا في صفحة منتجات الأطفال
+  const category = decodeURIComponent(
+    typeof router.query.category === 'string'
+      ? router.query.category
+      : router.query.category?.[0] || ''
+  );
+
+  const slug = decodeURIComponent(
+    typeof router.query.slug === 'string'
+      ? router.query.slug
+      : router.query.slug?.[0] || ''
+  );
+
   const isKidsCategory =
-    router.pathname === '/category/[category]' &&
-    decodeURIComponent(
-      typeof router.query.category === 'string'
-        ? router.query.category
-        : router.query.category?.[0] || ''
-    ) === 'منتجات الأطفال';
+    router.pathname === '/category/[category]' && category === 'منتجات الأطفال';
+
+  const isSpecificProduct =
+    router.pathname === '/product/[slug]' &&
+    ['ensemble-de-sacs-5-en-1', 'ensemble-de-sacs-scolaires'].includes(slug);
+
+  const shouldFireSecondPixel = isKidsCategory || isSpecificProduct;
 
   return (
     <div style={{ overflowX: 'hidden', maxWidth: '100vw' }}>
@@ -36,6 +48,7 @@ export default function MyApp({ Component, pageProps }: AppProps) {
           crossOrigin="anonymous"
           referrerPolicy="no-referrer"
         />
+        {/* 👇 البيكسل الأول - يظهر دائمًا */}
         <noscript>
           <img
             height="1"
@@ -52,9 +65,9 @@ export default function MyApp({ Component, pageProps }: AppProps) {
         />
       </Head>
 
-      {/* 📌 البيكسل الأول - يعمل دائمًا */}
+      {/* 📌 البيكسل الأول */}
       <Script
-        id="facebook-pixel"
+        id="meta-pixel-main"
         strategy="afterInteractive"
         dangerouslySetInnerHTML={{
           __html: `
@@ -72,10 +85,10 @@ export default function MyApp({ Component, pageProps }: AppProps) {
         }}
       />
 
-      {/* ✅ البيكسل الثاني - فقط في صفحة منتجات الأطفال */}
-      {isKidsCategory && (
+      {/* ✅ البيكسل الثاني - فقط في الصفحات المستهدفة */}
+      {shouldFireSecondPixel && (
         <>
-          <Script id="facebook-pixel-kids" strategy="afterInteractive">
+          <Script id="meta-pixel-second" strategy="afterInteractive">
             {`
               !function(f,b,e,v,n,t,s)
               {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
@@ -95,7 +108,7 @@ export default function MyApp({ Component, pageProps }: AppProps) {
               width="1"
               style={{ display: 'none' }}
               src="https://www.facebook.com/tr?id=610812365430824&ev=PageView&noscript=1"
-              alt="fb pixel"
+              alt="fb pixel 2"
             />
           </noscript>
         </>
