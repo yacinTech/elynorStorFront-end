@@ -32,11 +32,26 @@ export default function MyApp({ Component, pageProps }: AppProps) {
   const isKidsCategory =
     router.pathname === '/category/[category]' && category === 'منتجات الأطفال';
 
-  const isSpecificProduct =
-    router.pathname === '/product/[slug]' &&
-    ['ensemble-de-sacs-5-en-1', 'ensemble-de-sacs-scolaires'].includes(slug);
+  const isProductsForPixel2 = [
+    'ensemble-de-sacs-5-en-1',
+    'ensemble-de-sacs-scolaires',
+  ].includes(slug);
 
-  const shouldFireSecondPixel = isKidsCategory || isSpecificProduct;
+  const shouldFireSecondPixel = isKidsCategory || isProductsForPixel2;
+
+  // 🟣 البيكسل الأول فقط لهذه الصفحات:
+  const isSportsCategory =
+    router.pathname === '/category/[category]' && category === 'الرياضة والرحلات';
+
+  const isProductsForPixel1 = [
+    'chaise-de-camping-avec-parasol',
+    'chaise-de-plage-et-sorties',
+    'camping-tent-mltr',
+    'chaise-de-plage',
+    'table-pliante-portable',
+  ].includes(slug);
+
+  const shouldFireFirstPixel = isSportsCategory || isProductsForPixel1;
 
   return (
     <div style={{ overflowX: 'hidden', maxWidth: '100vw' }}>
@@ -48,16 +63,29 @@ export default function MyApp({ Component, pageProps }: AppProps) {
           crossOrigin="anonymous"
           referrerPolicy="no-referrer"
         />
-        {/* 👇 البيكسل الأول - يظهر دائمًا */}
-        <noscript>
-          <img
-            height="1"
-            width="1"
-            style={{ display: 'none' }}
-            src="https://www.facebook.com/tr?id=2833863817001070&ev=PageView&noscript=1"
-            alt="fb pixel"
-          />
-        </noscript>
+        {/* noscript لكل من البيكسلين */}
+        {shouldFireFirstPixel && (
+          <noscript>
+            <img
+              height="1"
+              width="1"
+              style={{ display: 'none' }}
+              src="https://www.facebook.com/tr?id=2833863817001070&ev=PageView&noscript=1"
+              alt="fb pixel"
+            />
+          </noscript>
+        )}
+        {shouldFireSecondPixel && (
+          <noscript>
+            <img
+              height="1"
+              width="1"
+              style={{ display: 'none' }}
+              src="https://www.facebook.com/tr?id=610812365430824&ev=PageView&noscript=1"
+              alt="fb pixel 2"
+            />
+          </noscript>
+        )}
         <link
           rel="icon"
           href="https://elynor-store.vercel.app/og-image.jpg"
@@ -65,31 +93,35 @@ export default function MyApp({ Component, pageProps }: AppProps) {
         />
       </Head>
 
-      {/* 📌 البيكسل الأول */}
-      <Script
-        id="meta-pixel-main"
-        strategy="afterInteractive"
-        dangerouslySetInnerHTML={{
-          __html: `
-            !function(f,b,e,v,n,t,s)
-            {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
-            n.callMethod.apply(n,arguments):n.queue.push(arguments)};
-            if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
-            n.queue=[];t=b.createElement(e);t.async=!0;
-            t.src='https://connect.facebook.net/en_US/fbevents.js';
-            s=b.getElementsByTagName(e)[0];
-            s.parentNode.insertBefore(t,s)}(window, document,'script');
-            fbq('init', '2833863817001070');
-            fbq('track', 'PageView');
-          `,
-        }}
-      />
+      {/* ✅ البيكسل الأول حسب الصفحات المحددة فقط */}
+      {shouldFireFirstPixel && (
+        <Script
+          id="meta-pixel-main"
+          strategy="afterInteractive"
+          dangerouslySetInnerHTML={{
+            __html: `
+              !function(f,b,e,v,n,t,s)
+              {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+              n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+              if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+              n.queue=[];t=b.createElement(e);t.async=!0;
+              t.src='https://connect.facebook.net/en_US/fbevents.js';
+              s=b.getElementsByTagName(e)[0];
+              s.parentNode.insertBefore(t,s)}(window, document,'script');
+              fbq('init', '2833863817001070');
+              fbq('track', 'PageView');
+            `,
+          }}
+        />
+      )}
 
-      {/* ✅ البيكسل الثاني - فقط في الصفحات المستهدفة */}
+      {/* ✅ البيكسل الثاني حسب الصفحات المحددة فقط */}
       {shouldFireSecondPixel && (
-        <>
-          <Script id="meta-pixel-second" strategy="afterInteractive">
-            {`
+        <Script
+          id="meta-pixel-second"
+          strategy="afterInteractive"
+          dangerouslySetInnerHTML={{
+            __html: `
               !function(f,b,e,v,n,t,s)
               {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
               n.callMethod.apply(n,arguments):n.queue.push(arguments)};
@@ -100,18 +132,9 @@ export default function MyApp({ Component, pageProps }: AppProps) {
               s.parentNode.insertBefore(t,s)}(window, document,'script');
               fbq('init', '610812365430824');
               fbq('track', 'PageView');
-            `}
-          </Script>
-          <noscript>
-            <img
-              height="1"
-              width="1"
-              style={{ display: 'none' }}
-              src="https://www.facebook.com/tr?id=610812365430824&ev=PageView&noscript=1"
-              alt="fb pixel 2"
-            />
-          </noscript>
-        </>
+            `,
+          }}
+        />
       )}
 
       <div
