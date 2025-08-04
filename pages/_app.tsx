@@ -44,15 +44,7 @@ export default function MyApp({ Component, pageProps }: AppProps) {
             alt="fb pixel"
           />
         </noscript>
-               <noscript>
-              <img
-                height="1"
-                width="1"
-                style={{ display: 'none' }}
-                src="https://www.facebook.com/tr?id=610812365430824&ev=PageView&noscript=1"
-                alt="fb pixel"
-              />
-            </noscript>
+             
              {isKidsCategoryPage && (
               <>
                <Script id="facebook-pixel" strategy="afterInteractive">
@@ -100,7 +92,15 @@ export default function MyApp({ Component, pageProps }: AppProps) {
         }}
       />
     
-            
+              <noscript>
+              <img
+                height="1"
+                width="1"
+                style={{ display: 'none' }}
+                src="https://www.facebook.com/tr?id=610812365430824&ev=PageView&noscript=1"
+                alt="fb pixel"
+              />
+            </noscript>
       
       <div style={{ position: 'fixed', top: 0, left: 0, right: 0, zIndex: 10000 }}>
         <Header />
