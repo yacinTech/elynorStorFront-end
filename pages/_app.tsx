@@ -49,9 +49,18 @@ export default function MyApp({ Component, pageProps }: AppProps) {
     'camping-tent-mltr',
     'chaise-de-plage',
     'table-pliante-portable',
+    
   ].includes(slug);
 
   const shouldFireFirstPixel = isSportsCategory || isProductsForPixel1;
+
+  // 🟢 البيكسل الثالث فقط لهاتين الصفحتين:
+  const isProductsForPixel3 = [
+    'ventilateur-vertical',
+    'mkyf-hwaey-mhmwl-brwdh-mtnqlh-aynma-knt!',
+  ].includes(slug);
+
+  const shouldFireThirdPixel = isProductsForPixel3;
 
   return (
     <div style={{ overflowX: 'hidden', maxWidth: '100vw' }}>
@@ -83,6 +92,17 @@ export default function MyApp({ Component, pageProps }: AppProps) {
               style={{ display: 'none' }}
               src="https://www.facebook.com/tr?id=610812365430824&ev=PageView&noscript=1"
               alt="fb pixel 2"
+            />
+          </noscript>
+        )}
+        {shouldFireThirdPixel && (
+          <noscript>
+            <img
+              height="1"
+              width="1"
+              style={{ display: 'none' }}
+              src="https://www.facebook.com/tr?id=1089901202646915&ev=PageView&noscript=1"
+              alt="fb pixel 3"
             />
           </noscript>
         )}
@@ -131,6 +151,28 @@ export default function MyApp({ Component, pageProps }: AppProps) {
               s=b.getElementsByTagName(e)[0];
               s.parentNode.insertBefore(t,s)}(window, document,'script');
               fbq('init', '610812365430824');
+              fbq('track', 'PageView');
+            `,
+          }}
+        />
+      )}
+
+      {/* ✅ البيكسل الثالث حسب الصفحات المحددة فقط */}
+      {shouldFireThirdPixel && (
+        <Script
+          id="meta-pixel-third"
+          strategy="afterInteractive"
+          dangerouslySetInnerHTML={{
+            __html: `
+              !function(f,b,e,v,n,t,s)
+              {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+              n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+              if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+              n.queue=[];t=b.createElement(e);t.async=!0;
+              t.src='https://connect.facebook.net/en_US/fbevents.js';
+              s=b.getElementsByTagName(e)[0];
+              s.parentNode.insertBefore(t,s)}(window, document,'script');
+              fbq('init', '1089901202646915');
               fbq('track', 'PageView');
             `,
           }}
