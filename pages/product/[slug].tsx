@@ -42,20 +42,64 @@ type Props = {
 
 
 function parseSimpleMarkup(text: string) {
+  // خريطة الألوان الموسعة
+  const colorMap: Record<string, string> = {
+    p: '#800080', // بنفسجي
+    r: '#e60023', // أحمر
+    g: '#008000', // أخضر
+    b: '#007BFF', // أزرق
+    o: '#FF6600', // برتقالي
+    y: '#FFD700', // أصفر
+    c: '#00CED1', // سماوي
+    m: '#FF00FF', // ماجنتا
+    k: '#000000', // أسود
+    w: '#FFFFFF', // أبيض
+    // أضف المزيد حسب الحاجة
+  };
+
+  // خلفيات بألوان
+  const bgColorMap: Record<string, string> = {
+    p: '#E6E6FA', // بنفسجي فاتح
+    r: '#FFC1C1', // أحمر فاتح
+    g: '#C1FFC1', // أخضر فاتح
+    b: '#C1DFFF', // أزرق فاتح
+    o: '#FFE6CC', // برتقالي فاتح
+    y: '#FFFFCC', // أصفر فاتح
+    c: '#CCF0F0', // سماوي فاتح
+    m: '#FFCCFF', // ماجنتا فاتح
+    k: '#CCCCCC', // رمادي فاتح
+    w: '#FFFFFF', // أبيض
+  };
+
   return text
-    .replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>') // عريض
-    .replace(/__(.+?)__/g, '<u>$1</u>')               // تحته خط
-    .replace(/@@(.+?)#([prgb])@@/g, (_, word, colorCode) => {
-      const colorMap: Record<string, string> = {
-        p: '#800080', // بنفسجي
-        r: '#e60023', // أحمر
-        g: '#008000', // أخضر
-        b: '#007BFF'  // أزرق
-      };
+    // خط مشطوب
+    .replace(/~~(.+?)~~/g, '<del>$1</del>')
+    // تحته خط
+    .replace(/__(.+?)__/g, '<u>$1</u>')
+    // عريض
+    .replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>')
+    // مائل
+    .replace(/\*(.+?)\*/g, '<em>$1</em>')
+    // ألوان نص مع تأثير عريض (مثل السابق)
+    .replace(/@@(.+?)#([prgboycmkw])@@/g, (_, word, colorCode) => {
       const color = colorMap[colorCode] || '#000';
       return `<span style="color:${color}; font-weight:bold;">${word}</span>`;
+    })
+    // خلفية ملونة
+    .replace(/##([prgboycmkw])::(.+?)##/g, (_, bgCode, text) => {
+      const bgColor = bgColorMap[bgCode] || '#fff';
+      return `<span style="background-color:${bgColor}; padding:2px 4px; border-radius:3px;">${text}</span>`;
+    })
+    // تأثير ظل للنص
+    .replace(/%%(.+?)::(.+?)%%/g, (_, effect, text) => {
+      if (effect === 'shadow') {
+        return `<span style="text-shadow: 1px 1px 2px rgba(0,0,0,0.3);">${text}</span>`;
+      }
+      // إضافة تأثيرات أخرى مستقبلاً هنا
+      return text;
     });
 }
+
 
 
 export default function ProductDetails({ product, related }: Props) {
