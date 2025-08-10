@@ -1,12 +1,24 @@
 // components/WhatsAppButton.tsx
 import React from 'react';
+import { useRouter } from 'next/router';
 
 export default function WhatsAppButton() {
+  const router = useRouter();
   const whatsappNumber = '212646342598'; // عدل الرقم مع كود دولتك بدون + أو 00
+
+  // تحديد الرسالة بناءً على الصفحة
+  let message = 'مرحبا! أريد الاستفسار عن منتجاتكم.';
+  if (router.pathname.startsWith('/product/')) {
+    const slug = router.asPath.split('/').pop();
+    if (slug) {
+      const productName = decodeURIComponent(slug.replace(/-/g, ' '));
+      message = `مرحبا! أريد الاستفسار عن المنتج: ${productName}`;
+    }
+  }
 
   const handleClick = () => {
     window.open(
-      `https://wa.me/${whatsappNumber}?text=${encodeURIComponent('مرحبا! أريد الاستفسار عن منتجاتكم.')}`,
+      `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(message)}`,
       '_blank'
     );
   };
@@ -49,7 +61,7 @@ export default function WhatsAppButton() {
         .whatsapp-btn:hover {
           transform: scale(1.1) rotate(10deg);
           box-shadow: 0 6px 15px rgba(37, 211, 102, 0.8);
-          animation: none; /* تعطيل التوهج أثناء المرور */
+          animation: none;
         }
 
         .whatsapp-btn:focus {
