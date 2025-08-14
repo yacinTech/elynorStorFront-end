@@ -16,15 +16,6 @@ export default function SearchBar() {
   const [open, setOpen] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
 
-  // منع هبوط الصفحة على الهواتف عند فتح البحث
-  useEffect(() => {
-    if (open) {
-      document.body.classList.add("search-open");
-    } else {
-      document.body.classList.remove("search-open");
-    }
-  }, [open]);
-
   // إغلاق البحث عند الضغط خارج الصندوق
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
@@ -136,8 +127,9 @@ export default function SearchBar() {
           background: rgba(0, 0, 0, 0.2);
           display: flex;
           justify-content: center;
-          align-items: start; /* ⚡ مهم لمنع الهبوط */
+          align-items: flex-start;
           padding: 16px;
+          padding-top: 60px; /* ⚡ إضافة إزاحة بسيطة لحل مشكلة الفراغ في الهواتف */
           z-index: 2000;
           overflow-y: auto;
         }
@@ -220,11 +212,6 @@ export default function SearchBar() {
           margin-top: 8px;
           font-size: 0.95rem;
           color: #555;
-        }
-
-        /* منع scroll الجسم عند فتح البحث */
-        :global(body.search-open) {
-          overflow: hidden;
         }
       `}</style>
     </div>
