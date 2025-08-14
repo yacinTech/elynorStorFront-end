@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import { API_BASE } from "../lib/api";
 import { FiSearch, FiX } from "react-icons/fi";
 
@@ -14,36 +14,36 @@ export default function SearchBar() {
   const [results, setResults] = useState<Product[]>([]);
   const [loading, setLoading] = useState(false);
   const [open, setOpen] = useState(false);
-  const wrapperRef = useRef<HTMLDivElement>(null);
+  const containerRef = useRef<HTMLDivElement>(null);
 
-  // إغلاق البحث عند الضغط خارج صندوق البحث أو التمرير
+  // إغلاق البحث عند الضغط خارج الصندوق
   useEffect(() => {
-    const handleClickOrScroll = (event: MouseEvent | TouchEvent | Event) => {
-      if (wrapperRef.current && !(event.target instanceof Node && wrapperRef.current.contains(event.target))) {
+    const handleOutside = (event: Event) => {
+      if (containerRef.current && event.target instanceof Node && !containerRef.current.contains(event.target)) {
         setOpen(false);
         setResults([]);
       }
     };
 
-    document.addEventListener("mousedown", handleClickOrScroll);
-    document.addEventListener("touchstart", handleClickOrScroll);
-    window.addEventListener("scroll", handleClickOrScroll, true); // true لالتقاط scroll في capture phase
+    document.addEventListener("mousedown", handleOutside);
+    document.addEventListener("touchstart", handleOutside);
+    document.addEventListener("pointerdown", handleOutside);
 
     return () => {
-      document.removeEventListener("mousedown", handleClickOrScroll);
-      document.removeEventListener("touchstart", handleClickOrScroll);
-      window.removeEventListener("scroll", handleClickOrScroll, true);
+      document.removeEventListener("mousedown", handleOutside);
+      document.removeEventListener("touchstart", handleOutside);
+      document.removeEventListener("pointerdown", handleOutside);
     };
   }, []);
 
-  // جلب النتائج من API
+  // جلب النتائج من API مع debounce بسيط
   useEffect(() => {
     if (query.trim().length < 2) {
       setResults([]);
       return;
     }
 
-    const debounce = setTimeout(async () => {
+    const timeout = setTimeout(async () => {
       try {
         setLoading(true);
         const res = await fetch(`${API_BASE}/search?q=${encodeURIComponent(query)}`);
@@ -56,17 +56,19 @@ export default function SearchBar() {
       }
     }, 300);
 
-    return () => clearTimeout(debounce);
+    return () => clearTimeout(timeout);
   }, [query]);
 
   return (
-    <div ref={wrapperRef} className="search-wrapper">
+    <div ref={containerRef} className="search-wrapper">
+      {/* زر البحث */}
       {!open && (
         <button className="search-toggle" onClick={() => setOpen(true)} aria-label="فتح البحث">
           <FiSearch size={20} />
         </button>
       )}
 
+      {/* صندوق البحث */}
       {open && (
         <div className="search-overlay">
           <div className="search-box">
@@ -103,42 +105,118 @@ export default function SearchBar() {
       )}
 
       <style jsx>{`
-        .search-wrapper { position: relative; display: flex; align-items: center; z-index: 1001; }
-        .search-toggle { background: none; border: none; cursor: pointer; color: #8e44ad; padding: 5px 10px; border-radius: 6px; display: flex; align-items: center; justify-content: center; }
+        .search-wrapper {
+          position: relative;
+          display: flex;
+          align-items: center;
+          z-index: 1001;
+        }
+
+        .search-toggle {
+          background: none;
+          border: none;
+          cursor: pointer;
+          color: #8e44ad;
+          padding: 5px 10px;
+          border-radius: 6px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+        }
 
         .search-overlay {
           position: fixed;
-          top: 0; left: 0;
-          width: 100%; height: 100%;
-          background: rgba(0,0,0,0.2);
-          display: flex; justify-content: center; align-items: flex-start;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+          background: rgba(0, 0, 0, 0.2);
+          display: flex;
+          justify-content: center;
+          align-items: flex-start;
           padding: 16px;
           z-index: 2000;
           overflow-y: auto;
         }
 
         .search-box {
-          width: 100%; max-width: 600px;
+          width: 100%;
+          max-width: 600px;
+          margin-top: 32px; /* تصحيح النزول على الهواتف */
           position: relative;
-          margin-top: 16px;
         }
 
-        .input-wrapper { position: relative; width: 100%; }
+        .input-wrapper {
+          position: relative;
+          width: 100%;
+        }
+
         .search-input {
-          width: 100%; padding: 12px 44px 12px 16px; border-radius: 8px; border: 1px solid #ccc; outline: none; font-size: 1rem;
+          width: 100%;
+          padding: 12px 44px 12px 16px;
+          border-radius: 8px;
+          border: 1px solid #ccc;
+          outline: none;
+          font-size: 1rem;
         }
-        .search-input:focus { border-color: #8e44ad; box-shadow: 0 0 6px rgba(142,68,173,0.5); }
 
-        .close-btn { position: absolute; top: 50%; right: 12px; transform: translateY(-50%); background: none; border: none; cursor: pointer; color: #888; display: flex; align-items: center; justify-content: center; z-index: 10; }
+        .search-input:focus {
+          border-color: #8e44ad;
+          box-shadow: 0 0 6px rgba(142, 68, 173, 0.5);
+        }
+
+        .close-btn {
+          position: absolute;
+          top: 50%;
+          right: 12px;
+          transform: translateY(-50%);
+          background: none;
+          border: none;
+          cursor: pointer;
+          color: #888;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          z-index: 10;
+        }
 
         .search-results {
-          margin-top: 12px; max-height: 70vh; overflow-y: auto; border-radius: 8px; background: white; list-style: none; padding: 0; border: 1px solid #ddd;
+          margin-top: 12px;
+          max-height: 70vh;
+          overflow-y: auto;
+          border-radius: 8px;
+          background: white;
+          list-style: none;
+          padding: 0;
+          border: 1px solid #ddd;
         }
 
-        .search-item { display: flex; align-items: center; gap: 10px; padding: 8px 12px; text-decoration: none; color: #333; }
-        .search-item:hover { background-color: #f5f5f5; }
-        .search-item img { width: 40px; height: 40px; object-fit: cover; border-radius: 5px; border: 1px solid #eee; }
-        .loading { margin-top: 8px; font-size: 0.95rem; color: #555; }
+        .search-item {
+          display: flex;
+          align-items: center;
+          gap: 10px;
+          padding: 8px 12px;
+          text-decoration: none;
+          color: #333;
+        }
+
+        .search-item:hover {
+          background-color: #f5f5f5;
+        }
+
+        .search-item img {
+          width: 40px;
+          height: 40px;
+          object-fit: cover;
+          border-radius: 5px;
+          border: 1px solid #eee;
+        }
+
+        .loading {
+          margin-top: 8px;
+          font-size: 0.95rem;
+          color: #555;
+        }
       `}</style>
     </div>
   );
