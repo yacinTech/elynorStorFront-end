@@ -16,36 +16,25 @@ export default function SearchBar() {
   const [open, setOpen] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
 
-  // إغلاق البحث عند الضغط خارج الصندوق أو التمرير
+  // إغلاق البحث عند الضغط خارج الصندوق
   useEffect(() => {
-    const handleClose = (event: Event) => {
-      if (
-        containerRef.current &&
-        event.target instanceof Node &&
-        !containerRef.current.contains(event.target)
-      ) {
+    const handleOutside = (event: Event) => {
+      if (containerRef.current && event.target instanceof Node && !containerRef.current.contains(event.target)) {
         setOpen(false);
         setResults([]);
       }
     };
 
-    const handleScroll = () => {
-      if (open) {
-        setOpen(false);
-        setResults([]);
-      }
-    };
-
-    document.addEventListener("mousedown", handleClose);
-    document.addEventListener("touchstart", handleClose);
-    document.addEventListener("scroll", handleScroll, { passive: true });
+    document.addEventListener("mousedown", handleOutside);
+    document.addEventListener("touchstart", handleOutside);
+    document.addEventListener("pointerdown", handleOutside);
 
     return () => {
-      document.removeEventListener("mousedown", handleClose);
-      document.removeEventListener("touchstart", handleClose);
-      document.removeEventListener("scroll", handleScroll);
+      document.removeEventListener("mousedown", handleOutside);
+      document.removeEventListener("touchstart", handleOutside);
+      document.removeEventListener("pointerdown", handleOutside);
     };
-  }, [open]);
+  }, []);
 
   // جلب النتائج من API مع debounce بسيط
   useEffect(() => {
@@ -72,12 +61,14 @@ export default function SearchBar() {
 
   return (
     <div ref={containerRef} className="search-wrapper">
+      {/* زر البحث */}
       {!open && (
         <button className="search-toggle" onClick={() => setOpen(true)} aria-label="فتح البحث">
           <FiSearch size={20} />
         </button>
       )}
 
+      {/* صندوق البحث */}
       {open && (
         <div className="search-overlay">
           <div className="search-box">
@@ -151,7 +142,7 @@ export default function SearchBar() {
         .search-box {
           width: 100%;
           max-width: 600px;
-          margin-top: 16px; /* أقل نزول لتجنب الفراغ العلوي */
+          margin-top: 32px; /* تصحيح النزول على الهواتف */
           position: relative;
         }
 
