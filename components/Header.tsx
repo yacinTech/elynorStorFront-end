@@ -2,6 +2,8 @@ import Link from 'next/link';
 import { useState } from 'react';
 import MobileMenu from './MobileMenu';
 import Image from 'next/image';
+import SearchBar from './SearchBar';
+
 
 export default function Header() {
   const [categories] = useState<string[]>([
@@ -60,31 +62,35 @@ export default function Header() {
             </Link>
           </div>
 
-          <nav className="desktop-nav">
-            {extraLinks.map(link => (
-              <Link key={link.name} href={link.href} legacyBehavior>
-                <a className="nav-link">{link.name}</a>
-              </Link>
-            ))}
-          </nav>
+         <div className="nav-search-wrapper">
+    <nav className="desktop-nav">
+      {extraLinks.map(link => (
+        <Link key={link.name} href={link.href} legacyBehavior>
+          <a className="nav-link">{link.name}</a>
+        </Link>
+      ))}
+    </nav>
 
-          {/* زر الجوال */}
-          <button
-            aria-label="فتح القائمة"
-            onClick={() => setMobileMenuOpen(true)}
-            className="mobile-menu-button"
-          >
-            ☰
-          </button>
-        </div>
+    <SearchBar />
+  </div>
 
+  <button
+    aria-label="فتح القائمة"
+    onClick={() => setMobileMenuOpen(true)}
+    className="mobile-menu-button"
+  >
+    ☰
+  </button>
+</div>
         {/* القسم السفلي: التصنيفات */}
         <div className="category-bar">
           {categories.map((item) => (
             <Link key={item} href={`/category/${encodeURIComponent(item)}`} legacyBehavior>
               <a className="nav-link">{item}</a>
             </Link>
+            
           ))}
+          
         </div>
       </header>
 
@@ -95,6 +101,7 @@ export default function Header() {
           onClose={() => setMobileMenuOpen(false)}
         />
       )}
+      
 
       <style jsx>{`
         .main-header {
@@ -294,6 +301,57 @@ export default function Header() {
           background-color: #8e44ad;
           color: white;
         }
+        @media (max-width: 768px) {
+  .nav-links {
+    display: none; /* إخفاء كل الروابط */
+  }
+
+  /* البحث يبقى ظاهر */
+  .desktop-nav > :global(div), 
+  .desktop-nav > :global(input) {
+    display: block; 
+  }
+}
+ /* شريط الروابط + البحث */
+.nav-search-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: nowrap;
+}
+
+/* الروابط العلوية */
+.desktop-nav {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+}
+
+@media (max-width: 768px) {
+  .desktop-nav {
+    display: none; /* إخفاء الروابط */
+  }
+
+  .nav-search-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 8px; /* مسافة صغيرة بين البحث وزر القائمة */
+    flex: none; /* لا يمتد على كامل العرض */
+    order: 2; /* تأكد من وضعها بعد اللوجو وقبل زر القائمة */
+  }
+
+  .top-bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between; /* اللوجو على اليسار، البحث وزر القائمة على اليمين */
+  }
+
+  .mobile-menu-button {
+    display: block;
+    order: 3; /* بعد البحث */
+  }
+}
+
       `}</style>
     </>
   );
