@@ -16,6 +16,15 @@ export default function SearchBar() {
   const [open, setOpen] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
 
+  // منع هبوط الصفحة على الهواتف عند فتح البحث
+  useEffect(() => {
+    if (open) {
+      document.body.classList.add("search-open");
+    } else {
+      document.body.classList.remove("search-open");
+    }
+  }, [open]);
+
   // إغلاق البحث عند الضغط خارج الصندوق
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
@@ -55,11 +64,7 @@ export default function SearchBar() {
   return (
     <div ref={containerRef} className="search-wrapper">
       {!open && (
-        <button
-          className="search-toggle"
-          onClick={() => setOpen(true)}
-          aria-label="فتح البحث"
-        >
+        <button className="search-toggle" onClick={() => setOpen(true)} aria-label="فتح البحث">
           <FiSearch size={20} />
         </button>
       )}
@@ -131,7 +136,7 @@ export default function SearchBar() {
           background: rgba(0, 0, 0, 0.2);
           display: flex;
           justify-content: center;
-          align-items: flex-start;
+          align-items: start; /* ⚡ مهم لمنع الهبوط */
           padding: 16px;
           z-index: 2000;
           overflow-y: auto;
@@ -150,7 +155,7 @@ export default function SearchBar() {
 
         .search-input {
           width: 100%;
-          padding: 12px 44px 12px 16px; /* مساحة لزر X على اليمين */
+          padding: 12px 44px 12px 16px;
           border-radius: 8px;
           border: 1px solid #ccc;
           outline: none;
@@ -215,6 +220,11 @@ export default function SearchBar() {
           margin-top: 8px;
           font-size: 0.95rem;
           color: #555;
+        }
+
+        /* منع scroll الجسم عند فتح البحث */
+        :global(body.search-open) {
+          overflow: hidden;
         }
       `}</style>
     </div>
