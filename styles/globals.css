@@ -9,6 +9,10 @@
 
 /* styles/globals.css */
 
+html {
+  scroll-behavior: smooth; /* يجعل جميع الروابط والتمرير بواسطة JS سلسًا */
+  -webkit-overflow-scrolling: touch; /* تحسين التمرير على iOS */
+}
 
 
 body {
