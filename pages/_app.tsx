@@ -62,6 +62,20 @@ export default function MyApp({ Component, pageProps }: AppProps) {
 
   const shouldFireThirdPixel = isProductsForPixel3;
 
+  const isProductsForPixel5 = [
+  'organisateur-des-chaussures',
+  'etagere-rotative',
+  'organisateur-de-chaussures',
+  'organisateur-de-cuisine',
+  'etagere-dangle-extensible',
+  'rf-alahthyh-mtadd-alastkhdamat',
+  'alaqh-alfwtat-mn-alanwks-alsafy-walghyr-qabl-llsda',
+  'etagere-extensible-en-metal',
+].includes(slug);
+
+const shouldFireFifthPixel = isProductsForPixel5;
+
+
   return (
     <div style={{ overflowX: 'hidden', maxWidth: '100vw' }}>
       <Head>
@@ -208,6 +222,41 @@ export default function MyApp({ Component, pageProps }: AppProps) {
               alt="fb pixel all site"
             />
           </noscript>
+
+          {/* ✅ البيكسل الخامس حسب الصفحات المحددة فقط */}
+{shouldFireFifthPixel && (
+  <Script
+    id="meta-pixel-fifth"
+    strategy="afterInteractive"
+    dangerouslySetInnerHTML={{
+      __html: `
+        !function(f,b,e,v,n,t,s)
+        {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+        n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+        if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+        n.queue=[];t=b.createElement(e);t.async=!0;
+        t.src='https://connect.facebook.net/en_US/fbevents.js';
+        s=b.getElementsByTagName(e)[0];
+        s.parentNode.insertBefore(t,s)}(window, document,'script');
+        fbq('init', '738455789097119');
+        fbq('track', 'PageView');
+      `,
+    }}
+  />
+)}
+
+{shouldFireFifthPixel && (
+  <noscript>
+    <img
+      height="1"
+      width="1"
+      style={{ display: 'none' }}
+      src="https://www.facebook.com/tr?id=738455789097119&ev=PageView&noscript=1"
+      alt="fb pixel fifth"
+    />
+  </noscript>
+)}
+
 
 
       <div
