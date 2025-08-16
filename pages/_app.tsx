@@ -242,7 +242,7 @@ const shouldFireFifthPixel = isProductsForPixel5;
       t.src='https://connect.facebook.net/en_US/fbevents.js';
       s=b.getElementsByTagName(e)[0];
       s.parentNode.insertBefore(t,s)}(window, document,'script');
-      fbq('init', '2473982636321790'); 
+      fbq('init', '662892656149516'); 
       fbq('track', 'PageView');
     `,
   }}
@@ -253,7 +253,7 @@ const shouldFireFifthPixel = isProductsForPixel5;
     height="1"
     width="1"
     style={{ display: "none" }}
-    src="https://www.facebook.com/tr?id=2473982636321790&ev=PageView&noscript=1"
+    src="https://www.facebook.com/tr?id=662892656149516&ev=PageView&noscript=1"
     alt="fb pixel all site"
   />
 </noscript>
