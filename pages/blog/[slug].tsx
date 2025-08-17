@@ -13,6 +13,8 @@ interface Post {
   content: string;
   imageUrl: string;
   keywords?: string[];
+  createdAt: string; 
+  updatedAt: string;
 }
 
 interface Props {
@@ -141,9 +143,8 @@ export default function BlogPostPage({ post, relatedPosts = [] }: Props) {
           "url": "https://elynor-store.vercel.app/og-image.jpg"
         }
       },
-      "datePublished": (post as any).createdAt || new Date().toISOString(),
-      "dateModified": (post as any).updatedAt || (post as any).createdAt || new Date().toISOString(),
-
+       "datePublished": post.createdAt || new Date().toISOString(),
+      "dateModified": post.updatedAt || post.createdAt || new Date().toISOString(),
       "description": post.content.slice(0, 150)
     }
   ]
