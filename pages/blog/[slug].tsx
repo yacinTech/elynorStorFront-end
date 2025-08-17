@@ -54,6 +54,11 @@ function parseSimpleMarkupWithLineBreaks(text: string) {
         return `<span style="text-shadow: 1px 1px 2px rgba(0,0,0,0.3);">${text}</span>`;
       }
       return text;
+    })
+    // روابط بصيغة مع أو بدون عنوان
+    .replace(/%%link::([^:]+?)(?:::(.*?))?%%/g, (_, url, label) => {
+      const safeLabel = label && label.trim() !== "" ? label : "اضغط هنا";
+      return `<a href="${url}" target="_blank" rel="noopener noreferrer" style="color:#007BFF; text-decoration:underline;">${safeLabel}</a>`;
     });
 
   parsed = parsed.replace(/\n/g, '<br>');
