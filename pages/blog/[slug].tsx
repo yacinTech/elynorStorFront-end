@@ -133,7 +133,8 @@ export default function BlogPostPage({ post, relatedPosts = [] }: Props) {
       "image": [post.imageUrl],
       "author": {
         "@type": "Person",
-        "name": "ELYNOR"
+        "name": "ELYNOR",
+        "url": "https://elynor-store.vercel.app" 
       },
       "publisher": {
         "@type": "Organization",
