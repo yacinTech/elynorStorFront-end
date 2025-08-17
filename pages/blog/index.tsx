@@ -2,7 +2,6 @@ import Link from "next/link";
 import { fetchBlogPosts } from "../../lib/api";
 import styles from "./blog.module.css";
 import Head from "next/head";
-import TopBanner from '../../components/TopBanner';
 
 // دالة معالجة النصوص (ألوان، خلفيات، ظل) بدون ظهور الرموز
 function parseSimpleMarkupWithLineBreaks(text: string) {
@@ -19,7 +18,6 @@ function parseSimpleMarkupWithLineBreaks(text: string) {
   };
 
   const parsed = text
-    // إزالة أي رموز غير مطلوبة
     .replace(/@@(.+?)#([prgboycmkw])@@/g, (_, word, colorCode) => {
       const color = colorMap[colorCode] || '#000';
       return `<span style="color:${color}; font-weight:bold;">${word}</span>`;
@@ -34,16 +32,26 @@ function parseSimpleMarkupWithLineBreaks(text: string) {
       }
       return word;
     })
-    .replace(/~~(.+?)~~/g, '$1')    // إزالة الشطب
-    .replace(/__(.+?)__/g, '$1')    // إزالة الخط السفلي
-    .replace(/\*\*(.+?)\*\*/g, '$1')// إزالة الغامق
-    .replace(/\*(.+?)\*/g, '$1')    // إزالة المائل
+    .replace(/~~(.+?)~~/g, '$1')
+    .replace(/__(.+?)__/g, '$1')
+    .replace(/\*\*(.+?)\*\*/g, '$1')
+    .replace(/\*(.+?)\*/g, '$1')
     .replace(/\n/g, '<br>');
 
   return parsed;
 }
 
-export default function BlogPage({ posts }: { posts: any[] }) {
+// تعريف نوع المقالة لتجنب any[]
+type Post = {
+  _id: string;
+  title: string;
+  slug: string;
+  imageUrl: string;
+  content: string;
+  keywords?: string[];
+};
+
+export default function BlogPage({ posts }: { posts: Post[] }) {
   // توليد الكلمات المفتاحية لجميع المقالات
   const keywordsContent = posts
     .flatMap((post) => [
