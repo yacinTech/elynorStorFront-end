@@ -145,7 +145,8 @@ export default function BlogPostPage({ post, relatedPosts = [] }: Props) {
       },
        "datePublished": post.createdAt || new Date().toISOString(),
       "dateModified": post.updatedAt || post.createdAt || new Date().toISOString(),
-      "description": post.content.slice(0, 150)
+      "description": post.content.slice(0, 150),
+      "url": `https://elynor-store.vercel.app/blog/${post.slug}`
     }
   ]
 };
