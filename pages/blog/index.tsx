@@ -18,7 +18,7 @@ function parseSimpleMarkupWithLineBreaks(text: string) {
     k: '#CCCCCC', w: '#FFFFFF',
   };
 
-  let parsed = text
+  const parsed = text
     // إزالة أي رموز غير مطلوبة
     .replace(/@@(.+?)#([prgboycmkw])@@/g, (_, word, colorCode) => {
       const color = colorMap[colorCode] || '#000';
