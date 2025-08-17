@@ -83,6 +83,73 @@ export default function BlogPostPage({ post, relatedPosts = [] }: Props) {
       : ['مقال', 'مدونة', 'أخبار', 'معلومات'])
   ].join(', ');
 
+  const structuredData = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "name": "ELYNOR",
+      "url": "https://elynor-store.vercel.app",
+      "logo": "https://elynor-store.vercel.app/og-image.jpg",
+      "contactPoint": {
+        "@type": "ContactPoint",
+        "telephone": "+212625902672",
+        "contactType": "customer service",
+        "areaServed": "MA",
+        "availableLanguage": "Arabic"
+      },
+      "sameAs": [
+        "https://www.facebook.com/profile.php?id=61571124188604",
+        "https://www.instagram.com/elynorofficiel/"
+      ]
+    },
+    {
+      "@type": "WebSite",
+      "url": "https://elynor-store.vercel.app/",
+      "name": "ELYNOR"
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "الرئيسية",
+          "item": "https://elynor-store.vercel.app/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": post.title,
+          "item": `https://elynor-store.vercel.app/blog/${post.slug}`
+        }
+      ]
+    },
+    {
+      "@type": "BlogPosting",
+      "headline": post.title,
+      "image": [post.imageUrl],
+      "author": {
+        "@type": "Person",
+        "name": "ELYNOR"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "ELYNOR",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://elynor-store.vercel.app/og-image.jpg"
+        }
+      },
+      "datePublished": (post as any).createdAt || new Date().toISOString(),
+      "dateModified": (post as any).updatedAt || (post as any).createdAt || new Date().toISOString(),
+
+      "description": post.content.slice(0, 150)
+    }
+  ]
+};
+
+
   return (
     <>
       <Head>
@@ -91,6 +158,12 @@ export default function BlogPostPage({ post, relatedPosts = [] }: Props) {
         <meta name="keywords" content={keywordsContent} />
 
         <link rel="canonical" href={pageUrl} />
+
+         <script
+          type="application/ld+json"
+          // تحويل الكائن إلى نص JSON صالح
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
+        />
 
         {/* Open Graph */}
         <meta property="og:type" content="article" />
