@@ -3,6 +3,8 @@ import Link from "next/link";
 import Head from "next/head";
 import styles from "./blog.module.css";
 import { FaFacebookF, FaWhatsapp, FaTwitter } from "react-icons/fa";
+import { GetServerSideProps } from 'next';
+
 
 interface Post {
   _id: string;
@@ -149,16 +151,16 @@ export default function BlogPostPage({ post, relatedPosts = [] }: Props) {
 }
 
 // جلب المقال والمقالات العشوائية
-export async function getServerSideProps(context: any) {
-  const { slug } = context.params;
-  const posts = await fetchBlogPosts();
-  const post = posts.find((p: any) => p.slug === slug);
+export const getServerSideProps: GetServerSideProps<{ post: Post; relatedPosts: Post[] }> = async (context) => {
+  const { slug } = context.params as { slug: string };
+  const posts: Post[] = await fetchBlogPosts();
+  const post = posts.find((p) => p.slug === slug);
 
   if (!post) return { notFound: true };
 
-  const relatedPosts = (posts.filter((p: any) => p.slug !== slug) || [])
+  const relatedPosts = (posts.filter((p) => p.slug !== slug) || [])
     .sort(() => 0.5 - Math.random())
     .slice(0, 3);
 
   return { props: { post, relatedPosts } };
-}
+};
