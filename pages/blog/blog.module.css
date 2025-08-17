@@ -1,0 +1,533 @@
+/* Container العام للصفحة */
+.blogContainer {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 120px 20px 40px; /* هامش أعلى 120px بسبب الهيدر الثابت */
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #fdfdfd;
+}
+
+/* عنوان المدونة */
+.title {
+  text-align: center;
+  font-size: 36px;
+  font-weight: 700;
+  margin-bottom: 50px;
+  color: #222;
+  text-decoration: none; /* حذف أي خطوط تحت العنوان */
+}
+
+/* Grid للبطاقات */
+.blogGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 30px;
+}
+
+/* كل بطاقة */
+.blogCard {
+  background-color: #fff;
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  cursor: pointer;
+}
+
+.blogCard:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 15px 35px rgba(0,0,0,0.15);
+}
+
+/* صورة البطاقة */
+.blogCard img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.3s ease;
+}
+
+.blogCard:hover img {
+  transform: scale(1.05);
+}
+
+/* محتوى البطاقة */
+.blogCardContent {
+  padding: 20px;
+}
+
+.blogCardContent h2 {
+  font-size: 22px;
+  margin-bottom: 10px;
+  color: #222;
+  text-decoration: none; /* حذف الخط تحت النص */
+}
+
+.blogCardContent p {
+  font-size: 15px;
+  color: #555;
+  line-height: 1.6;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;  
+  overflow: hidden;
+  text-overflow: ellipsis;
+  text-decoration: none; /* حذف الخطوط */
+}
+
+/* رابط البطاقة بالكامل */
+.blogCard a {
+  text-decoration: none;
+  color: inherit;
+}
+
+/* صفحة المقال */
+.blogPost {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 120px 20px 40px; /* هامش أعلى بسبب الهيدر */
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  color: #333;
+}
+
+.blogPost h1 {
+  font-size: 36px;
+  font-weight: 700;
+  margin-bottom: 30px;
+  text-decoration: none; /* إزالة الخط تحت العنوان */
+}
+
+.blogPost img {
+  width: 100%;
+  height: 400px;
+  object-fit: cover;
+  border-radius: 20px;
+  margin-bottom: 30px;
+}
+
+.blogPost p {
+  font-size: 16px;
+  line-height: 1.8;
+  margin-bottom: 20px;
+}
+
+.backLink {
+  display: inline-block;
+  margin-top: 20px;
+  color: #1e90ff;
+  text-decoration: none; /* حذف الخط */
+  font-weight: 600;
+  transition: color 0.3s ease;
+}
+
+.backLink:hover {
+  color: #3742fa;
+  text-decoration: underline;
+}
+
+/* تحسين الاستجابة */
+@media (max-width: 768px) {
+  .title, .blogPost h1 {
+    font-size: 28px;
+    margin-bottom: 30px;
+  }
+
+  .blogCard img {
+    height: 180px;
+  }
+
+  .blogPost img {
+    height: 250px;
+  }
+}
+/* صفحة المقال */
+.blogPost {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 120px 20px 40px;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  color: #333;
+}
+
+.blogPost img {
+  width: 100%;
+  height: 400px;
+  object-fit: cover;
+  border-radius: 20px;
+  margin-bottom: 20px;
+  box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+  transition: transform 0.3s ease;
+}
+
+.blogPost img:hover {
+  transform: scale(1.02);
+}
+
+/* العنوان */
+.blogPost h1 {
+  font-size: 36px;
+  font-weight: 700;
+  margin: 20px 0 30px 0;
+  color: #222;
+  text-align: center;
+  text-decoration: none;
+}
+
+/* المحتوى */
+.blogPost p {
+  font-size: 16px;
+  line-height: 1.8;
+  margin-bottom: 20px;
+}
+
+/* رابط العودة */
+.backLink {
+  display: inline-block;
+  margin-top: 20px;
+  color: #1e90ff;
+  text-decoration: none;
+  font-weight: 600;
+  transition: color 0.3s ease;
+}
+
+.backLink:hover {
+  color: #3742fa;
+  text-decoration: underline;
+}
+
+/* أزرار المشاركة أسفل المقال */
+.shareButtons {
+  display: flex;
+  gap: 15px;
+  margin-top: 30px;
+  justify-content: center;
+}
+
+.shareButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  color: #fff;
+  font-size: 24px;
+  transition: transform 0.3s ease, opacity 0.3s ease;
+  cursor: pointer;
+}
+
+.shareButton:hover {
+  transform: scale(1.1);
+  opacity: 0.85;
+}
+
+/* ألوان كل منصة */
+.shareFacebook {
+  background-color: #4267B2; /* فيسبوك */
+}
+
+.shareWhatsapp {
+  background-color: #25D366; /* واتساب */
+}
+
+.shareTwitter {
+  background-color: #1DA1F2; /* تويتر */
+}
+
+/* تحسين الاستجابة */
+@media (max-width: 768px) {
+  .blogPost h1 {
+    font-size: 28px;
+    margin-bottom: 30px;
+  }
+
+  .blogPost img {
+    height: 250px;
+  }
+}
+
+
+/* نص دعوة المشاركة */
+.shareTitle {
+  text-align: center;
+  font-size: 16px;
+  font-weight: 600;
+  margin-bottom: 10px;
+  color: #555;
+}
+
+/* قسم مقالات ذات صلة */
+.relatedPosts {
+  margin-top: 50px;
+}
+
+.relatedPosts h2 {
+  font-size: 24px;
+  font-weight: 700;
+  margin-bottom: 20px;
+  text-align: center;
+  color: #222;
+}
+
+.relatedPostsGrid {
+  display: grid;
+  gap: 20px;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+}
+
+.relatedPostCard {
+  background-color: #fff;
+  border-radius: 15px;
+  overflow: hidden;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.relatedPostCard:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+}
+
+.relatedPostCard img {
+  width: 100%;
+  height: 140px;
+  object-fit: cover;
+}
+
+.relatedPostCard h3 {
+  font-size: 16px;
+  font-weight: 600;
+  margin: 10px;
+  color: #333;
+  text-decoration: none;
+}
+
+.relatedPostCard a {
+  text-decoration: none;
+}
+
+.backButton {
+  display: inline-block;
+  margin-top: 2rem;
+  padding: 0.6rem 1.2rem;
+  background-color: #4f46e5; /* لون أزرق جذاب */
+  color: white;
+  font-weight: 600;
+  font-size: 0.95rem;
+  border-radius: 0.5rem;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+}
+
+.backButton:hover {
+  background-color: #4338ca;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 10px rgba(0,0,0,0.15);
+}
+.blogTitle {
+  font-size: 3rem;                /* حجم كبير للعنوان */
+  font-weight: 700;                /* عريض */
+  text-align: center;              /* توسيط */
+  color: #111827;                  /* لون داكن أنيق */
+  margin-bottom: 2.5rem;           /* مسافة أسفل العنوان */
+  position: relative;
+  letter-spacing: 1.2px;           /* تحسين المسافات بين الحروف */
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /* خط عصري */
+}
+
+.blogTitle::after {
+  content: "";
+  display: block;
+  width: 50%;                       /* عرض نصف الصفحة */
+  max-width: 300px;                 /* أقصى عرض */
+  height: 5px;                      /* سمك الخط */
+  background-color: #f59e0b;        /* لون برتقالي جذاب */
+  margin: 0.7rem auto 0;            /* توسيط أسفل العنوان */
+  border-radius: 5px;               /* حواف مدورة للخط */
+  box-shadow: 0 2px 6px rgba(245, 158, 11, 0.3); /* ظل خفيف */
+}
+
+/* استايلات للشاشات الصغيرة */
+@media (max-width: 640px) {
+  .blogTitle {
+    font-size: 2rem;                /* تصغير حجم العنوان */
+    margin-bottom: 2rem;            /* تقليل المسافة أسفل العنوان */
+  }
+
+  .blogTitle::after {
+    width: 60%;                      /* عرض أكبر نسبة بالنسبة للشاشة الصغيرة */
+    max-width: 180px;                /* تقليل أقصى عرض */
+    height: 4px;                     /* تقليل سمك الشريط */
+    margin: 0.5rem auto 0;           /* تقليل المسافة أسفل العنوان */
+  }
+}
+/* =============================== */
+/* تحسين التجاوب للشاشات الصغيرة */
+@media (max-width: 768px) {
+
+  /* العناوين */
+  .title,
+  .blogPost h1 {
+    font-size: 28px;
+    margin-bottom: 25px;
+  }
+
+  /* صور البطاقات والمقال */
+  .blogCard img {
+    height: 180px;
+  }
+
+  .blogPost img {
+    height: 250px;
+  }
+
+  /* أزرار المشاركة */
+  .shareButton {
+    width: 40px;
+    height: 40px;
+    font-size: 20px;
+  }
+
+  /* زر العودة للمدونة */
+  .backButton,
+  .backLink {
+    font-size: 0.85rem;
+    padding: 0.5rem 1rem;
+  }
+}
+
+/* للشاشات الأصغر جدًا */
+@media (max-width: 480px) {
+
+  /* تقليل حجم العنوان قليلاً */
+  .title,
+  .blogPost h1 {
+    font-size: 24px;
+    margin-bottom: 20px;
+  }
+
+  /* صور المقال والبطاقات أصغر */
+  .blogCard img {
+    height: 150px;
+  }
+
+  .blogPost img {
+    height: 200px;
+  }
+
+  /* أزرار المشاركة أصغر */
+  .shareButton {
+    width: 35px;
+    height: 35px;
+    font-size: 18px;
+  }
+
+  /* زر العودة أصغر وأكثر مناسبة */
+  .backButton,
+  .backLink {
+    font-size: 0.8rem;
+    padding: 0.4rem 0.8rem;
+  }
+}
+/* ============================= */
+/* قسم مقالات ذات صلة */
+.relatedPosts {
+  margin-top: 50px;
+}
+
+.relatedPosts h2 {
+  font-size: 24px;
+  font-weight: 700;
+  margin-bottom: 30px;
+  text-align: center;
+  color: #222;
+}
+
+/* Grid للمقالات */
+.relatedPostsGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 25px;
+}
+
+/* كل بطاقة */
+.relatedPostCard {
+  display: block; /* لتجنب الخطوط تحت النص */
+  background-color: #fff;
+  border-radius: 15px;
+  overflow: hidden;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.08);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  text-decoration: none; /* إزالة أي خطوط أسفل النص */
+  color: inherit;
+}
+
+.relatedPostCard:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+}
+
+/* صورة المقال */
+.relatedPostCard img {
+  width: 100%;
+  height: 140px;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.3s ease;
+}
+
+.relatedPostCard:hover img {
+  transform: scale(1.05);
+}
+
+/* عنوان المقال داخل البطاقة */
+.relatedPostCard h3 {
+  font-size: 16px;
+  font-weight: 600;
+  margin: 10px;
+  color: #111827;
+  text-decoration: none; /* إزالة الخطوط */
+}
+
+/* تحسين تجاوب الشاشات الصغيرة */
+@media (max-width: 768px) {
+  .relatedPostsGrid {
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 20px;
+  }
+
+  .relatedPostCard img {
+    height: 120px;
+  }
+
+  .relatedPostCard h3 {
+    font-size: 14px;
+    margin: 8px;
+  }
+}
+
+@media (max-width: 480px) {
+  .relatedPostsGrid {
+    grid-template-columns: 1fr;
+    gap: 15px;
+  }
+
+  .relatedPostCard img {
+    height: 150px;
+  }
+
+  .relatedPostCard h3 {
+    font-size: 15px;
+    margin: 10px;
+  }
+}
+/* نص دعوة المشاركة مع مسافة عن المقال */
+.shareTitle {
+  text-align: center;
+  font-size: 16px;
+  font-weight: 600;
+  margin: 40px 0 10px 0; /* هامش علوي 40px لفصلها عن المقال، وهامش سفلي 10px */
+  color: #555;
+}

@@ -23,6 +23,7 @@ export default function Header() {
     { name: 'من نحن', href: '/about' },
     { name: 'سياسة الخصوصية', href: '/privacy' },
     { name: 'تواصل معنا', href: '#contact' },
+    { name: 'المدونة', href: '/blog' },
   ];
 
   return (

@@ -66,3 +66,16 @@ export const subscribeToNewsletter = async (email: string): Promise<unknown> => 
 };
 
 
+export const BLOG_API_BASE = "https://elynor-store-020eb5c3d7a2.herokuapp.com/api"; // غير الرابط حسب السيرفر عندك
+
+export async function fetchBlogPosts() {
+  const res = await fetch(`${BLOG_API_BASE}/blog`, { cache: "no-store" });
+  if (!res.ok) throw new Error("فشل في جلب المقالات");
+  return res.json();
+}
+
+export async function fetchBlogPost(slug: string) {
+  const res = await fetch(`${BLOG_API_BASE}/blog/${slug}`, { cache: "no-store" });
+  if (!res.ok) throw new Error("فشل في جلب المقال");
+  return res.json();
+}
