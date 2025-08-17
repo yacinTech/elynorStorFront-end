@@ -37,30 +37,35 @@ function parseSimpleMarkupWithLineBreaks(text: string) {
   };
 
   let parsed = text
+    // تأثيرات النصوص
     .replace(/~~(.+?)~~/g, '<del>$1</del>')
     .replace(/__(.+?)__/g, '<u>$1</u>')
     .replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>')
     .replace(/\*(.+?)\*/g, '<em>$1</em>')
+    // ألوان للنصوص
     .replace(/@@(.+?)#([prgboycmkw])@@/g, (_, word, colorCode) => {
       const color = colorMap[colorCode] || '#000';
       return `<span style="color:${color}; font-weight:bold;">${word}</span>`;
     })
-    .replace(/##([prgboycmkw])::(.+?)##/g, (_, bgCode, text) => {
+    // خلفيات ملوّنة
+    .replace(/##([prgboycmkw])::(.+?)##/g, (_, bgCode, innerText) => {
       const bgColor = bgColorMap[bgCode] || '#fff';
-      return `<span style="background-color:${bgColor}; padding:2px 4px; border-radius:3px;">${text}</span>`;
+      return `<span style="background-color:${bgColor}; padding:2px 4px; border-radius:3px;">${innerText}</span>`;
     })
-    .replace(/%%(.+?)::(.+?)%%/g, (_, effect, text) => {
+    // تأثيرات خاصة
+    .replace(/%%(.+?)::(.+?)%%/g, (_, effect, innerText) => {
       if (effect === 'shadow') {
-        return `<span style="text-shadow: 1px 1px 2px rgba(0,0,0,0.3);">${text}</span>`;
+        return `<span style="text-shadow: 1px 1px 2px rgba(0,0,0,0.3);">${innerText}</span>`;
       }
-      return text;
+      return innerText;
     })
     // روابط بصيغة مع أو بدون عنوان
-    .replace(/%%link::([^:]+?)(?:::(.*?))?%%/g, (_, url, label) => {
+    .replace(/%%link::([^\s:]+(?:\:\/\/[^\s]+)?)(?:::(.*?))?%%/g, (_, url, label) => {
       const safeLabel = label && label.trim() !== "" ? label : "اضغط هنا";
       return `<a href="${url}" target="_blank" rel="noopener noreferrer" style="color:#007BFF; text-decoration:underline;">${safeLabel}</a>`;
     });
 
+  // تحويل الأسطر إلى <br>
   parsed = parsed.replace(/\n/g, '<br>');
   return parsed;
 }
