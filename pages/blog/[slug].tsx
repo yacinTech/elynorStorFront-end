@@ -21,7 +21,11 @@ interface Props {
   post: Post;
   relatedPosts: Post[];
 }
-// دالة تحويل النصوص مع ألوان وخلفيات وتأثيرات
+
+
+
+
+// دالة تحويل النصوص مع ألوان وخلفيات وتأثيرات + إخفاء الروابط
 function parseSimpleMarkupWithLineBreaks(text: string) {
   const colorMap: Record<string, string> = {
     p: '#800080', r: '#e60023', g: '#008000', b: '#007BFF',
@@ -34,6 +38,8 @@ function parseSimpleMarkupWithLineBreaks(text: string) {
     o: '#FFE6CC', y: '#FFFFCC', c: '#CCF0F0', m: '#FFCCFF',
     k: '#CCCCCC', w: '#FFFFFF',
   };
+
+  const linkLabel = "اضغط هنا"; // الكلمة البديلة للروابط
 
   let parsed = text
     // تأثيرات النصوص
@@ -58,10 +64,14 @@ function parseSimpleMarkupWithLineBreaks(text: string) {
       }
       return innerText;
     })
-    // روابط بصيغة مع أو بدون عنوان، يظهر فقط العنوان
+    // روابط بصيغة %%link::url::label%%
     .replace(/%%link::([^\s]+?)(?:::(.*?))?%%/g, (_, url, label) => {
-      const safeLabel = label && label.trim() !== "" ? label : "اضغط هنا";
-      return `<span onclick="window.open('${url}', '_blank')" style="cursor:pointer; color:#007BFF; text-decoration:underline;">${safeLabel}</span>`;
+      const safeLabel = label && label.trim() !== "" ? label : linkLabel;
+      return `<a href="${url}" target="_blank" style="color:#007BFF; text-decoration:underline;">${safeLabel}</a>`;
+    })
+    // إخفاء أي رابط عادي http/https وتحويله إلى <a>
+    .replace(/https?:\/\/[^\s]+/g, (url) => {
+      return `<a href="${url}" target="_blank" style="color:#007BFF; text-decoration:underline;">${linkLabel}</a>`;
     });
 
   // تحويل الأسطر إلى <br>
@@ -73,7 +83,6 @@ function parseSimpleMarkupWithLineBreaks(text: string) {
 function getSnippet(text: string, length = 160) {
   return text.replace(/<[^>]+>/g, '').substring(0, length) + '...';
 }
-
 
 export default function BlogPostPage({ post, relatedPosts = [] }: Props) {
   if (!post) return <p>المقال غير موجود.</p>;
