@@ -3,6 +3,13 @@ import Link from 'next/link';
 import { FaFacebookF, FaInstagram, FaWhatsapp } from 'react-icons/fa';
 import Image from 'next/image';
 
+function optimizeImage(url: string) {
+  return url.includes("/upload/")
+    ? url.replace("/upload/", "/upload/f_auto,q_auto/")
+    : url;
+}
+
+
 
 export default function Footer() {
   return (
@@ -24,7 +31,7 @@ export default function Footer() {
         {/* شعار واسم المتجر */}
         <div style={{ marginBottom: '20px' }}>
          <Image
-            src="/og-image.jpg"
+            src={optimizeImage("/og-image.jpg")}
             alt="شعار المتجر"
             width={66}
             height={66}

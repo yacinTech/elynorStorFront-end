@@ -4,6 +4,13 @@ import MobileMenu from './MobileMenu';
 import Image from 'next/image';
 import SearchBar from './SearchBar';
 
+function optimizeImage(url: string) {
+  return url.includes("/upload/")
+    ? url.replace("/upload/", "/upload/f_auto,q_auto/")
+    : url;
+}
+
+
 
 export default function Header() {
   const [categories] = useState<string[]>([
@@ -40,7 +47,7 @@ export default function Header() {
                 onMouseLeave={() => setHovered(false)}
               >
                 <Image
-  src="/og-image.jpg"
+  src={optimizeImage("/og-image.jpg")}
   alt="Logo"
   width={40}
   height={40}
