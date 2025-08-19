@@ -10,6 +10,14 @@ interface Product {
   images: string[];
 }
 
+// دالة لتحويل رابط الصورة تلقائياً إلى WebP/ضغط ذكي إذا كانت على Cloudinary
+function optimizeImage(url: string) {
+  return url.includes("/upload/")
+    ? url.replace("/upload/", "/upload/f_auto,q_auto/")
+    : url;
+}
+
+
 export default function ProductCard({ product }: { product: Product }) {
   const oldPrice = Math.round(product.price * 1.4); // السعر قبل الخصم
 
@@ -18,7 +26,8 @@ export default function ProductCard({ product }: { product: Product }) {
       <Link href={`/product/${product.slug}`} style={{ color: 'inherit', textDecoration: 'none' }}>
         {product.images?.length ? (
           <Image
-            src={product.images[0]}
+            src={optimizeImage(product.images[0])}
+
             alt={product.name}
             width={300}
             height={180}

@@ -8,6 +8,15 @@ import { getProductBySlug, getProductsByCategory } from '../../lib/api';
 import TopBanner from '../../components/TopBanner';
 import ProductReviews from '../../components/productsReviews/ProductReviews';
 
+// دالة لتحويل رابط الصورة تلقائياً إلى WebP/ضغط ذكي إذا كانت على Cloudinary
+function optimizeImage(url: string) {
+  // إذا كان الرابط يحتوي على /upload/ في Cloudinary
+  return url.includes("/upload/")
+    ? url.replace("/upload/", "/upload/f_auto,q_auto/")
+    : url;
+}
+
+
 export {};
 
 declare global {
@@ -142,6 +151,9 @@ export default function ProductDetails({ product, related }: Props) {
     product.images?.[0]?.startsWith('http')
       ? product.images[0]
       : `https://elynor-store.vercel.app${product.images?.[0] || '/logo.png'}`;
+      const fullImageUrlOptimized = optimizeImage(fullImageUrl);
+
+
 
   const productUrl = `https://elynor-store.vercel.app/product/${product.slug}`;
 
@@ -174,13 +186,15 @@ export default function ProductDetails({ product, related }: Props) {
         <meta property="og:type" content="product" />
         <meta property="og:title" content={product.name} />
         <meta property="og:description" content={product.description || 'تفاصيل المنتج'} />
-        <meta property="og:image" content={fullImageUrl} />
+        <meta property="og:image" content={fullImageUrlOptimized} />
+
         <meta property="og:url" content={productUrl} />
 
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content={product.name} />
         <meta name="twitter:description" content={product.description} />
-        <meta name="twitter:image" content={fullImageUrl} />
+        <meta name="twitter:image" content={fullImageUrlOptimized} />
+
 
         <link rel="canonical" href={productUrl} />
 
