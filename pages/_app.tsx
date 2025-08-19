@@ -72,6 +72,7 @@ export default function MyApp({ Component, pageProps }: AppProps) {
   'rf-alahthyh-mtadd-alastkhdamat',
   'alaqh-alfwtat-mn-alanwks-alsafy-walghyr-qabl-llsda',
   'etagere-extensible-en-metal',
+  'etagere',
 ].includes(slug);
 
 const shouldFireFifthPixel = isProductsForPixel5;

@@ -3,6 +3,11 @@ import Slider from 'react-slick';
 import Image from 'next/image';
 import ImageModal from './ImageModal';
 
+function optimizeImage(url: string) {
+  return url.includes("/upload/") ? url.replace("/upload/", "/upload/f_auto,q_auto/") : url;
+}
+
+
 interface ProductSliderProps {
   images: string[];
 }
