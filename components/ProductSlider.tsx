@@ -75,20 +75,22 @@ const ProductSlider: React.FC<ProductSliderProps> = ({ images }) => {
                 style={{ cursor: 'zoom-in' }}
               >
                <div style={{ width: '100%', height: '400px', position: 'relative', border: '4px solid #f0f0f0', borderRadius: '12px', overflow: 'hidden' }}>
-  <Image
-    src={src}
-    alt={`صورة ${index + 1}`}
-    fill
-    style={{
-      objectFit: 'cover',
-      userSelect: 'none',
-      transition: 'transform 0.3s ease',
-    }}
-    onMouseOver={(e) => (e.currentTarget.style.transform = 'scale(1.02)')}
-    onMouseOut={(e) => (e.currentTarget.style.transform = 'scale(1)')}
-    priority={index === 0}
-    draggable={false}
-  />
+<Image
+  src={src}
+  alt={`صورة ${index + 1}`}
+  fill
+  style={{
+    objectFit: 'cover',
+    userSelect: 'none',
+    transition: 'transform 0.3s ease',
+  }}
+  onMouseOver={(e) => (e.currentTarget.style.transform = 'scale(1.02)')}
+  onMouseOut={(e) => (e.currentTarget.style.transform = 'scale(1)')}
+  priority={index < 2}          // 👈 أول صورتين فقط priority
+  loading={index < 2 ? 'eager' : 'lazy'} // 👈 البقية lazy
+  draggable={false}
+/>
+
 </div>
 
               </div>
