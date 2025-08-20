@@ -91,7 +91,7 @@ export default function BlogPostPage({ post, relatedPosts = [] }: Props) {
   const shareText = encodeURIComponent(post.title);
 
   const facebookShare = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(pageUrl)}`;
-  const whatsappShare = `https://wa.me/?text=${shareText}%20${encodeURIComponent(pageUrl)}`;
+  const whatsappShare = `https://wa.me/?text=${encodeURIComponent(pageUrl)}`;
   const twitterShare = `https://twitter.com/intent/tweet?text=${shareText}&url=${encodeURIComponent(pageUrl)}`;
 
 
