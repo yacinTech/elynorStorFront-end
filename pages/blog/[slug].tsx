@@ -88,10 +88,12 @@ export default function BlogPostPage({ post, relatedPosts = [] }: Props) {
   if (!post) return <p>المقال غير موجود.</p>;
 
   const pageUrl = typeof window !== "undefined" ? window.location.href : "";
+  const articleUrl = `https://elynor-store.vercel.app/blog/${post.slug}`;
+
   const shareText = encodeURIComponent(post.title);
 
   const facebookShare = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(pageUrl)}`;
-  const whatsappShare = `https://wa.me/?text=${encodeURIComponent(pageUrl)}`;
+  const whatsappShare = `https://wa.me/?text=${encodeURIComponent(articleUrl)}`;
   const twitterShare = `https://twitter.com/intent/tweet?text=${shareText}&url=${encodeURIComponent(pageUrl)}`;
 
 
