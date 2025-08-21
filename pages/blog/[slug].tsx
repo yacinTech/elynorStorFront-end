@@ -4,6 +4,8 @@ import Head from "next/head";
 import styles from "./blog.module.css";
 import { FaFacebookF, FaWhatsapp, FaTwitter } from "react-icons/fa";
 import { GetServerSideProps } from 'next';
+import RelatedProducts from '../../components/RelatedProducts';
+
 
 
 interface Post {
@@ -15,6 +17,7 @@ interface Post {
   keywords?: string[];
   createdAt: string; 
   updatedAt: string;
+  relatedProducts?: string[];
 }
 
 interface Props {
@@ -174,6 +177,7 @@ export default function BlogPostPage({ post, relatedPosts = [] }: Props) {
 };
 
 
+
   return (
     <>
       <Head>
@@ -224,6 +228,9 @@ export default function BlogPostPage({ post, relatedPosts = [] }: Props) {
             <FaTwitter />
           </a>
         </div>
+
+        <RelatedProducts slugs={post.relatedProducts || []} />
+
 
         <Link href="/blog" className={styles.backButton}>
           ← العودة للمدونة
