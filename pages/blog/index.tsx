@@ -49,20 +49,21 @@ type Post = {
   imageUrl: string;
   content: string;
   keywords?: string[];
+  createdAt?: string;
 };
 
 export default function BlogPage({ posts }: { posts: Post[] }) {
   // توليد الكلمات المفتاحية لجميع المقالات
-  const keywordsContent = posts
-    .flatMap((post) => [
-      post.title,
-      ...(Array.isArray(post.keywords) && post.keywords.length > 0
-        ? post.keywords
-        : post.content
-        ? post.content.split(' ').slice(0, 10)
-        : [])
+const keywordsContent = Array.from(
+  new Set(
+    posts.flatMap((post) => [
+      post.title,                 // عنوان المقال
+      ...(post.keywords || []),   // كلمات المقالة الخاصة
+      ...(post.keywords?.length ? [] : post.content?.split(' ').slice(0, 10) || [])
     ])
-    .join(', ');
+  )
+).join(', ');
+
 
   return (
     <>
@@ -73,6 +74,36 @@ export default function BlogPage({ posts }: { posts: Post[] }) {
           content="اكتشف أحدث المقالات في موضة، ديكور، أجهزة المنزل، مطبخ، نصائح حياتية، تربية الأطفال، رحلات وتخييم وأكثر على مدونة إلينور."
         />
         <meta name="keywords" content={keywordsContent} />
+        <meta name="robots" content="index, follow" />
+        <meta property="og:title" content="مدونة إلينور - أحدث المقالات" />
+        <meta property="og:description" content="اكتشف أحدث المقالات في موضة، ديكور، أجهزة المنزل، مطبخ، نصائح حياتية، تربية الأطفال، رحلات وتخييم وأكثر على مدونة إلينور." />
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="https://elynor-store.vercel.app/blog" />
+        <meta property="og:image" content="/Elynor1.png" />
+        <link rel="canonical" href="https://elynor-store.vercel.app/blog" />
+
+        <script type="application/ld+json">
+          {`
+          {
+            "@context": "https://schema.org",
+            "@type": "Blog",
+            "name": "مدونة إلينور",
+            "url": "https://elynor-store.vercel.app/blog",
+            "description": "اكتشف أحدث المقالات في موضة، ديكور، أجهزة المنزل، مطبخ، نصائح حياتية، تربية الأطفال، رحلات وتخييم وأكثر.",
+            "blogPost": ${JSON.stringify(posts.map(post => ({
+                "@type": "BlogPosting",
+                "headline": post.title,
+                "image": post.imageUrl,
+                "url": `https://elynor-store.vercel.app/blog/${post.slug}`,
+                "datePublished": post.createdAt || new Date().toISOString()
+            })))}
+          }
+          `}
+          </script>
+
+
+
+
       </Head>
 
       <div className={styles.blogContainer}>
