@@ -25,49 +25,22 @@ interface Product {
   category: string;
   price: number;
   images: string[];
-  seoKeywords?: string[];
   createdAt?: string;
-  [key: string]: unknown;
-}
-
-interface BlogPost {
-  _id: string;
-  slug: string;
-  title: string;
-  keywords?: string[];
   [key: string]: unknown;
 }
 
 interface HomeProps {
   products: Product[];
-  blogPosts: BlogPost[];
 }
 
-export default function Home({ products, blogPosts }: HomeProps) {
+export default function Home({ products }: HomeProps) {
   const [ref, isVisible] = useOnScreen<HTMLDivElement>();
   const [visibleCount, setVisibleCount] = useState(12);
 
-  // بافتراض أن عندك مصفوفتين: products و blogPosts
-const keywords =
-  products.length > 0 || blogPosts.length > 0
-    ? Array.from(
-        new Set([
-          // من المنتجات
-          ...products.flatMap((p) => [
-            p.name,
-            p.category,
-            ...(p.seoKeywords || [])
-          ]).filter(Boolean),
-
-          // من المقالات
-          ...blogPosts.flatMap((b) => [
-            b.title,
-            ...(b.keywords || [])
-          ]).filter(Boolean)
-        ])
-      ).join(', ')
-    : 'منتجات, متجر, شراء, تسوق, مقالات, مدونة';
-
+  const keywords =
+    products.length > 0
+      ? Array.from(new Set(products.flatMap((p) => [p.name, p.category]).filter(Boolean))).join(', ')
+      : 'منتجات, متجر, شراء, تسوق';
 
   const description =
     'مرحباً بكم في متجر Elynor حيث تجدون منتجات مختارة بعناية، بأناقة وجودة عالية. استمتعوا بتجربة تسوق مميزة وآمنة.';
