@@ -26,6 +26,7 @@ interface Product {
   price: number;
   images: string[];
   createdAt?: string;
+  seoKeywords?: string[];
   [key: string]: unknown;
 }
 
@@ -38,9 +39,18 @@ export default function Home({ products }: HomeProps) {
   const [visibleCount, setVisibleCount] = useState(12);
 
   const keywords =
-    products.length > 0
-      ? Array.from(new Set(products.flatMap((p) => [p.name, p.category]).filter(Boolean))).join(', ')
-      : 'منتجات, متجر, شراء, تسوق';
+  products.length > 0
+    ? Array.from(
+        new Set(
+          products.flatMap((p) => [
+            p.name,                  // اسم المنتج
+            p.category,              // الفئة
+            ...(p.seoKeywords || []) // الكلمات المفتاحية الخاصة بالمنتج إن وجدت
+          ]).filter(Boolean)
+        )
+      ).join(', ')
+    : 'منتجات, متجر, شراء, تسوق';
+
 
   const description =
     'مرحباً بكم في متجر Elynor حيث تجدون منتجات مختارة بعناية، بأناقة وجودة عالية. استمتعوا بتجربة تسوق مميزة وآمنة.';
