@@ -30,12 +30,12 @@ export default function ProductCard({ product }: { product: Product }) {
 
             alt={product.name}
             width={300}
-            height={180}
+            height={300}
             style={{
               objectFit: 'cover',
               borderRadius: '6px',
               width: '100%',
-              height: 'auto',
+              height: '100px',
             }}
           />
         ) : (
@@ -85,36 +85,64 @@ export default function ProductCard({ product }: { product: Product }) {
           color: #333;
         }
 
-        .price-wrapper {
-          margin-top: 8px;
-          display: flex;
-          flex-direction: column;
-          align-items: center;
-          gap: 4px;
-        }
+       .price-wrapper {
+  margin-top: 10px;
+  display: flex;
+  flex-direction: row;       /* الجديد والقديم جنب بعض */
+  justify-content: center;
+  align-items: center;
+  gap: 12px;
+}
 
-        .old-price {
-          font-size: 0.9rem;
-          color: #999;
-          text-decoration: line-through;
-        }
+.old-price {
+  font-size: 0.85rem;
+  color: #888;
+  text-decoration: line-through;
+}
 
-        .new-price {
-          background-color: #f9f3e9;
-          color: #c97b00;
-          font-weight: bold;
-          padding: 6px 12px;
-          border-radius: 20px;
-          font-size: 1rem;
-          border: 1px solid #f0e0c0;
-        }
+.new-price {
+  background: linear-gradient(135deg, #4ade80, #22d3ee); /* ألوان مريحة */
+  color: #fff;
+  font-weight: 600;
+  padding: 4px 10px;       /* تصغير البادينغ */
+  border-radius: 10px;
+  font-size: 0.85rem;      /* حجم أصغر */
+  border: none;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
 
-        @media (max-width: 640px) {
-          .product-card {
-            max-width: 95%;
-            margin: 8px auto;
-          }
-        }
+.new-price:hover {
+  transform: scale(1.05);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+}
+
+/* شاشات صغيرة */
+@media (max-width: 640px) {
+  .product-card {
+    max-width: 95%;
+    margin: 8px auto;
+  }
+
+  h3 {
+    font-size: 0.75rem; /* تصغير اسم المنتج */
+  }
+
+  .price-wrapper {
+    gap: 8px;
+  }
+
+  .new-price {
+    font-size: 0.75rem;    /* أصغر حجم للشاشات الصغيرة */
+    padding: 3px 8px;      /* بادينغ أقل لتقليل طول البطاقة */
+    border-radius: 6px;    /* حواف أقل استدارة لتناسب البطاقة الصغيرة */
+  }
+
+  .old-price {
+    font-size: 0.65rem;    /* حجم أصغر للسعر القديم */
+  }
+}
+
       `}</style>
     </div>
   );

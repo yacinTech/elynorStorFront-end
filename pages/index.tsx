@@ -239,26 +239,34 @@ export default function Home({ products }: HomeProps) {
         </section>
 
         <style jsx>{`
-          .product-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-            gap: 20px;
-            padding-bottom: 40px;
-          }
+  .product-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 20px;
+    padding-bottom: 40px;
+  }
 
-          .welcome-section {
-            opacity: 0;
-            transform: translateY(40px);
-            transition: opacity 0.8s ease, transform 0.8s ease;
-            max-width: 800px;
-            margin: 0 auto;
-          }
+  /* بطاقتين فقط في الشاشات الصغيرة */
+  @media (max-width: 640px) {
+    .product-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
 
-          .welcome-section.visible {
-            opacity: 1;
-            transform: translateY(0);
-          }
-        `}</style>
+  .welcome-section {
+    opacity: 0;
+    transform: translateY(40px);
+    transition: opacity 0.8s ease, transform 0.8s ease;
+    max-width: 800px;
+    margin: 0 auto;
+  }
+
+  .welcome-section.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+`}</style>
+
       </main>
       
     </>
