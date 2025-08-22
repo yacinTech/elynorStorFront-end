@@ -2,7 +2,7 @@
 import React, { useEffect, useState, useRef } from "react";
 import Link from "next/link";
 import { getProductBySlug } from "../lib/api";
-import { ChevronLeft, ChevronRight } from "lucide-react"; // استيراد الأسهم
+import { ChevronLeft, ChevronRight } from "lucide-react";
 
 interface Product {
   _id: string;
@@ -22,22 +22,19 @@ const RelatedProducts: React.FC<RelatedProductsProps> = ({ slugs }) => {
   useEffect(() => {
     const fetchProducts = async () => {
       if (!slugs.length) return;
-
       const fetched: Product[] = [];
       for (const slug of slugs) {
         const product = await getProductBySlug(slug);
         if (product) fetched.push(product);
       }
-
-      setProducts(fetched.slice(0, 5)); // أول 5 منتجات
+      setProducts(fetched.slice(0, 5));
     };
-
     fetchProducts();
   }, [slugs]);
 
   const scroll = (direction: "left" | "right") => {
     if (scrollRef.current) {
-      const scrollAmount = 240; // عرض البطاقة + الفجوة
+      const scrollAmount = 180; // أقل عرض لتسهيل التمرير السريع
       scrollRef.current.scrollBy({
         left: direction === "left" ? -scrollAmount : scrollAmount,
         behavior: "smooth",
@@ -66,8 +63,8 @@ const RelatedProducts: React.FC<RelatedProductsProps> = ({ slugs }) => {
             backgroundColor: "rgba(0,0,0,0.6)",
             border: "none",
             borderRadius: "50%",
-            width: "40px",
-            height: "40px",
+            width: "36px",
+            height: "36px",
             display: "flex",
             justifyContent: "center",
             alignItems: "center",
@@ -92,8 +89,8 @@ const RelatedProducts: React.FC<RelatedProductsProps> = ({ slugs }) => {
             backgroundColor: "rgba(0,0,0,0.6)",
             border: "none",
             borderRadius: "50%",
-            width: "40px",
-            height: "40px",
+            width: "36px",
+            height: "36px",
             display: "flex",
             justifyContent: "center",
             alignItems: "center",
@@ -111,11 +108,11 @@ const RelatedProducts: React.FC<RelatedProductsProps> = ({ slugs }) => {
           ref={scrollRef}
           style={{
             display: "flex",
-            gap: "20px",
+            gap: "16px",
             overflowX: "auto",
             scrollBehavior: "smooth",
             padding: "10px 50px",
-            scrollbarWidth: "none", // اخفاء شريط التمرير في Firefox
+            scrollbarWidth: "none",
           }}
         >
           {products.map((p) => {
@@ -123,38 +120,55 @@ const RelatedProducts: React.FC<RelatedProductsProps> = ({ slugs }) => {
 
             return (
               <Link
-                key={p._id}
-                href={`/product/${p.slug}`}
-                style={{
-                  display: "block",
-                  minWidth: "220px",
-                  border: "1px solid #ddd",
-                  borderRadius: "12px",
-                  overflow: "hidden",
-                  textAlign: "center",
-                  textDecoration: "none",
-                  color: "#111",
-                  boxShadow: "0 4px 12px rgba(0,0,0,0.08)",
-                  transition: "transform 0.2s ease, box-shadow 0.2s ease",
-                  flexShrink: 0,
-                  backgroundColor: "#fff",
-                }}
-                onMouseDown={(e) => (e.currentTarget.style.transform = "scale(0.97)")}
-                onMouseUp={(e) => (e.currentTarget.style.transform = "scale(1)")}
-              >
-                <img
-                  src={firstImage}
-                  alt={p.name}
-                  style={{
-                    width: "100%",
-                    height: "160px",
-                    objectFit: "cover",
-                  }}
-                />
-                <h4 style={{ fontSize: "1rem", fontWeight: 600, margin: "10px 0" }}>
-                  {p.name}
-                </h4>
-              </Link>
+  key={p._id}
+  href={`/product/${p.slug}`}
+  style={{
+    display: "block",
+    position: "relative",   // مهم ليظهر النص فوق الصورة
+    minWidth: "140px",
+    height: "140px",
+    border: "1px solid #ddd",
+    borderRadius: "12px",
+    overflow: "hidden",
+    textAlign: "center",
+    textDecoration: "none",
+    color: "#111",
+    boxShadow: "0 4px 10px rgba(0,0,0,0.08)",
+    flexShrink: 0,
+    backgroundColor: "#fff",
+    transition: "transform 0.2s ease, box-shadow 0.2s ease",
+  }}
+>
+  <img
+    src={firstImage}
+    alt={p.name}
+    style={{
+      width: "100%",
+      height: "100%",
+      objectFit: "cover",
+    }}
+  />
+  <h4
+    style={{
+      fontSize: "0.85rem",
+      fontWeight: 600,
+      margin: 0,
+      lineHeight: 1.2,
+      backgroundColor: "rgba(255,255,255,0.85)",
+      position: "absolute",
+      bottom: 0,
+      width: "100%",
+      textAlign: "center",
+      padding: "4px 0",
+      overflow: "hidden",
+      textOverflow: "ellipsis",
+      whiteSpace: "nowrap",
+    }}
+  >
+    {p.name}
+  </h4>
+</Link>
+
             );
           })}
         </div>
