@@ -531,3 +531,22 @@
   margin: 40px 0 10px 0; /* هامش علوي 40px لفصلها عن المقال، وهامش سفلي 10px */
   color: #555;
 }
+.relatedProductsWrapper {
+  margin-top: 2rem;
+  padding: 1rem;
+  background: #fafafa;
+  border-radius: 12px;
+}
+
+.relatedProductsWrapper h2 {
+  font-size: 1.2rem;
+  margin-bottom: 1rem;
+  text-align: right;
+}
+
+.relatedProductsWrapper :global(.related-products-container) {
+  overflow-x: auto;
+  display: flex;
+  gap: 1rem;
+  padding-bottom: 0.5rem;
+}

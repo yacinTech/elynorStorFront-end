@@ -229,7 +229,11 @@ export default function BlogPostPage({ post, relatedPosts = [] }: Props) {
           </a>
         </div>
 
-        <RelatedProducts slugs={post.relatedProducts || []} />
+        <div className={styles.relatedProductsWrapper}>
+ 
+          <RelatedProducts slugs={post.relatedProducts || []} />
+        </div>
+
 
 
         <Link href="/blog" className={styles.backButton}>

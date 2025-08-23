@@ -22,6 +22,7 @@ const RelatedProducts: React.FC<RelatedProductsProps> = ({ slugs }) => {
   useEffect(() => {
     const fetchProducts = async () => {
       if (!slugs.length) return;
+
       const fetched: Product[] = [];
       for (const slug of slugs) {
         const product = await getProductBySlug(slug);
@@ -34,7 +35,7 @@ const RelatedProducts: React.FC<RelatedProductsProps> = ({ slugs }) => {
 
   const scroll = (direction: "left" | "right") => {
     if (scrollRef.current) {
-      const scrollAmount = 180; // أقل عرض لتسهيل التمرير السريع
+      const scrollAmount = 180;
       scrollRef.current.scrollBy({
         left: direction === "left" ? -scrollAmount : scrollAmount,
         behavior: "smooth",
@@ -46,7 +47,12 @@ const RelatedProducts: React.FC<RelatedProductsProps> = ({ slugs }) => {
 
   return (
     <section style={{ marginTop: "40px" }}>
-      <h3 style={{ fontSize: "1.5rem", fontWeight: 700, marginBottom: "20px" }}>
+      <h3 style={{
+        fontSize: "1.4rem",
+        fontWeight: 700,
+        marginBottom: "20px",
+        textAlign: "center"
+      }}>
         منتجات ذات صلة
       </h3>
 
@@ -71,10 +77,8 @@ const RelatedProducts: React.FC<RelatedProductsProps> = ({ slugs }) => {
             cursor: "pointer",
             transition: "all 0.2s ease",
           }}
-          onMouseDown={(e) => (e.currentTarget.style.transform = "translateY(-50%) scale(0.9)")}
-          onMouseUp={(e) => (e.currentTarget.style.transform = "translateY(-50%) scale(1)")}
         >
-          <ChevronLeft color="#fff" size={20} />
+          <ChevronLeft color="#fff" size={18} />
         </button>
 
         {/* زر التمرير لليمين */}
@@ -97,10 +101,8 @@ const RelatedProducts: React.FC<RelatedProductsProps> = ({ slugs }) => {
             cursor: "pointer",
             transition: "all 0.2s ease",
           }}
-          onMouseDown={(e) => (e.currentTarget.style.transform = "translateY(-50%) scale(0.9)")}
-          onMouseUp={(e) => (e.currentTarget.style.transform = "translateY(-50%) scale(1)")}
         >
-          <ChevronRight color="#fff" size={20} />
+          <ChevronRight color="#fff" size={18} />
         </button>
 
         {/* سطر المنتجات */}
@@ -111,8 +113,9 @@ const RelatedProducts: React.FC<RelatedProductsProps> = ({ slugs }) => {
             gap: "16px",
             overflowX: "auto",
             scrollBehavior: "smooth",
-            padding: "10px 50px",
+            padding: "10px 40px",
             scrollbarWidth: "none",
+            WebkitOverflowScrolling: "touch",
           }}
         >
           {products.map((p) => {
@@ -120,55 +123,47 @@ const RelatedProducts: React.FC<RelatedProductsProps> = ({ slugs }) => {
 
             return (
               <Link
-  key={p._id}
-  href={`/product/${p.slug}`}
-  style={{
-    display: "block",
-    position: "relative",   // مهم ليظهر النص فوق الصورة
-    minWidth: "140px",
-    height: "140px",
-    border: "1px solid #ddd",
-    borderRadius: "12px",
-    overflow: "hidden",
-    textAlign: "center",
-    textDecoration: "none",
-    color: "#111",
-    boxShadow: "0 4px 10px rgba(0,0,0,0.08)",
-    flexShrink: 0,
-    backgroundColor: "#fff",
-    transition: "transform 0.2s ease, box-shadow 0.2s ease",
-  }}
->
-  <img
-    src={firstImage}
-    alt={p.name}
-    style={{
-      width: "100%",
-      height: "100%",
-      objectFit: "cover",
-    }}
-  />
-  <h4
-    style={{
-      fontSize: "0.85rem",
-      fontWeight: 600,
-      margin: 0,
-      lineHeight: 1.2,
-      backgroundColor: "rgba(255,255,255,0.85)",
-      position: "absolute",
-      bottom: 0,
-      width: "100%",
-      textAlign: "center",
-      padding: "4px 0",
-      overflow: "hidden",
-      textOverflow: "ellipsis",
-      whiteSpace: "nowrap",
-    }}
-  >
-    {p.name}
-  </h4>
-</Link>
-
+                key={p._id}
+                href={`/product/${p.slug}`}
+                style={{
+                  display: "block",
+                  minWidth: "180px",
+                  border: "1px solid #ddd",
+                  borderRadius: "10px",
+                  overflow: "hidden",
+                  textAlign: "center",
+                  textDecoration: "none",
+                  color: "#111",
+                  boxShadow: "0 3px 8px rgba(0,0,0,0.08)",
+                  transition: "transform 0.2s ease, box-shadow 0.2s ease",
+                  flexShrink: 0,
+                  backgroundColor: "#fff",
+                }}
+                onMouseDown={(e) => (e.currentTarget.style.transform = "scale(0.97)")}
+                onMouseUp={(e) => (e.currentTarget.style.transform = "scale(1)")}
+              >
+                <img
+                  src={firstImage}
+                  alt={p.name}
+                  style={{
+                    width: "100%",
+                    height: "140px",
+                    objectFit: "cover",
+                    borderBottom: "1px solid #eee"
+                  }}
+                />
+                <h4 style={{
+                  fontSize: "0.95rem",
+                  fontWeight: 600,
+                  margin: "8px 0",
+                  padding: "0 5px",
+                  overflow: "hidden",
+                  textOverflow: "ellipsis",
+                  whiteSpace: "nowrap",
+                }}>
+                  {p.name}
+                </h4>
+              </Link>
             );
           })}
         </div>
