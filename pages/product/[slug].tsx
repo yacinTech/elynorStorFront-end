@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { GetServerSideProps, GetServerSidePropsContext } from 'next';
 import Head from 'next/head';
 import ProductCard from '../../components/ProductCard';
@@ -7,6 +7,8 @@ import ProductSlider from '../../components/ProductSlider';
 import { getProductBySlug, getProductsByCategory } from '../../lib/api';
 import TopBanner from '../../components/TopBanner';
 import ProductReviews from '../../components/productsReviews/ProductReviews';
+import { ChevronLeft, ChevronRight } from 'lucide-react';
+
 
 // دالة لتحويل رابط الصورة تلقائياً إلى WebP/ضغط ذكي إذا كانت على Cloudinary
 function optimizeImage(url: string) {
@@ -114,6 +116,8 @@ function parseSimpleMarkup(text: string) {
 export default function ProductDetails({ product, related }: Props) {
   // تعريف الهامش الأعلى ديناميكياً حسب حجم الشاشة
   const [spacerHeight, setSpacerHeight] = useState(74);
+    const scrollRef = useRef<HTMLDivElement>(null);
+
 
   useEffect(() => {
     function handleResize() {
@@ -156,6 +160,14 @@ export default function ProductDetails({ product, related }: Props) {
 
 
   const productUrl = `https://elynor-store.vercel.app/product/${product.slug}`;
+
+
+   const scroll = (dir: "left" | "right") => {
+    if (scrollRef.current) {
+      const amt = 220;
+      scrollRef.current.scrollBy({ left: dir === "left" ? -amt : amt, behavior: "smooth" });
+    }
+  };
 
   return (
     <>
@@ -391,22 +403,51 @@ export default function ProductDetails({ product, related }: Props) {
 
 
 
+{related.length > 0 && (
+          <section style={{ marginTop: '40px', position: 'relative' }}>
+            <h3 style={{ textAlign: 'center', marginBottom: '15px' }}>منتجات مشابهة</h3>
 
-        {related.length > 0 && (
-          <section style={{ marginTop: '40px' }}>
-            <h3 style={{ textAlign: 'center' }}>منتجات مشابهة</h3>
-            <div
+            {/* زر يسار */}
+            <button
+              onClick={() => scroll("left")}
               style={{
-                display: 'grid',
-                gridTemplateColumns: 'repeat(auto-fit,minmax(180px,1fr))',
-                gap: '15px',
-                marginTop: '10px',
+                position: "absolute", left: 0, top: "50%",
+                transform: "translateY(-50%)", zIndex: 10,
+                background: "#fff", borderRadius: "50%",
+                border: "1px solid #ccc", cursor: "pointer",
+              }}
+            >
+              <ChevronLeft size={22} />
+            </button>
+
+            {/* المنتجات */}
+            <div
+              ref={scrollRef}
+              style={{
+                display: "flex", gap: "15px",
+                overflowX: "auto", padding: "10px",
+                scrollBehavior: "smooth",
               }}
             >
               {related.map((p) => (
-                <ProductCard key={p._id} product={p} />
+                <div key={p._id} style={{ flex: "0 0 180px", maxWidth: "180px" }}>
+                  <ProductCard product={p} />
+                </div>
               ))}
             </div>
+
+            {/* زر يمين */}
+            <button
+              onClick={() => scroll("right")}
+              style={{
+                position: "absolute", right: 0, top: "50%",
+                transform: "translateY(-50%)", zIndex: 10,
+                background: "#fff", borderRadius: "50%",
+                border: "1px solid #ccc", cursor: "pointer",
+              }}
+            >
+              <ChevronRight size={22} />
+            </button>
           </section>
         )}
       </main>
