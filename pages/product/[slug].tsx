@@ -404,52 +404,99 @@ export default function ProductDetails({ product, related }: Props) {
 
 
 {related.length > 0 && (
-          <section style={{ marginTop: '40px', position: 'relative' }}>
-            <h3 style={{ textAlign: 'center', marginBottom: '15px' }}>منتجات مشابهة</h3>
+  <section style={{ marginTop: "40px", position: "relative" }}>
+    <h3 style={{ textAlign: "center", marginBottom: "15px" }}>منتجات مشابهة</h3>
 
-            {/* زر يسار */}
-            <button
-              onClick={() => scroll("left")}
-              style={{
-                position: "absolute", left: 0, top: "50%",
-                transform: "translateY(-50%)", zIndex: 10,
-                background: "#fff", borderRadius: "50%",
-                border: "1px solid #ccc", cursor: "pointer",
-              }}
-            >
-              <ChevronLeft size={22} />
-            </button>
+    {/* زر يسار */}
+    <button
+      onClick={() => scroll("left")}
+      style={{
+        position: "absolute",
+        left: "10px",
+        top: "50%",
+        transform: "translateY(-50%)",
+        zIndex: 10,
+        background: "rgba(0,0,0,0.6)",
+        borderRadius: "50%",
+        border: "none",
+        cursor: "pointer",
+        width: "38px",
+        height: "38px",
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+        color: "#fff",
+        boxShadow: "0 3px 8px rgba(0,0,0,0.25)",
+        transition: "all 0.3s ease",
+      }}
+      onMouseEnter={(e) =>
+        (e.currentTarget.style.background = "rgba(0,0,0,0.8)")
+      }
+      onMouseLeave={(e) =>
+        (e.currentTarget.style.background = "rgba(0,0,0,0.6)")
+      }
+    >
+      <ChevronLeft size={20} />
+    </button>
 
-            {/* المنتجات */}
-            <div
-              ref={scrollRef}
-              style={{
-                display: "flex", gap: "15px",
-                overflowX: "auto", padding: "10px",
-                scrollBehavior: "smooth",
-              }}
-            >
-              {related.map((p) => (
-                <div key={p._id} style={{ flex: "0 0 180px", maxWidth: "180px" }}>
-                  <ProductCard product={p} />
-                </div>
-              ))}
-            </div>
+    {/* المنتجات */}
+    <div
+      ref={scrollRef}
+      style={{
+        display: "flex",
+        gap: "15px",
+        overflowX: "auto",
+        padding: "10px 40px",
+        scrollBehavior: "smooth",
+        scrollbarWidth: "none",
+      }}
+    >
+      {related.map((p) => (
+        <div
+          key={p._id}
+          style={{
+            flex: "0 0 180px",
+            maxWidth: "180px",
+          }}
+        >
+          <ProductCard product={p} />
+        </div>
+      ))}
+    </div>
 
-            {/* زر يمين */}
-            <button
-              onClick={() => scroll("right")}
-              style={{
-                position: "absolute", right: 0, top: "50%",
-                transform: "translateY(-50%)", zIndex: 10,
-                background: "#fff", borderRadius: "50%",
-                border: "1px solid #ccc", cursor: "pointer",
-              }}
-            >
-              <ChevronRight size={22} />
-            </button>
-          </section>
-        )}
+    {/* زر يمين */}
+    <button
+      onClick={() => scroll("right")}
+      style={{
+        position: "absolute",
+        right: "10px",
+        top: "50%",
+        transform: "translateY(-50%)",
+        zIndex: 10,
+        background: "rgba(0,0,0,0.6)",
+        borderRadius: "50%",
+        border: "none",
+        cursor: "pointer",
+        width: "38px",
+        height: "38px",
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+        color: "#fff",
+        boxShadow: "0 3px 8px rgba(0,0,0,0.25)",
+        transition: "all 0.3s ease",
+      }}
+      onMouseEnter={(e) =>
+        (e.currentTarget.style.background = "rgba(0,0,0,0.8)")
+      }
+      onMouseLeave={(e) =>
+        (e.currentTarget.style.background = "rgba(0,0,0,0.6)")
+      }
+    >
+      <ChevronRight size={20} />
+    </button>
+  </section>
+)}
       </main>
     </>
   );
