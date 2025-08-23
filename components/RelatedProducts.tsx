@@ -35,7 +35,7 @@ const RelatedProducts: React.FC<RelatedProductsProps> = ({ slugs }) => {
 
   const scroll = (direction: "left" | "right") => {
     if (scrollRef.current) {
-      const scrollAmount = 180;
+      const scrollAmount = 160;
       scrollRef.current.scrollBy({
         left: direction === "left" ? -scrollAmount : scrollAmount,
         behavior: "smooth",
@@ -57,7 +57,7 @@ const RelatedProducts: React.FC<RelatedProductsProps> = ({ slugs }) => {
       </h3>
 
       <div style={{ position: "relative" }}>
-        {/* زر التمرير لليسار */}
+        {/* أزرار التمرير */}
         <button
           onClick={() => scroll("left")}
           style={{
@@ -81,7 +81,6 @@ const RelatedProducts: React.FC<RelatedProductsProps> = ({ slugs }) => {
           <ChevronLeft color="#fff" size={18} />
         </button>
 
-        {/* زر التمرير لليمين */}
         <button
           onClick={() => scroll("right")}
           style={{
@@ -110,7 +109,7 @@ const RelatedProducts: React.FC<RelatedProductsProps> = ({ slugs }) => {
           ref={scrollRef}
           style={{
             display: "flex",
-            gap: "16px",
+            gap: "12px",
             overflowX: "auto",
             scrollBehavior: "smooth",
             padding: "10px 40px",
@@ -127,35 +126,33 @@ const RelatedProducts: React.FC<RelatedProductsProps> = ({ slugs }) => {
                 href={`/product/${p.slug}`}
                 style={{
                   display: "block",
-                  minWidth: "180px",
+                  minWidth: "140px", // حجم أصغر للهواتف
+                  maxWidth: "160px", // حدود عليا للعرض
                   border: "1px solid #ddd",
-                  borderRadius: "10px",
+                  borderRadius: "12px",
                   overflow: "hidden",
                   textAlign: "center",
                   textDecoration: "none",
                   color: "#111",
-                  boxShadow: "0 3px 8px rgba(0,0,0,0.08)",
+                  boxShadow: "0 4px 10px rgba(0,0,0,0.08)",
                   transition: "transform 0.2s ease, box-shadow 0.2s ease",
                   flexShrink: 0,
                   backgroundColor: "#fff",
                 }}
-                onMouseDown={(e) => (e.currentTarget.style.transform = "scale(0.97)")}
-                onMouseUp={(e) => (e.currentTarget.style.transform = "scale(1)")}
               >
                 <img
                   src={firstImage}
                   alt={p.name}
                   style={{
                     width: "100%",
-                    height: "140px",
+                    height: "120px", // أصغر للهواتف
                     objectFit: "cover",
-                    borderBottom: "1px solid #eee"
                   }}
                 />
                 <h4 style={{
-                  fontSize: "0.95rem",
+                  fontSize: "0.9rem",
                   fontWeight: 600,
-                  margin: "8px 0",
+                  margin: "6px 0",
                   padding: "0 5px",
                   overflow: "hidden",
                   textOverflow: "ellipsis",

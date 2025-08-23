@@ -140,6 +140,9 @@
   .blogPost img {
     height: 250px;
   }
+  .blogContainer {
+    padding: 60px 10px 20px;
+  }
 }
 /* صفحة المقال */
 .blogPost {
