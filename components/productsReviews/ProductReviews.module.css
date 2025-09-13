@@ -48,12 +48,17 @@
   border-color: rgba(37, 211, 102, 0.4);
 }
 
+.card {
+  background: rgba(223, 255, 220, 0.97); /* أفتح وأقل شفافية */
+  border: 1px solid rgba(37, 211, 102, 0.3);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.05); /* أقل ظل */
+}
 .card.prev,
 .card.next {
-  opacity: 0.5;
-  z-index: 1;
-  filter: blur(1px); /* عمق بصري */
+  opacity: 0.6; /* أو أقل قليلاً */
+  filter: none; /* إزالة أي blur */
 }
+
 
 .header {
   display: flex;
