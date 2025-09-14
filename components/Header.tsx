@@ -47,7 +47,7 @@ export default function Header() {
                 onMouseLeave={() => setHovered(false)}
               >
                 <Image
-  src={optimizeImage("/og-image.jpg")}
+  src={optimizeImage("/elynorLogo.jpg")}
   alt="Logo"
   width={40}
   height={40}

@@ -31,7 +31,7 @@ export default function Footer() {
         {/* شعار واسم المتجر */}
         <div style={{ marginBottom: '20px' }}>
          <Image
-            src={optimizeImage("/og-image.jpg")}
+            src={optimizeImage("/elynorLogo.jpg")}
             alt="شعار المتجر"
             width={66}
             height={66}
