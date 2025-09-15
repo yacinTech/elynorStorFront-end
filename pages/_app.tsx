@@ -300,6 +300,7 @@ const shouldFireFifthPixel = isProductsForPixel5;
 
 
 
+
 {isProductsForPixel5 && (
   <>
     <Script
@@ -323,14 +324,16 @@ const shouldFireFifthPixel = isProductsForPixel5;
       }}
     />
     <noscript>
-      <img height="1" width="1" style={{display:'none'}}
+      <img
+        height="1"
+        width="1"
+        style={{ display: 'none' }}
         src="https://www.facebook.com/tr?id=1169655271681082&ev=PageView&noscript=1"
+        alt="fb pixel custom"
       />
     </noscript>
   </>
 )}
-
-
 
 
 
