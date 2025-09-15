@@ -298,6 +298,8 @@ const shouldFireFifthPixel = isProductsForPixel5;
   </>
 )}
 
+
+
 {isProductsForPixel5 && (
   <>
     <Script
@@ -327,6 +329,7 @@ const shouldFireFifthPixel = isProductsForPixel5;
     </noscript>
   </>
 )}
+
 
 
 
