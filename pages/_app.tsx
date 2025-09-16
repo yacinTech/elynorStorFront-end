@@ -318,7 +318,7 @@ const shouldFireFifthPixel = isProductsForPixel5;
             s.parentNode.insertBefore(t,s)
           }(window, document,'script','https://connect.facebook.net/en_US/fbevents.js');
   
-          fbq('init', '1169655271681082'); 
+          fbq('init', '657092764102451'); 
           fbq('track', 'PageView');
         `,
       }}
@@ -328,7 +328,7 @@ const shouldFireFifthPixel = isProductsForPixel5;
         height="1"
         width="1"
         style={{ display: 'none' }}
-        src="https://www.facebook.com/tr?id=1169655271681082&ev=PageView&noscript=1"
+        src="https://www.facebook.com/tr?id=657092764102451&ev=PageView&noscript=1"
         alt="fb pixel custom"
       />
     </noscript>
