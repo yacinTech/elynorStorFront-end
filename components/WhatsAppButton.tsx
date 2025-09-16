@@ -16,6 +16,12 @@ export default function WhatsAppButton() {
   }
 
   const handleClick = () => {
+    if (typeof window !== 'undefined' && typeof fbq === 'function') {
+    fbq('trackCustom', 'WhatsAppClick', {
+      page: router.asPath,
+      product: message,
+    });
+  }
     window.open(
       `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(message)}`,
       '_blank'
@@ -67,3 +73,7 @@ export default function WhatsAppButton() {
     </button>
   );
 }
+function fbq(arg0: string, arg1: string, arg2: { page: string; product: string; }) {
+  throw new Error('Function not implemented.');
+}
+
