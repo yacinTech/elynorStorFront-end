@@ -15,12 +15,25 @@ export default function WhatsAppButton() {
     }
   }
 
-  const handleClick = () => {
-    window.open(
-      `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(message)}`,
-      '_blank'
-    );
-  };
+const handleClick = () => {
+  try {
+    if (typeof window !== 'undefined' && typeof (window as any).fbq === 'function') {
+      (window as any).fbq('trackCustom', 'WhatsAppClick', {
+        page: window.location.pathname,
+        message: message,
+      });
+    }
+  } catch (err) {
+    console.error("FBQ error:", err);
+  }
+
+  // افتح واتساب بعد التتبع
+  window.open(
+    `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(message)}`,
+    '_blank'
+  );
+};
+
 
   return (
     <button className="whatsapp-btn" onClick={handleClick} aria-label="تواصل عبر واتساب">
@@ -67,3 +80,7 @@ export default function WhatsAppButton() {
     </button>
   );
 }
+function fbq(arg0: string, arg1: string, arg2: { page: string; message: string; }) {
+  throw new Error('Function not implemented.');
+}
+
