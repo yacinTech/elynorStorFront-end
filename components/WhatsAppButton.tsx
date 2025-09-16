@@ -2,6 +2,12 @@
 import React from 'react';
 import { useRouter } from 'next/router';
 
+declare global {
+  interface Window {
+    fbq?: (...args: any[]) => void;
+  }
+}
+
 export default function WhatsAppButton() {
   const router = useRouter();
   const whatsappNumber = '212646342598'; // ضع رقمك هنا بدون + أو 00
