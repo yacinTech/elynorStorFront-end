@@ -21,24 +21,21 @@ export default function WhatsAppButton() {
     }
   }
 
-const handleClick = () => {
-  try {
-    if (typeof window !== 'undefined' && typeof (window as any).fbq === 'function') {
-      (window as any).fbq('trackCustom', 'WhatsAppClick', {
+ const handleClick = () => {
+    // تسجيل حدث في Facebook Pixel إذا متاح
+    if (typeof window !== 'undefined' && typeof window.fbq === 'function') {
+      window.fbq('trackCustom', 'WhatsAppClick', {
         page: window.location.pathname,
         message: message,
       });
     }
-  } catch (err) {
-    console.error("FBQ error:", err);
-  }
 
-  // افتح واتساب بعد التتبع
-  window.open(
-    `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(message)}`,
-    '_blank'
-  );
-};
+    // فتح واتساب برابط مخصص
+    window.open(
+      `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(message)}`,
+      '_blank'
+    );
+  };
 
 
   return (
