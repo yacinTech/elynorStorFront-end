@@ -4,11 +4,7 @@ import { useRouter } from 'next/router';
 
 declare global {
   interface Window {
-    fbq?: (
-      event: 'track' | 'trackCustom' | string,
-      eventName?: string,
-      params?: Record<string, unknown>
-    ) => void;
+    fbq?: (event: string, eventName?: string, params?: Record<string, unknown>) => void;
   }
 }
 
@@ -18,7 +14,7 @@ export default function WhatsAppButton() {
 
   let message = 'مرحبا! أريد الاستفسار عن منتجاتكم.';
   if (router.pathname.startsWith('/product/')) {
-    const slug = router.asPath.split('/').pop()?.split('?')[0];
+    const slug = router.asPath.split('/').pop()?.split('?')[0]; // إزالة أي باراميترات
     if (slug) {
       const productName = decodeURIComponent(slug.replace(/-/g, ' '));
       message = `مرحبا! أريد الاستفسار عن المنتج: ${productName}`;
@@ -26,6 +22,7 @@ export default function WhatsAppButton() {
   }
 
   const handleClick = () => {
+    // تسجيل حدث في Facebook Pixel إذا متاح
     if (typeof window !== 'undefined' && typeof window.fbq === 'function') {
       window.fbq('trackCustom', 'WhatsAppClick', {
         page: window.location.pathname,
@@ -33,6 +30,7 @@ export default function WhatsAppButton() {
       });
     }
 
+    // فتح واتساب برابط مخصص
     window.open(
       `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(message)}`,
       '_blank'
