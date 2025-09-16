@@ -21,7 +21,7 @@ export default function WhatsAppButton() {
     }
   }
 
- const handleClick = () => {
+  const handleClick = () => {
     // تسجيل حدث في Facebook Pixel إذا متاح
     if (typeof window !== 'undefined' && typeof window.fbq === 'function') {
       window.fbq('trackCustom', 'WhatsAppClick', {
@@ -36,7 +36,6 @@ export default function WhatsAppButton() {
       '_blank'
     );
   };
-
 
   return (
     <button className="whatsapp-btn" onClick={handleClick} aria-label="تواصل عبر واتساب">
@@ -83,7 +82,3 @@ export default function WhatsAppButton() {
     </button>
   );
 }
-function fbq(arg0: string, arg1: string, arg2: { page: string; message: string; }) {
-  throw new Error('Function not implemented.');
-}
-
