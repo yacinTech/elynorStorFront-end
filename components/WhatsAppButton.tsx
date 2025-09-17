@@ -2,12 +2,6 @@
 import React from 'react';
 import { useRouter } from 'next/router';
 
-declare global {
-  interface Window {
-    fbq?: (event: string, eventName?: string, params?: Record<string, unknown>) => void;
-  }
-}
-
 export default function WhatsAppButton() {
   const router = useRouter();
   const whatsappNumber = '212646342598'; // ضع رقمك هنا بدون + أو 00
@@ -22,15 +16,6 @@ export default function WhatsAppButton() {
   }
 
   const handleClick = () => {
-    // تسجيل حدث في Facebook Pixel إذا متاح
-    if (typeof window !== 'undefined' && typeof window.fbq === 'function') {
-      window.fbq('trackCustom', 'WhatsAppClick', {
-        page: window.location.pathname,
-        message: message,
-      });
-    }
-
-    // فتح واتساب برابط مخصص
     window.open(
       `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(message)}`,
       '_blank'

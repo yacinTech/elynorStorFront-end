@@ -327,6 +327,34 @@ const shouldFireFifthPixel = isProductsForPixel5;
 )}
 
 
+{isProductsForPixel5 && (
+  <>
+    <Script
+      id="meta-pixel-last"
+      strategy="afterInteractive"
+      dangerouslySetInnerHTML={{
+        __html: `
+          if (typeof fbq === 'function') {
+            fbq('init', '1169655271681082'); 
+            fbq('track', 'PageView');
+          }
+        `,
+      }}
+    />
+    <noscript>
+      <img
+        height="1"
+        width="1"
+        style={{ display: 'none' }}
+        src="https://www.facebook.com/tr?id=1169655271681082&ev=PageView&noscript=1"
+        alt="fb pixel last"
+      />
+    </noscript>
+  </>
+)}
+
+
+
 
 
 
