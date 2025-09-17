@@ -2,11 +2,11 @@ import React from 'react';
 import { FaTruck, FaHeadset, FaPercent, FaStar, FaGift } from 'react-icons/fa';
 
 const phrases = [
-  { icon: <FaTruck style={{ marginLeft: 8, color: '#A5D8FF' }} />, text: 'التوصيل مجاني لجميع الطلبات' },
-  { icon: <FaHeadset style={{ marginLeft: 8, color: '#A5D8FF' }} />, text: 'خدمة الزبائن متوفرة 24 ساعة' },
-  { icon: <FaPercent style={{ marginLeft: 8, color: '#A5D8FF' }} />, text: 'خصومات تصل إلى 50% على المنتجات المختارة' },
-  { icon: <FaStar style={{ marginLeft: 8, color: '#A5D8FF' }} />, text: 'جودة عالية وأسعار منافسة' },
-  { icon: <FaGift style={{ marginLeft: 8, color: '#A5D8FF' }} />, text: 'اشترك الآن واحصل على عروض حصرية' },
+  { icon: <FaTruck style={{ marginRight: 8, color: '#A5D8FF' }} />, text: ' التوصيل مجاني لجميع الطلبات' },
+  { icon: <FaHeadset style={{ marginRight: 8, color: '#A5D8FF' }} />, text: 'خدمة الزبائن متوفرة 24 ساعة' },
+  { icon: <FaPercent style={{ marginRight: 8, color: '#A5D8FF' }} />, text: 'خصومات تصل إلى 50% على المنتجات المختارة' },
+  { icon: <FaStar style={{ marginRight: 8, color: '#A5D8FF' }} />, text: 'جودة عالية وأسعار منافسة' },
+  { icon: <FaGift style={{ marginRight: 8, color: '#A5D8FF' }} />, text: 'اشترك الآن واحصل على عروض حصرية' },
 ];
 
 export default function TopBanner() {
@@ -52,6 +52,7 @@ export default function TopBanner() {
           margin: 0 1.5rem;
           display: inline-flex;
           align-items: center;
+          direction: ltr;
         }
 
         .phrase svg {
