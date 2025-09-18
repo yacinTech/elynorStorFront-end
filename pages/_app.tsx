@@ -236,7 +236,6 @@ const isEtagerPage = slug === 'etagere';
 
 
 
-// متغير خاص بالصفحة etager فقط
 
 
 {isEtagerPage && (
@@ -341,7 +340,6 @@ const isEtagerPage = slug === 'etagere';
   </>
 )}
 
-// متغير خاص بصفحة منظم الأحذية فقط
 
 {isShoeOrganizerPage && (
   <>
