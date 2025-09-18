@@ -343,6 +343,7 @@ const isEtagerPage = slug === 'etagere';
 
 {isShoeOrganizerPage && (
   <>
+    {/* Meta Pixel Code */}
     <Script
       id="facebook-pixel-5"
       strategy="afterInteractive"
@@ -378,9 +379,9 @@ const isEtagerPage = slug === 'etagere';
         alt="facebook pixel"
       />
     </noscript>
+    {/* End Meta Pixel Code */}
   </>
 )}
-
 
 
 
