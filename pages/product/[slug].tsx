@@ -8,6 +8,7 @@ import { getProductBySlug, getProductsByCategory } from '../../lib/api';
 import TopBanner from '../../components/TopBanner';
 import ProductReviews from '../../components/productsReviews/ProductReviews';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
+import FeatureSlider from '../../components/Delivery';
 
 
 // دالة لتحويل رابط الصورة تلقائياً إلى WebP/ضغط ذكي إذا كانت على Cloudinary
@@ -401,6 +402,7 @@ export default function ProductDetails({ product, related }: Props) {
   reviewFormUrl="#contact"
 />
 
+<FeatureSlider />
 
 
 {related.length > 0 && (
