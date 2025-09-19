@@ -4,7 +4,7 @@ const FeatureSlider = () => {
   const slides = [
     {
       img: "https://img.icons8.com/color/96/000000/cash-in-hand.png",
-      text: "الدفع عند الاستلام"
+      text: "الدفع عند الاستلام "
     },
     {
       img: "https://img.icons8.com/fluency/48/delivery-scooter.png",
