@@ -143,29 +143,29 @@ export default function FloatingOrderButton({ product }: FloatingOrderButtonProp
 
         /* زر الإغلاق في أعلى يمين النافذة */
         .close-btn {
-          position: absolute;
-          top: -18px; /* رفع الزر أعلى النافذة */
-          right: -18px;
-          background: #f56565;
-          color: #fff;
-          border: none;
-          border-radius: 50%;
-          width: 36px;
-          height: 36px;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          cursor: pointer;
-          font-size: 1.5rem;
-          box-shadow: 0 4px 12px rgba(0,0,0,0.2);
-          transition: all 0.3s ease;
-          z-index: 10;
-        }
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  background: #f56565;
+  color: #fff; /* لون الأيقونة */
+  border: none;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-size: 1.6rem; /* حجم الأيقونة */
+  box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+  transition: background 0.2s ease, transform 0.2s ease;
+}
 
-        .close-btn:hover {
-          background: #e53e3e;
-          transform: scale(1.1);
-        }
+.close-btn:hover {
+  background: #e53e3e;
+  transform: scale(1.1);
+}
+
 
         @keyframes fadeInUp {
           from { opacity: 0; transform: translateY(30px); }
