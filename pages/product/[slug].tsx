@@ -9,6 +9,7 @@ import TopBanner from '../../components/TopBanner';
 import ProductReviews from '../../components/productsReviews/ProductReviews';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 import FeatureSlider from '../../components/Delivery';
+import FloatingOrderButton from '../../components/FloatingOrderButtonProps'
 
 
 // دالة لتحويل رابط الصورة تلقائياً إلى WebP/ضغط ذكي إذا كانت على Cloudinary
@@ -35,6 +36,7 @@ type Review = {
 };
 
 type Product = {
+  id: string;
   colors: string[] | undefined;
   _id: string;
   slug: string;
@@ -403,6 +405,16 @@ export default function ProductDetails({ product, related }: Props) {
 />
 
 <FeatureSlider />
+<FloatingOrderButton
+        productId={product.id}
+        productName={product.name}
+        productImage={fullImageUrl}
+        productPrice={`${product.price} درهم`}
+        productCategory={product.category}
+        colors={product.colors}
+        
+      />
+
 
 
 {related.length > 0 && (
