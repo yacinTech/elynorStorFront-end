@@ -405,6 +405,20 @@ export default function ProductDetails({ product, related }: Props) {
 />
 
 <FeatureSlider />
+<FloatingOrderButton
+  product={{
+    _id: product._id,
+    name: product.name,
+    image: product.images?.[0]
+      ? (product.images[0].startsWith('http')
+          ? product.images[0]
+          : `https://elynor-store.vercel.app${product.images[0]}`)
+      : '/logo.png',
+    price: product.price.toString(),
+    category: product.category,
+    colors: product.colors,
+  }}
+/>
 
 
 
