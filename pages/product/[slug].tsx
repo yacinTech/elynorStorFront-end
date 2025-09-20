@@ -405,15 +405,7 @@ export default function ProductDetails({ product, related }: Props) {
 />
 
 <FeatureSlider />
-<FloatingOrderButton
-        productId={product.id}
-        productName={product.name}
-        productImage={fullImageUrl}
-        productPrice={`${product.price} درهم`}
-        productCategory={product.category}
-        colors={product.colors}
-        
-      />
+
 
 
 
