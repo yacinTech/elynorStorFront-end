@@ -1,7 +1,6 @@
 import { useState } from "react";
 import OrderForm from "./order";
 import { FaShoppingCart } from "react-icons/fa";
-import { FiX } from "react-icons/fi";
 
 interface Product {
   _id: string;
@@ -31,9 +30,22 @@ export default function FloatingOrderButton({ product }: FloatingOrderButtonProp
       {open && (
         <div className="modal-overlay" onClick={() => setOpen(false)}>
           <div className="modal-content" onClick={(e) => e.stopPropagation()}>
-            {/* زر الإغلاق في أعلى يمين النافذة */}
+            {/* زر الإغلاق باستخدام SVG داخلي */}
             <button className="close-btn" onClick={() => setOpen(false)}>
-              <FiX />
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="20"
+                height="20"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="white"
+                strokeWidth="3"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              >
+                <line x1="18" y1="6" x2="6" y2="18" />
+                <line x1="6" y1="6" x2="18" y2="18" />
+              </svg>
             </button>
 
             {/* بطاقة المنتج */}
@@ -141,42 +153,38 @@ export default function FloatingOrderButton({ product }: FloatingOrderButtonProp
           padding-right: 6px;
         }
 
-        /* زر الإغلاق في أعلى يمين النافذة */
         .close-btn {
-  position: absolute;
-  top: 12px;
-  right: 12px;
-  background: #f56565;
-  color: #fff; /* لون الأيقونة */
-  border: none;
-  border-radius: 50%;
-  width: 40px;
-  height: 40px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  font-size: 1.6rem; /* حجم الأيقونة */
-  box-shadow: 0 4px 12px rgba(0,0,0,0.2);
-  transition: background 0.2s ease, transform 0.2s ease;
-}
+          position: absolute;
+          top: 12px;
+          right: 12px;
+          background: #f56565;
+          border: none;
+          border-radius: 50%;
+          width: 40px;
+          height: 40px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          cursor: pointer;
+          box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+          transition: background 0.2s ease, transform 0.2s ease;
+          z-index: 10;
+        }
 
-.close-btn:hover {
-  background: #e53e3e;
-  transform: scale(1.1);
-}
-
+        .close-btn:hover {
+          background: #e53e3e;
+          transform: scale(1.1);
+        }
 
         @keyframes fadeInUp {
           from { opacity: 0; transform: translateY(30px); }
           to { opacity: 1; transform: translateY(0); }
         }
 
-        /* بطاقة المنتج */
         .product-card {
           display: flex;
-          flex-direction: row-reverse; /* الصورة على اليمين */
-          align-items: stretch; /* يجعل الطول متساوي */
+          flex-direction: row-reverse;
+          align-items: stretch;
           gap: 16px;
           padding: 16px;
           margin-bottom: 16px;
@@ -234,14 +242,8 @@ export default function FloatingOrderButton({ product }: FloatingOrderButtonProp
           .close-btn {
             width: 32px;
             height: 32px;
-            font-size: 1.3rem;
             top: -16px;
             right: -16px;
-          }
-
-          .product-card {
-            flex-direction: row-reverse;
-            align-items: stretch;
           }
 
           .product-card img {
