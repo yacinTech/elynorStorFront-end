@@ -31,6 +31,7 @@ export default function FloatingOrderButton({ product }: FloatingOrderButtonProp
       {open && (
         <div className="modal-overlay" onClick={() => setOpen(false)}>
           <div className="modal-content" onClick={(e) => e.stopPropagation()}>
+            {/* زر الإغلاق في أعلى يمين النافذة */}
             <button className="close-btn" onClick={() => setOpen(false)}>
               <FiX />
             </button>
@@ -40,12 +41,12 @@ export default function FloatingOrderButton({ product }: FloatingOrderButtonProp
               <img src={product.image || "/placeholder.png"} alt={product.name} />
               <div className="product-info">
                 <div className="info-row">
-                  <span className="label">الاسم:</span>
+                  <span className="label">المنتج:</span>
                   <span className="value">{product.name}</span>
                 </div>
                 <div className="info-row">
                   <span className="label">السعر:</span>
-                  <span className="value">{product.price}</span>
+                  <span className="value">{product.price} درهم</span>
                 </div>
                 <div className="info-row">
                   <span className="label">التصنيف:</span>
@@ -115,7 +116,7 @@ export default function FloatingOrderButton({ product }: FloatingOrderButtonProp
           display: flex;
           justify-content: center;
           align-items: flex-start;
-          padding-top: 120px; /* لتفادي الهيدر وTopBanner */
+          padding-top: 120px;
           z-index: 10000;
           overflow-y: auto;
           box-sizing: border-box;
@@ -140,21 +141,30 @@ export default function FloatingOrderButton({ product }: FloatingOrderButtonProp
           padding-right: 6px;
         }
 
+        /* زر الإغلاق في أعلى يمين النافذة */
         .close-btn {
           position: absolute;
-          top: 12px;
-          right: 12px;
-          background: none;
+          top: -18px; /* رفع الزر أعلى النافذة */
+          right: -18px;
+          background: #f56565;
+          color: #fff;
           border: none;
-          font-size: 1.8rem;
+          border-radius: 50%;
+          width: 36px;
+          height: 36px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
           cursor: pointer;
-          color: #555;
+          font-size: 1.5rem;
+          box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+          transition: all 0.3s ease;
           z-index: 10;
-          transition: color 0.2s ease;
         }
 
         .close-btn:hover {
-          color: #000;
+          background: #e53e3e;
+          transform: scale(1.1);
         }
 
         @keyframes fadeInUp {
@@ -168,12 +178,13 @@ export default function FloatingOrderButton({ product }: FloatingOrderButtonProp
           flex-direction: row-reverse; /* الصورة على اليمين */
           align-items: stretch; /* يجعل الطول متساوي */
           gap: 16px;
-          padding: 12px;
+          padding: 16px;
           margin-bottom: 16px;
           border-radius: 12px;
           background: linear-gradient(120deg, #f0f4ff, #e0ebff);
           border: 1px solid #c3d0f0;
           width: 100%;
+          box-shadow: 0 4px 12px rgba(0,0,0,0.1);
         }
 
         .product-card img {
@@ -190,7 +201,7 @@ export default function FloatingOrderButton({ product }: FloatingOrderButtonProp
           flex-direction: column;
           justify-content: center;
           gap: 6px;
-          min-height: 100%; /* مساوي لطول الصورة */
+          min-height: 100%;
         }
 
         .info-row {
@@ -221,10 +232,13 @@ export default function FloatingOrderButton({ product }: FloatingOrderButtonProp
           }
 
           .close-btn {
-            font-size: 1.5rem;
+            width: 32px;
+            height: 32px;
+            font-size: 1.3rem;
+            top: -16px;
+            right: -16px;
           }
 
-          /* على الهواتف: الصورة تبقى على اليمين والمعلومات على اليسار، الطول متساوي */
           .product-card {
             flex-direction: row-reverse;
             align-items: stretch;
