@@ -30,7 +30,6 @@ export default function MyApp({ Component, pageProps }: AppProps) {
       : router.query.slug?.[0] || ''
   );
 
-  // 🟣 الشروط
   const isKidsCategory =
     router.pathname === '/category/[category]' && category === 'منتجات الأطفال';
 
@@ -41,6 +40,7 @@ export default function MyApp({ Component, pageProps }: AppProps) {
 
   const shouldFireSecondPixel = isKidsCategory || isProductsForPixel2;
 
+  // 🟣 البيكسل الأول فقط لهذه الصفحات:
   const isSportsCategory =
     router.pathname === '/category/[category]' && category === 'الرياضة والرحلات';
 
@@ -50,53 +50,37 @@ export default function MyApp({ Component, pageProps }: AppProps) {
     'camping-tent-mltr',
     'chaise-de-plage',
     'table-pliante-portable',
+    
   ].includes(slug);
 
   const shouldFireFirstPixel = isSportsCategory || isProductsForPixel1;
 
+  // 🟢 البيكسل الثالث فقط لهاتين الصفحتين:
   const isProductsForPixel3 = [
     'ventilateur-vertical',
     'mkyf-hwaey-mhmwl-brwdh-mtnqlh-aynma-knt!',
   ].includes(slug);
+
   const shouldFireThirdPixel = isProductsForPixel3;
 
   const isProductsForPixel5 = [
-    'organisateur-des-chaussures',
-    'etagere-rotative',
-    'organisateur-de-chaussures',
-    'organisateur-de-cuisine',
-    'etagere-dangle-extensible',
-    'rf-alahthyh-mtadd-alastkhdamat',
-    'alaqh-alfwtat-mn-alanwks-alsafy-walghyr-qabl-llsda',
-    'etagere-extensible-en-metal',
-    'etagere',
-  ].includes(slug);
+  'organisateur-des-chaussures',
+  'etagere-rotative',
+  'organisateur-de-chaussures',
+  'organisateur-de-cuisine',
+  'etagere-dangle-extensible',
+  'rf-alahthyh-mtadd-alastkhdamat',
+  'alaqh-alfwtat-mn-alanwks-alsafy-walghyr-qabl-llsda',
+  'etagere-extensible-en-metal',
+  'etagere',
+].includes(slug);
 
-  const shouldFireFifthPixel = isProductsForPixel5;
-  const isShoeOrganizerPage = slug === 'organisateur-des-chaussures';
-  const isEtagerPage = slug === 'etagere';
+const shouldFireFifthPixel = isProductsForPixel5;
+const isShoeOrganizerPage = slug === 'organisateur-des-chaussures';
+const isEtagerPage = slug === 'etagere';
 
-  // 🟢 IDs للبيكسلات
-  const pixels: { [key: string]: string } = {
-    first: '2833863817001070',
-    second: '610812365430824',
-    third: '1089901202646915',
-    fifth: '738455789097119',
-    etager: '662892656149516',
-    custom: '753759500831707',
-    last: '632899916325860',
-    shoe: '1169655271681082',
-  };
 
-  // 🟡 لائحة البيكسلات التي ستشتغل حسب الشرط
-  const activePixels: string[] = [];
-  if (shouldFireFirstPixel) activePixels.push(pixels.first);
-  if (shouldFireSecondPixel) activePixels.push(pixels.second);
-  if (shouldFireThirdPixel) activePixels.push(pixels.third);
-  if (shouldFireFifthPixel) activePixels.push(pixels.fifth);
-  if (isEtagerPage) activePixels.push(pixels.etager);
-  if (isProductsForPixel5) activePixels.push(pixels.custom, pixels.last);
-  if (isShoeOrganizerPage) activePixels.push(pixels.shoe);
+
 
   return (
     <div style={{ overflowX: 'hidden', maxWidth: '100vw' }}>
@@ -108,20 +92,40 @@ export default function MyApp({ Component, pageProps }: AppProps) {
           crossOrigin="anonymous"
           referrerPolicy="no-referrer"
         />
-
-        {/* noscript لجميع البيكسلات النشيطة */}
-        {activePixels.map((id) => (
-          <noscript key={id}>
+        {/* noscript لكل من البيكسلين */}
+        {shouldFireFirstPixel && (
+          <noscript>
             <img
               height="1"
               width="1"
               style={{ display: 'none' }}
-              src={`https://www.facebook.com/tr?id=${id}&ev=PageView&noscript=1`}
-              alt={`fb pixel ${id}`}
+              src="https://www.facebook.com/tr?id=2833863817001070&ev=PageView&noscript=1"
+              alt="fb pixel"
             />
           </noscript>
-        ))}
-
+        )}
+        {shouldFireSecondPixel && (
+          <noscript>
+            <img
+              height="1"
+              width="1"
+              style={{ display: 'none' }}
+              src="https://www.facebook.com/tr?id=610812365430824&ev=PageView&noscript=1"
+              alt="fb pixel 2"
+            />
+          </noscript>
+        )}
+        {shouldFireThirdPixel && (
+          <noscript>
+            <img
+              height="1"
+              width="1"
+              style={{ display: 'none' }}
+              src="https://www.facebook.com/tr?id=1089901202646915&ev=PageView&noscript=1"
+              alt="fb pixel 3"
+            />
+          </noscript>
+        )}
         <link
           rel="icon"
           href="https://elynor-store.vercel.app/og-image.jpg"
@@ -129,35 +133,257 @@ export default function MyApp({ Component, pageProps }: AppProps) {
         />
       </Head>
 
-      {/* ✅ تحميل مكتبة البيكسل مرة وحدة */}
-      {activePixels.length > 0 && (
+      {/* ✅ البيكسل الأول حسب الصفحات المحددة فقط */}
+      {shouldFireFirstPixel && (
         <Script
-          id="facebook-pixel-loader"
+          id="meta-pixel-main"
           strategy="afterInteractive"
           dangerouslySetInnerHTML={{
             __html: `
-              !function(f,b,e,v,n,t,s){
-                if(f.fbq)return;
-                n=f.fbq=function(){n.callMethod?
-                  n.callMethod.apply(n,arguments):n.queue.push(arguments)};
-                if(!f._fbq)f._fbq=n;
-                n.push=n;
-                n.loaded=!0;
-                n.version='2.0';
-                n.queue=[];
-                t=b.createElement(e);t.async=!0;
-                t.src='https://connect.facebook.net/en_US/fbevents.js';
-                s=b.getElementsByTagName(e)[0];
-                s.parentNode.insertBefore(t,s)
-              }(window, document,'script');
-              
-              ${activePixels
-                .map((id) => `fbq('init', '${id}'); fbq('track', 'PageView');`)
-                .join('\n')}
+              !function(f,b,e,v,n,t,s)
+              {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+              n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+              if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+              n.queue=[];t=b.createElement(e);t.async=!0;
+              t.src='https://connect.facebook.net/en_US/fbevents.js';
+              s=b.getElementsByTagName(e)[0];
+              s.parentNode.insertBefore(t,s)}(window, document,'script');
+              fbq('init', '2833863817001070');
+              fbq('track', 'PageView');
             `,
           }}
         />
       )}
+
+      {/* ✅ البيكسل الثاني حسب الصفحات المحددة فقط */}
+      {shouldFireSecondPixel && (
+        <Script
+          id="meta-pixel-second"
+          strategy="afterInteractive"
+          dangerouslySetInnerHTML={{
+            __html: `
+              !function(f,b,e,v,n,t,s)
+              {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+              n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+              if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+              n.queue=[];t=b.createElement(e);t.async=!0;
+              t.src='https://connect.facebook.net/en_US/fbevents.js';
+              s=b.getElementsByTagName(e)[0];
+              s.parentNode.insertBefore(t,s)}(window, document,'script');
+              fbq('init', '610812365430824');
+              fbq('track', 'PageView');
+            `,
+          }}
+        />
+      )}
+
+      {/* ✅ البيكسل الثالث حسب الصفحات المحددة فقط */}
+      {shouldFireThirdPixel && (
+        <Script
+          id="meta-pixel-third"
+          strategy="afterInteractive"
+          dangerouslySetInnerHTML={{
+            __html: `
+              !function(f,b,e,v,n,t,s)
+              {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+              n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+              if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+              n.queue=[];t=b.createElement(e);t.async=!0;
+              t.src='https://connect.facebook.net/en_US/fbevents.js';
+              s=b.getElementsByTagName(e)[0];
+              s.parentNode.insertBefore(t,s)}(window, document,'script');
+              fbq('init', '1089901202646915');
+              fbq('track', 'PageView');
+            `,
+          }}
+        />
+      )}
+
+    
+
+ {/* ✅ البيكسل الخامس (738455789097119) */} 
+{shouldFireFifthPixel && (
+  <>
+    <Script
+      id="meta-pixel-fifth"
+      strategy="afterInteractive"
+      dangerouslySetInnerHTML={{
+        __html: `
+          !function(f,b,e,v,n,t,s)
+          {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+          n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+          if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+          n.queue=[];t=b.createElement(e);t.async=!0;
+          t.src='https://connect.facebook.net/en_US/fbevents.js';
+          s=b.getElementsByTagName(e)[0];
+          s.parentNode.insertBefore(t,s)}(window, document,'script');
+          fbq('init', '738455789097119');
+          fbq('track', 'PageView');
+        `,
+      }}
+    />
+    <noscript>
+      <img
+        height="1"
+        width="1"
+        style={{ display: 'none' }}
+        src="https://www.facebook.com/tr?id=738455789097119&ev=PageView&noscript=1"
+        alt="fb pixel fifth"
+      />
+    </noscript>
+  </>
+)}
+
+
+{isEtagerPage && (
+  <>
+    <Script
+      id="facebook-pixel-662892656149516"
+      strategy="afterInteractive"
+      dangerouslySetInnerHTML={{
+        __html: `
+          !function(f,b,e,v,n,t,s){
+            if(f.fbq)return;
+            n=f.fbq=function(){n.callMethod?
+              n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+            if(!f._fbq)f._fbq=n;
+            n.push=n;
+            n.loaded=!0;
+            n.version='2.0';
+            n.queue=[];
+            t=b.createElement(e);t.async=!0;
+            t.src='https://connect.facebook.net/en_US/fbevents.js';
+            s=b.getElementsByTagName(e)[0];
+            s.parentNode.insertBefore(t,s)
+          }(window, document,'script');
+          
+          fbq('init', '662892656149516'); 
+          fbq('track', 'PageView');
+        `,
+      }}
+    />
+    <noscript>
+      <img
+        height="1"
+        width="1"
+        style={{ display: "none" }}
+        src="https://www.facebook.com/tr?id=662892656149516&ev=PageView&noscript=1"
+        alt="facebook pixel"
+      />
+    </noscript>
+  </>
+)}
+
+
+{/* ✅ البيكسل المخصص (753759500831707) */}
+{isProductsForPixel5 && (
+  <>
+    <Script
+      id="meta-pixel-custom"
+      strategy="afterInteractive"
+      dangerouslySetInnerHTML={{
+        __html: `
+          !function(f,b,e,v,n,t,s){
+            if(f.fbq)return;n=f.fbq=function(){
+              n.callMethod? n.callMethod.apply(n,arguments):n.queue.push(arguments)
+            };
+            if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+            n.queue=[];t=b.createElement(e);t.async=!0;
+            t.src=v;s=b.getElementsByTagName(e)[0];
+            s.parentNode.insertBefore(t,s)
+          }(window, document,'script','https://connect.facebook.net/en_US/fbevents.js');
+  
+          fbq('init', '753759500831707'); 
+          fbq('track', 'PageView');
+        `,
+      }}
+    />
+    <noscript>
+      <img
+        height="1"
+        width="1"
+        style={{ display: 'none' }}
+        src="https://www.facebook.com/tr?id=753759500831707&ev=PageView&noscript=1"
+        alt="fb pixel custom"
+      />
+    </noscript>
+  </>
+)}
+
+
+
+{isProductsForPixel5 && (
+  <>
+    <Script
+      id="meta-pixel-last"
+      strategy="afterInteractive"
+      dangerouslySetInnerHTML={{
+        __html: `
+          if (typeof fbq === 'function') {
+            fbq('init', '632899916325860'); 
+            fbq('track', 'PageView');
+          }
+        `,
+      }}
+    />
+    <noscript>
+      <img
+        height="1"
+        width="1"
+        style={{ display: 'none' }}
+        src="https://www.facebook.com/tr?id=632899916325860&ev=PageView&noscript=1"
+        alt="fb pixel last"
+      />
+    </noscript>
+  </>
+)}
+
+
+{isShoeOrganizerPage && (
+  <>
+    {/* Meta Pixel Code */}
+    <Script
+      id="facebook-pixel-5"
+      strategy="afterInteractive"
+      dangerouslySetInnerHTML={{
+        __html: `
+          !function(f,b,e,v,n,t,s){
+            if(f.fbq)return;
+            n=f.fbq=function(){n.callMethod?
+              n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+            if(!f._fbq)f._fbq=n;
+            n.push=n;
+            n.loaded=!0;
+            n.version='2.0';
+            n.queue=[];
+            t=b.createElement(e);t.async=!0;
+            t.src=v;
+            s=b.getElementsByTagName(e)[0];
+            s.parentNode.insertBefore(t,s)
+          }(window, document,'script',
+          'https://connect.facebook.net/en_US/fbevents.js');
+          
+          fbq('init', '1169655271681082');
+          fbq('track', 'PageView');
+        `,
+      }}
+    />
+    <noscript>
+      <img
+        height="1"
+        width="1"
+        style={{ display: 'none' }}
+        src="https://www.facebook.com/tr?id=1169655271681082&ev=PageView&noscript=1"
+        alt="facebook pixel"
+      />
+    </noscript>
+    {/* End Meta Pixel Code */}
+  </>
+)}
+
+
+
+
 
       <div
         style={{
