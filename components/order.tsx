@@ -14,9 +14,10 @@ interface OrderFormProps {
   productId: string;
   productName: string;
   colors?: string[];
+  id?: string;
 }
 
-export default function OrderForm({ productId, productName, colors = [] }: OrderFormProps) {
+export default function OrderForm({ productId, productName, colors = [], id }: OrderFormProps) {
   const [form, setForm] = useState({
     customerName: '',
     address: '',
@@ -105,7 +106,7 @@ export default function OrderForm({ productId, productName, colors = [] }: Order
   return (
     <div className="order-container">
       <h2>طلب المنتج</h2>
-      <form onSubmit={handleSubmit} className="order-form">
+      <form onSubmit={handleSubmit} className="order-form" id={id}>
         <div className="form-grid">
           <input
             name="customerName"

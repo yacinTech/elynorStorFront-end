@@ -393,6 +393,7 @@ export default function ProductDetails({ product, related }: Props) {
         </section>
 
         <OrderForm
+        id={`order-form-${product._id}`}
           productId={product._id}
           productName={product.name}
           colors={product.colors}
