@@ -104,9 +104,9 @@ export default function OrderForm({ productId, productName, colors = [], id }: O
 
 
   return (
-    <div className="order-container">
+    <div className="order-container" id={id}>
       <h2>طلب المنتج</h2>
-      <form onSubmit={handleSubmit} className="order-form" id={id}>
+      <form onSubmit={handleSubmit} className="order-form" >
         <div className="form-grid">
           <input
             name="customerName"
