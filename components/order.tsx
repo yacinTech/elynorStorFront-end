@@ -80,10 +80,20 @@ export default function OrderForm({ productId, productName, colors = [], id }: O
       });
     }
 
-    toast.success(' تم إرسال الطلب بنجاح! شكرًا لثقتك.', {
-      position: 'top-center',
-      autoClose: 4000,
-    });
+    
+    toast.success(
+  <div style={{ direction: 'rtl', textAlign: 'right' }}>
+    <span style={{ color: '#3182ce', fontWeight: 'bold' }}>{form.customerName}</span>
+    {`، شكراً لثقتك! `}
+    <span style={{ color: '#d69e2e', fontWeight: 'bold' }}>فريق Elynor</span>
+    {` سيتواصل معك قريباً لتأكيد طلبك وضمان شحنه إلى `}
+    <span style={{ color: '#38a169', fontWeight: 'bold' }}>{form.address}</span>
+  </div>,
+  {
+    position: "top-center",
+    autoClose: 6000,
+  }
+);
 
     setForm({
       customerName: '',
