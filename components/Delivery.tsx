@@ -4,31 +4,37 @@ const FeatureSlider = () => {
   const slides = [
     {
       img: "https://img.icons8.com/color/96/000000/cash-in-hand.png",
-      text: " الدفع عند الاستلام"
+      text: " الدفع عند الاستلام",
     },
     {
       img: "https://img.icons8.com/fluency/48/delivery-scooter.png",
-      text: " توصيل سريع ومجاني"
+      text: " توصيل سريع ومجاني",
     },
     {
       img: "https://img.icons8.com/color/96/000000/guarantee.png",
-      text: " ضمان على الجودة"
+      text: " ضمان على الجودة",
     },
     {
       img: "https://img.icons8.com/?size=100&id=116989&format=png&color=000000",
-      text: " خدمة العملاء متوفرة"
-    }
+      text: " خدمة العملاء متوفرة",
+    },
   ];
 
   const [current, setCurrent] = useState(0);
 
+  // التمرير التلقائي
   useEffect(() => {
     const interval = setInterval(() => {
-      setCurrent(prev => (prev + 1) % slides.length);
-    }, 4000); // كل 4 ثواني
+      setCurrent((prev) => (prev + 1) % slides.length);
+    }, 3333);
 
     return () => clearInterval(interval);
   }, [slides.length]);
+
+  // عند الضغط نمرر للبطاقة التالية
+  const handleNext = () => {
+    setCurrent((prev) => (prev + 1) % slides.length);
+  };
 
   return (
     <div style={styles.container}>
@@ -36,12 +42,14 @@ const FeatureSlider = () => {
         {slides.map((slide, index) => (
           <div
             key={index}
+            onClick={handleNext} // ✅ الانتقال عند الضغط
             style={{
               ...styles.slide,
               opacity: index === current ? 1 : 0,
               transform:
                 index === current ? "translateY(0)" : "translateY(20px)",
-              zIndex: index === current ? 2 : 1
+              zIndex: index === current ? 2 : 1,
+              cursor: "pointer", // مؤشر اليد عند المرور
             }}
           >
             <img src={slide.img} alt={slide.text} style={styles.image} />
@@ -57,7 +65,7 @@ const FeatureSlider = () => {
             key={index}
             style={{
               ...styles.dot,
-              backgroundColor: index === current ? "#ff6b6b" : "#ddd"
+              backgroundColor: index === current ? "#ff6b6b" : "#ddd",
             }}
           />
         ))}
@@ -80,7 +88,7 @@ const styles: {
     display: "flex",
     flexDirection: "column",
     alignItems: "center",
-    padding: "20px"
+    padding: "20px",
   },
   sliderContainer: {
     position: "relative",
@@ -90,7 +98,7 @@ const styles: {
     overflow: "hidden",
     borderRadius: "20px",
     background: "linear-gradient(135deg, #f9f9f9, #f1f1f1)",
-    boxShadow: "0 8px 25px rgba(0,0,0,0.15)"
+    boxShadow: "0 8px 25px rgba(0,0,0,0.15)",
   },
   slide: {
     position: "absolute",
@@ -103,32 +111,32 @@ const styles: {
     justifyContent: "center",
     alignItems: "center",
     transition: "all 0.9s ease",
-    padding: "10px"
+    padding: "10px",
   },
   image: {
     width: "85px",
     height: "85px",
     marginBottom: "15px",
-    filter: "drop-shadow(0 4px 6px rgba(0,0,0,0.2))"
+    filter: "drop-shadow(0 4px 6px rgba(0,0,0,0.2))",
   },
   text: {
     fontSize: "20px",
     fontWeight: 600,
     color: "#333",
     textAlign: "center",
-    lineHeight: "1.5"
+    lineHeight: "1.5",
   },
   indicators: {
     marginTop: "15px",
     display: "flex",
-    gap: "8px"
+    gap: "8px",
   },
   dot: {
     width: "12px",
     height: "12px",
     borderRadius: "50%",
-    transition: "background-color 0.3s ease"
-  }
+    transition: "background-color 0.3s ease",
+  },
 };
 
 export default FeatureSlider;
