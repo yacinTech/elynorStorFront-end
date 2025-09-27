@@ -10,14 +10,48 @@ interface PriceBoxProps {
 }
 
 const PriceBox: React.FC<PriceBoxProps> = ({ product }) => {
-  const [timeLeft, setTimeLeft] = useState(4 * 60 * 60); // 4 ساعات بالثواني
+  const initialTime = 4 * 60 * 60; // 4 ساعات بالثواني
+  const extendedTime = 7 * 60 * 60; // 7 ساعات بالثواني عند انتهاء الوقت
 
+  const storageKey = `pricebox_timer_${product.price}`;
+
+  const [timeLeft, setTimeLeft] = useState<number>(initialTime);
+
+  // تهيئة الوقت من localStorage أو القيمة الافتراضية
   useEffect(() => {
+    const savedEnd = localStorage.getItem(storageKey);
+    let endTime: number;
+    if (savedEnd) {
+      endTime = parseInt(savedEnd, 10);
+      const now = Math.floor(Date.now() / 1000);
+      if (endTime > now) {
+        setTimeLeft(endTime - now);
+      } else {
+        // الوقت انتهى، نضيف 7 ساعات
+        endTime = now + extendedTime;
+        localStorage.setItem(storageKey, endTime.toString());
+        setTimeLeft(extendedTime);
+      }
+    } else {
+      endTime = Math.floor(Date.now() / 1000) + initialTime;
+      localStorage.setItem(storageKey, endTime.toString());
+      setTimeLeft(initialTime);
+    }
+
     const interval = setInterval(() => {
-      setTimeLeft((prev) => (prev > 0 ? prev - 1 : 0));
+      const now = Math.floor(Date.now() / 1000);
+      let remaining = endTime - now;
+      if (remaining <= 0) {
+        // يبدأ العد من جديد بـ 7 ساعات
+        endTime = now + extendedTime;
+        localStorage.setItem(storageKey, endTime.toString());
+        remaining = extendedTime;
+      }
+      setTimeLeft(remaining);
     }, 1000);
+
     return () => clearInterval(interval);
-  }, []);
+  }, [product.price]);
 
   const formatTime = (seconds: number) => {
     const h = Math.floor(seconds / 3600);
