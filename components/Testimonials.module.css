@@ -23,13 +23,14 @@
   background: #f8f8f8;
   border-radius: 16px;
   padding: 2rem;
-  width: 300px;
+  width: 280px;
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.05);
-  transition: transform 0.3s ease;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .card:hover {
   transform: translateY(-5px);
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.12);
 }
 
 .avatarWrapper {
@@ -68,4 +69,28 @@
 .stars {
   color: #ffb400;
   font-size: 1.1rem;
+}
+
+/* تجاوب البطاقات */
+@media (max-width: 768px) {
+  .cards {
+    gap: 1.2rem;
+  }
+
+  .card {
+    width: 45%;
+    padding: 1.5rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .card {
+    width: 100%;
+    padding: 1.2rem;
+  }
+
+  .heading {
+    font-size: 1.6rem;
+    margin-bottom: 2rem;
+  }
 }

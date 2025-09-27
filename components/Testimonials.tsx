@@ -10,30 +10,59 @@ type Testimonial = {
 };
 
 const testimonials: Testimonial[] = [
+  // إناث
   {
     name: 'فاطمة الزهراء',
-    comment: 'خدمة ممتازة ومنتجات رائعة! أنصح الجميع بالتجربة.',
+    comment: 'خدمة رائعة، الموقع سهل الاستخدام والمنتجات ممتازة!',
     rating: 5,
     image: '/avatar1.png',
   },
+
+    {
+    name: 'Hassan',
+    comment: 'Expérience très positive, je recommande vivement ce magasin.',
+    rating: 5,
+    image: '/avatar8.png',
+  },
   {
-    name: 'خديجة',
-    comment: 'توصيل سريع واحترافية في التعامل.',
+    name: 'Khadija',
+    comment: 'Service impeccable, je reviendrai pour mes prochains achats!',
     rating: 4,
     image: '/avatar2.png',
   },
   {
     name: 'سلمى',
-    comment: 'أحببت تنوع المنتجات والجودة العالية.',
+    comment: 'جودة عالية وأسعار مناسبة، تجربة رائعة مع متجر ألينور.',
     rating: 5,
     image: '/avatar3.png',
   },
-  {
-    name: 'أم ريان',
-    comment: 'تجربتي مع متجر ألينور كانت أكثر من رائعة! تغليف أنيق، جودة ممتازة، وتعامل راقٍ. شكراً لكم!',
+   {
+    name: 'آدم',
+    comment: 'توصيل سريع والتغليف كان ممتازاً، أنصح الجميع بالتجربة.',
     rating: 5,
-    image: '/avatar4.png'
+    image: '/avatar6.png',
   },
+  {
+    name: 'Laila',
+    comment: 'Produits variés et livraison rapide, très satisfait!',
+    rating: 5,
+    image: '/avatar4.png',
+  },
+
+  {
+    name: 'Youssef',
+    comment: 'Très satisfait de la qualité des produits et du service client.',
+    rating: 5,
+    image: '/avatar5.png',
+  },
+ 
+  {
+    name: 'محمد',
+    comment: 'التعامل راقٍ جداً والخدمة ممتازة، شكراً لكم!',
+    rating: 4,
+    image: '/avatar7.png',
+  },
+
 ];
 
 const Testimonials = () => {
