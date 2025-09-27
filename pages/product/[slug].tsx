@@ -9,7 +9,8 @@ import TopBanner from '../../components/TopBanner';
 import ProductReviews from '../../components/productsReviews/ProductReviews';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 import FeatureSlider from '../../components/Delivery';
-import FloatingOrderButton from '../../components/FloatingOrderButtonProps'
+import FloatingOrderButton from '../../components/FloatingOrderButtonProps';
+import PriceBox from '../../components/PriceBox';
 
 
 // دالة لتحويل رابط الصورة تلقائياً إلى WebP/ضغط ذكي إذا كانت على Cloudinary
@@ -355,7 +356,7 @@ export default function ProductDetails({ product, related }: Props) {
             }}
             dangerouslySetInnerHTML={{ __html: parseSimpleMarkup(product.description) }}
           />
-
+         
           <p
             style={{
               fontSize: '1.1rem',
@@ -391,6 +392,7 @@ export default function ProductDetails({ product, related }: Props) {
             التصنيف: {product.category}
           </p>
         </section>
+         <PriceBox product={{ price: product.price }} />
 
         <OrderForm
         id={`order-form-${product._id}`}
