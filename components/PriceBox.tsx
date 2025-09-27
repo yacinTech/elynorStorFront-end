@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { FaFire } from "react-icons/fa"; // أيقونة النار
+import { FaRegClock } from "react-icons/fa6"; // أيقونة الساعة
 
 interface Product {
   price: number;
@@ -31,13 +31,13 @@ const PriceBox: React.FC<PriceBoxProps> = ({ product }) => {
   return (
     <div
       style={{
-        border: "2px solid #ff1744",
+        border: "2px solid #e91e63",
         borderRadius: "14px",
         padding: "12px 18px",
         maxWidth: "260px",
         margin: "20px auto",
-        background: "linear-gradient(135deg, #fff, #ffe6e9)",
-        boxShadow: "0 4px 12px rgba(0,0,0,0.1)",
+        background: "linear-gradient(135deg, #fff, #fce4ec)",
+        boxShadow: "0 4px 14px rgba(233,30,99,0.2)",
         textAlign: "center",
         fontFamily: "sans-serif",
       }}
@@ -51,11 +51,10 @@ const PriceBox: React.FC<PriceBoxProps> = ({ product }) => {
           display: "flex",
           justifyContent: "center",
           alignItems: "center",
-          gap: "8px",
-          color: "#d32f2f",
+          color: "#ad1457",
         }}
       >
-        <FaFire className="fire-icon" />
+        <FaRegClock className="clock-icon" style={{ marginLeft: "6px" }} />
         العرض ينتهي خلال {formatTime(timeLeft)}
       </div>
 
@@ -103,15 +102,15 @@ const PriceBox: React.FC<PriceBoxProps> = ({ product }) => {
             100% { transform: scale(1); }
           }
 
-          @keyframes bounce {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-6px); }
+          @keyframes rotate {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
           }
 
-          .fire-icon {
+          .clock-icon {
             font-size: 1.4rem;
-            color: #ff5722;
-            animation: bounce 1.5s infinite;
+            color: #e91e63;
+            animation: rotate 3s linear infinite;
           }
 
           .highlight-price {
