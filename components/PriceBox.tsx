@@ -10,9 +10,7 @@ interface PriceBoxProps {
 }
 
 const PriceBox: React.FC<PriceBoxProps> = ({ product }) => {
-  const initialTime = 4 * 60 * 60; // 4 ساعات بالثواني
-  const extendedTime = 7 * 60 * 60; // 7 ساعات بالثواني عند انتهاء الوقت
-
+  const initialTime = (24 * 60 * 60) + (5 * 60 * 60); // 1 يوم + 5 ساعات بالثواني
   const storageKey = `pricebox_timer_${product.price}`;
 
   const [timeLeft, setTimeLeft] = useState<number>(initialTime);
@@ -27,10 +25,10 @@ const PriceBox: React.FC<PriceBoxProps> = ({ product }) => {
       if (endTime > now) {
         setTimeLeft(endTime - now);
       } else {
-        // الوقت انتهى، نضيف 7 ساعات
-        endTime = now + extendedTime;
+        // إعادة ضبط العداد لنفس المدة (1j : 5h)
+        endTime = now + initialTime;
         localStorage.setItem(storageKey, endTime.toString());
-        setTimeLeft(extendedTime);
+        setTimeLeft(initialTime);
       }
     } else {
       endTime = Math.floor(Date.now() / 1000) + initialTime;
@@ -42,10 +40,10 @@ const PriceBox: React.FC<PriceBoxProps> = ({ product }) => {
       const now = Math.floor(Date.now() / 1000);
       let remaining = endTime - now;
       if (remaining <= 0) {
-        // يبدأ العد من جديد بـ 7 ساعات
-        endTime = now + extendedTime;
+        // عند الانتهاء يبدأ من جديد
+        endTime = now + initialTime;
         localStorage.setItem(storageKey, endTime.toString());
-        remaining = extendedTime;
+        remaining = initialTime;
       }
       setTimeLeft(remaining);
     }, 1000);
@@ -54,12 +52,14 @@ const PriceBox: React.FC<PriceBoxProps> = ({ product }) => {
   }, [product.price]);
 
   const formatTime = (seconds: number) => {
-    const h = Math.floor(seconds / 3600);
+    const d = Math.floor(seconds / (24 * 3600));
+    const h = Math.floor((seconds % (24 * 3600)) / 3600);
     const m = Math.floor((seconds % 3600) / 60);
     const s = seconds % 60;
-    return `${h.toString().padStart(2, "0")}:${m
+
+    return `${d}j : ${h}h : ${m.toString().padStart(2, "0")}m : ${s
       .toString()
-      .padStart(2, "0")}:${s.toString().padStart(2, "0")}`;
+      .padStart(2, "0")}s`;
   };
 
   return (
@@ -89,7 +89,8 @@ const PriceBox: React.FC<PriceBoxProps> = ({ product }) => {
         }}
       >
         <FaRegClock className="clock-icon" style={{ marginLeft: "6px" }} />
-        العرض ينتهي خلال {formatTime(timeLeft)}
+        العرض ينتهي خلال <br />
+        {formatTime(timeLeft)}
       </div>
 
       {/* الثمن */}
