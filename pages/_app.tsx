@@ -57,8 +57,8 @@ export default function MyApp({ Component, pageProps }: AppProps) {
 
   // 🟢 البيكسل الثالث فقط لهاتين الصفحتين:
   const isProductsForPixel3 = [
-    'ventilateur-vertical',
-    'mkyf-hwaey-mhmwl-brwdh-mtnqlh-aynma-knt!',
+    'bunion-corrector',
+    
   ].includes(slug);
 
   const shouldFireThirdPixel = isProductsForPixel3;
