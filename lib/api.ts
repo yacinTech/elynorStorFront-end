@@ -1,6 +1,6 @@
 // lib/api.ts
 
-export const API_BASE = 'https://elynor-store-020eb5c3d7a2.herokuapp.com/api/products'; // عدّل هذا حسب API الخاص بك
+export const API_BASE = 'https://my-store-back-end.vercel.app/api/products'; // عدّل هذا حسب API الخاص بك
 
 export async function getAllProducts() {
   const res = await fetch(`${API_BASE}`);
@@ -33,7 +33,7 @@ export async function submitOrder(orderData: {
   quantity: number;
   color?: string;
 }) {
-  const res = await fetch('https://elynor-store-020eb5c3d7a2.herokuapp.com/api/orders', {
+  const res = await fetch('https://my-store-back-end.vercel.app/api/orders', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json; charset=utf-8', // تأكد من هذا السطر
@@ -49,7 +49,7 @@ export async function submitOrder(orderData: {
 
 
 export const subscribeToNewsletter = async (email: string): Promise<unknown> => {
-  const res = await fetch('https://elynor-store-020eb5c3d7a2.herokuapp.com/api/newsletter/subscribe', {
+  const res = await fetch('https://my-store-back-end.vercel.app/api/newsletter/subscribe', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
@@ -66,7 +66,7 @@ export const subscribeToNewsletter = async (email: string): Promise<unknown> => 
 };
 
 
-export const BLOG_API_BASE = "https://elynor-store-020eb5c3d7a2.herokuapp.com/api"; // غير الرابط حسب السيرفر عندك
+export const BLOG_API_BASE = "https://my-store-back-end.vercel.app/api"; // غير الرابط حسب السيرفر عندك
 
 export async function fetchBlogPosts() {
   const res = await fetch(`${BLOG_API_BASE}/blog`, { cache: "no-store" });
