@@ -73,7 +73,7 @@ export default function MyApp({ Component, pageProps }: AppProps) {
   'alaqh-alfwtat-mn-alanwks-alsafy-walghyr-qabl-llsda',
   'etagere-extensible-en-metal',
   'etagere',
-  'Organiseur%20AirFryer',
+  'Organiseur AirFryer',
 ].includes(slug);
 
 const shouldFireFifthPixel = isProductsForPixel5;
