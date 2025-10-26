@@ -78,7 +78,7 @@ export default function MyApp({ Component, pageProps }: AppProps) {
 ].includes(slug);
 
 const shouldFireFifthPixel = isProductsForPixel5;
-const isShoeOrganizerPage = slug === 'organisateur-des-chaussures';
+const isShoeOrganizerPage = slug === 'bunion-corrector';
 const isEtagerPage = slug === 'etagere';
 
 
