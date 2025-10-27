@@ -74,7 +74,6 @@ export default function MyApp({ Component, pageProps }: AppProps) {
   'etagere-extensible-en-metal',
   'etagere',
   'Organiseur AirFryer',
-  'bunion-corrector',
 ].includes(slug);
 
 const shouldFireFifthPixel = isProductsForPixel5;
