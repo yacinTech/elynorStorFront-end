@@ -102,8 +102,12 @@ const frenchToast = (
   <div style={{ direction: 'ltr', textAlign: 'left' }}>
     Merci <span style={{ color: '#3182ce', fontWeight: 'bold' }}>{form.customerName}</span> !
     <br />
-    <span style={{ color: '#d69e2e', fontWeight: 'bold' }}>L'équipe Elynor</span> vous contactera bientôt
-    pour confirmer votre commande et l’expédier à :
+   <span style={{ color: '#d69e2e', fontWeight: 'bold' }}>
+  L&apos;équipe Elynor
+</span>{' '}
+vous contactera bientôt
+pour confirmer votre commande et l&apos;expédier à :
+
     <br />
     <span style={{ color: '#38a169', fontWeight: 'bold' }}>{form.address}</span>
   </div>
