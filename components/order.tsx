@@ -81,19 +81,40 @@ export default function OrderForm({ productId, productName, colors = [], id }: O
     }
 
     
-    toast.success(
+// دالة بسيطة لاكتشاف العربية
+const isArabic = (text: string) => /[\u0600-\u06FF]/.test(text);
+
+const customerLangIsArabic = isArabic(form.customerName) || isArabic(form.address);
+
+// الرسالة العربية
+const arabicToast = (
   <div style={{ direction: 'rtl', textAlign: 'right' }}>
     <span style={{ color: '#3182ce', fontWeight: 'bold' }}>{form.customerName}</span>
     {`، شكراً لثقتك! `}
     <span style={{ color: '#d69e2e', fontWeight: 'bold' }}>فريق Elynor</span>
-    {` سيتواصل معك قريباً لتأكيد طلبك وضمان شحنه إلى `}
+    {` سيتواصل معك قريباً لتأكيد طلبك وشحنه إلى `}
     <span style={{ color: '#38a169', fontWeight: 'bold' }}>{form.address}</span>
-  </div>,
-  {
-    position: "top-center",
-    autoClose: 6000,
-  }
+  </div>
 );
+
+// الرسالة الفرنسية
+const frenchToast = (
+  <div style={{ direction: 'ltr', textAlign: 'left' }}>
+    Merci <span style={{ color: '#3182ce', fontWeight: 'bold' }}>{form.customerName}</span> !
+    <br />
+    <span style={{ color: '#d69e2e', fontWeight: 'bold' }}>L'équipe Elynor</span> vous contactera bientôt
+    pour confirmer votre commande et l’expédier à :
+    <br />
+    <span style={{ color: '#38a169', fontWeight: 'bold' }}>{form.address}</span>
+  </div>
+);
+
+// إظهار التوست بناءً على اللغة
+toast.success(customerLangIsArabic ? arabicToast : frenchToast, {
+  position: "top-center",
+  autoClose: 6000,
+});
+
 
     setForm({
       customerName: '',
